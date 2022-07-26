@@ -1,0 +1,9 @@
+https://biglovewheat.gihub.io/tags/index.html
+https://biglovewheat.gihub.io/tags/index-1.html
+https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/
+https://biglovewheat.gihub.io/categories/index.html
+https://biglovewheat.gihub.io/
+https://biglovewheat.gihub.io/tags/devops/
+https://biglovewheat.gihub.io/tags/jenkins/
+https://biglovewheat.gihub.io/tags/shell/
+https://biglovewheat.gihub.io/categories/devops/
