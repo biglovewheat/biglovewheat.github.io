@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://biglovewheat.gihub.io/2022/07/26/Jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
+    <loc>https://biglovewheat.gihub.io/2022/07/26/rocketmq-dleger-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2022-07-26</lastmod>
   </url>
   <url>
     <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
+    <lastmod>2022-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
     <lastmod>2022-07-26</lastmod>
   </url>
 </urlset> 

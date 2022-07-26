@@ -1,10 +1,14 @@
-https://biglovewheat.gihub.io/2022/07/26/Jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/
+https://biglovewheat.gihub.io/2022/07/26/rocketmq-dleger-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/
+https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/
+https://biglovewheat.gihub.io/2022/07/26/jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/
 https://biglovewheat.gihub.io/categories/index.html
 https://biglovewheat.gihub.io/tags/index.html
-https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/
 https://biglovewheat.gihub.io/
 https://biglovewheat.gihub.io/tags/devops/
 https://biglovewheat.gihub.io/tags/jenkins/
 https://biglovewheat.gihub.io/tags/k8s/
 https://biglovewheat.gihub.io/tags/shell/
+https://biglovewheat.gihub.io/tags/middleware/
+https://biglovewheat.gihub.io/tags/mq/
 https://biglovewheat.gihub.io/categories/devops/
+https://biglovewheat.gihub.io/categories/middleware/
