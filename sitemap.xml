@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://biglovewheat.gihub.io/categories/index.html</loc>
+    
+    <lastmod>2022-07-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://biglovewheat.gihub.io/tags/index-1.html</loc>
     
     <lastmod>2022-07-26</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
     
     <lastmod>2022-07-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/categories/index.html</loc>
-    
-    <lastmod>2022-07-25</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
