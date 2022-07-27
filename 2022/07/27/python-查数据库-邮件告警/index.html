@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Python-查数据库-邮件告警 | biglovewheat</title>
+  <meta name="description" content="Python-查数据库-邮件告警一个python写的简单的查数据库脚本，配合crontab和邮件实现定时监控和告警。 监控脚本12345678910111213141516171819202122232425262728293031#!&#x2F;opt&#x2F;python3&#x2F;bin&#x2F;python3import smtplibfrom email.mime.text import MIMETextimport p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-查数据库-邮件告警">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="Python-查数据库-邮件告警一个python写的简单的查数据库脚本，配合crontab和邮件实现定时监控和告警。 监控脚本12345678910111213141516171819202122232425262728293031#!&#x2F;opt&#x2F;python3&#x2F;bin&#x2F;python3import smtplibfrom email.mime.text import MIMETextimport p">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-27T05:58:10.255Z">
+<meta property="article:modified_time" content="2022-07-27T00:39:35.000Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="监控">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS/" rel="tag">AWS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FS/" rel="tag">FS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/" rel="tag">backup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/devops/" rel="tag">devops</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp/" rel="tag">frp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/" rel="tag">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/" rel="tag">jenkins</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/middleware/" rel="tag">middleware</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mq/" rel="tag">mq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nacos/" rel="tag">nacos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/" rel="tag">prometheus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AWS/" style="font-size: 13px;">AWS</a> <a href="/tags/FS/" style="font-size: 13px;">FS</a> <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 14px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/gitlab/" style="font-size: 13px;">gitlab</a> <a href="/tags/jenkins/" style="font-size: 13.5px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13px;">k8s</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.5px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13px;">python</a> <a href="/tags/shell/" style="font-size: 13.5px;">shell</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.5px;">监控</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/27/rsync%E5%90%8C%E6%AD%A5/" class="title">rsync同步</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-27T05:58:10.731Z" itemprop="datePublished">2022-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/" class="title">Python-查数据库-邮件告警</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-27T05:58:10.255Z" itemprop="datePublished">2022-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/27/prometheus-mysql-%E7%9B%91%E6%8E%A7/" class="title">prometheus-mysql-监控</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-27T05:58:09.755Z" itemprop="datePublished">2022-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/27/minio%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/" class="title">MinIO集群安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-27T05:58:09.261Z" itemprop="datePublished">2022-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/AWS/">AWS</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/27/aws-ebs-%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="title">AWS-EBS-磁盘管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-27T05:58:08.735Z" itemprop="datePublished">2022-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-python-查数据库-邮件告警" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python-查数据库-邮件告警
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/" class="article-date">
+	  <time datetime="2022-07-27T05:58:10.255Z" itemprop="datePublished">2022-07-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Python-查数据库-邮件告警"><a href="#Python-查数据库-邮件告警" class="headerlink" title="Python-查数据库-邮件告警"></a>Python-查数据库-邮件告警</h2><p><em>一个python写的简单的查数据库脚本，配合crontab和邮件实现定时监控和告警。</em></p>
+<h3 id="监控脚本"><a href="#监控脚本" class="headerlink" title="监控脚本"></a>监控脚本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/opt/python3/bin/python3</span></span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">dd=(datetime.datetime.now()+datetime.timedelta(days=-<span class="number">1</span>)).strftime(<span class="string">&quot;%Y-%m-%d&quot;</span>)</span><br><span class="line"><span class="built_in">print</span> (dd)</span><br><span class="line"></span><br><span class="line">db = pymysql.Connect(host=<span class="string">&#x27;10.0.0.1&#x27;</span>,port=<span class="number">3306</span>,user=<span class="string">&#x27;root&#x27;</span>,passwd=<span class="string">&#x27;123456&#x27;</span>,db=<span class="string">&#x27;testdb&#x27;</span>,charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line">sql = <span class="string">&quot;select * from t_farm where time=&#x27;&quot;</span>+dd+<span class="string">&quot;&#x27;;&quot;</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"></span><br><span class="line">row=cursor.rowcount</span><br><span class="line"><span class="comment">#print (row)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> row == <span class="number">0</span> :</span><br><span class="line">    msg = MIMEText(dd+<span class="string">&#x27;的条目数是: &#x27;</span>+<span class="built_in">str</span>(row)+<span class="string">&#x27; ,请检查。&#x27;</span>,<span class="string">&#x27;plain&#x27;</span>,<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    from_addr = <span class="string">&#x27;biglovewheat@126.com&#x27;</span></span><br><span class="line">    password = <span class="string">&#x27;GQYRFCDKEXEIHQGH&#x27;</span>   <span class="comment">## 邮箱的授权密码，非用户密码</span></span><br><span class="line">    to_addr = [<span class="string">&#x27;biglovewheat@126.com&#x27;</span>,<span class="string">&#x27;aa@126.com&#x27;</span>]</span><br><span class="line">    smtp_server = <span class="string">&#x27;smtp.126.com&#x27;</span></span><br><span class="line">    msg[<span class="string">&#x27;From&#x27;</span>] = from_addr</span><br><span class="line">    msg[<span class="string">&#x27;To&#x27;</span>] = <span class="string">&#x27;,&#x27;</span>.join(to_addr)</span><br><span class="line">    msg[<span class="string">&#x27;Subject&#x27;</span>] = <span class="string">&#x27;Python脚本告警&#x27;</span></span><br><span class="line">    server = smtplib.SMTP_SSL(smtp_server,<span class="number">465</span>)</span><br><span class="line">    server.login(from_addr,password)</span><br><span class="line">    server.sendmail(from_addr,to_addr,msg.as_string())</span><br><span class="line">    server.quit()</span><br></pre></td></tr></table></figure>
+
+<h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">31 4 * * * /data/app/moni.py &gt;&gt; /data/app/moni.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/" title="Python-查数据库-邮件告警" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/07/27/python-查数据库-邮件告警/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/07/27/rsync%E5%90%8C%E6%AD%A5/" title="rsync同步"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/07/27/prometheus-mysql-%E7%9B%91%E6%8E%A7/" title="prometheus-mysql-监控"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

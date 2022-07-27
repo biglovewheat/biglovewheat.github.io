@@ -1,3 +1,8 @@
+https://biglovewheat.gihub.io/2022/07/27/prometheus-mysql-%E7%9B%91%E6%8E%A7/
+https://biglovewheat.gihub.io/2022/07/27/minio%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/
+https://biglovewheat.gihub.io/2022/07/27/aws-ebs-%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/
+https://biglovewheat.gihub.io/2022/07/27/python-%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93-%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6/
+https://biglovewheat.gihub.io/2022/07/27/rsync%E5%90%8C%E6%AD%A5/
 https://biglovewheat.gihub.io/2022/07/26/frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/
 https://biglovewheat.gihub.io/2022/07/26/python-%E7%AB%AF%E5%8F%A3%E7%9B%91%E6%8E%A7-%E9%92%89%E9%92%89%E5%91%8A%E8%AD%A6/
 https://biglovewheat.gihub.io/2022/07/26/nacos-%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/
@@ -21,8 +26,17 @@ https://biglovewheat.gihub.io/tags/nacos/
 https://biglovewheat.gihub.io/tags/python/
 https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/
 https://biglovewheat.gihub.io/tags/mq/
+https://biglovewheat.gihub.io/tags/AWS/
+https://biglovewheat.gihub.io/tags/linux/
+https://biglovewheat.gihub.io/tags/FS/
+https://biglovewheat.gihub.io/tags/prometheus/
+https://biglovewheat.gihub.io/tags/mysql/
+https://biglovewheat.gihub.io/tags/Python/
+https://biglovewheat.gihub.io/tags/backup/
 https://biglovewheat.gihub.io/categories/network/
 https://biglovewheat.gihub.io/categories/devops/
 https://biglovewheat.gihub.io/categories/middleware/
 https://biglovewheat.gihub.io/categories/%E7%9B%91%E6%8E%A7/
 https://biglovewheat.gihub.io/categories/shell/
+https://biglovewheat.gihub.io/categories/AWS/
+https://biglovewheat.gihub.io/categories/linux/
