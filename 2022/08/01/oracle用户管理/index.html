@@ -18,15 +18,15 @@
   
   
   <title>Oracle用户管理 | biglovewheat</title>
-  <meta name="description" content="创建只读用户123456create user query identified by query default tablespace cc;grant connect to query ;grant SELECT ANY TABLE to query;--grant select on  aaa to query;--数据字典权限grant select any dictionary to q">
+  <meta name="description" content="Oracle用户管理创建只读用户123456create user query identified by query default tablespace cc;grant connect to query ;grant SELECT ANY TABLE to query;--grant select on  aaa to query;--数据字典权限grant select any dicti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Oracle用户管理">
 <meta property="og:url" content="https://biglovewheat.gihub.io/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="biglovewheat">
-<meta property="og:description" content="创建只读用户123456create user query identified by query default tablespace cc;grant connect to query ;grant SELECT ANY TABLE to query;--grant select on  aaa to query;--数据字典权限grant select any dictionary to q">
+<meta property="og:description" content="Oracle用户管理创建只读用户123456create user query identified by query default tablespace cc;grant connect to query ;grant SELECT ANY TABLE to query;--grant select on  aaa to query;--数据字典权限grant select any dicti">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-01T07:10:31.468Z">
-<meta property="article:modified_time" content="2022-08-01T07:08:33.000Z">
+<meta property="article:published_time" content="2022-08-01T07:19:52.339Z">
+<meta property="article:modified_time" content="2022-08-01T07:18:51.000Z">
 <meta property="article:author" content="biglovewheat">
 <meta property="article:tag" content="oracle">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                 <a href="/2022/08/01/shell%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/" class="title">shell循环例子</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-01T07:10:31.892Z" itemprop="datePublished">2022-08-01</time>
+                <time datetime="2022-08-01T07:19:52.825Z" itemprop="datePublished">2022-08-01</time>
               </p>
             </div>
           </li>
@@ -227,7 +227,7 @@
                 <a href="/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" class="title">Oracle用户管理</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-01T07:10:31.468Z" itemprop="datePublished">2022-08-01</time>
+                <time datetime="2022-08-01T07:19:52.339Z" itemprop="datePublished">2022-08-01</time>
               </p>
             </div>
           </li>
@@ -242,7 +242,22 @@
                 <a href="/2022/08/01/mysql%E6%96%87%E6%9C%AC%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/" class="title">Mysql数据导入导出</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-01T07:10:31.028Z" itemprop="datePublished">2022-08-01</time>
+                <time datetime="2022-08-01T07:19:51.917Z" itemprop="datePublished">2022-08-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/mysql/">mysql</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/01/mysql%E5%AE%9E%E7%8E%B0dblink/" class="title">Mysql实现dblink</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-01T07:19:51.021Z" itemprop="datePublished">2022-08-01</time>
               </p>
             </div>
           </li>
@@ -258,21 +273,6 @@
               </p>
               <p class="item-date">
                 <time datetime="2022-08-01T07:10:30.586Z" itemprop="datePublished">2022-08-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/mysql/">mysql</a>
-              </p>
-              <p class="item-title">
-                <a href="/2022/08/01/mysql%E5%AE%9E%E7%8E%B0dblink/" class="title">Mysql实现dblink</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2022-08-01T07:10:30.154Z" itemprop="datePublished">2022-08-01</time>
               </p>
             </div>
           </li>
@@ -306,7 +306,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" class="article-date">
-	  <time datetime="2022-08-01T07:10:31.468Z" itemprop="datePublished">2022-08-01</time>
+	  <time datetime="2022-08-01T07:19:52.339Z" itemprop="datePublished">2022-08-01</time>
 	</a>
 </span>
         
@@ -330,7 +330,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="创建只读用户"><a href="#创建只读用户" class="headerlink" title="创建只读用户"></a>创建只读用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> query identified <span class="keyword">by</span> query <span class="keyword">default</span> tablespace cc;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">connect</span> <span class="keyword">to</span> query ;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span> <span class="keyword">ANY</span> <span class="keyword">TABLE</span> <span class="keyword">to</span> query;</span><br><span class="line"><span class="comment">--grant select on  aaa to query;</span></span><br><span class="line"><span class="comment">--数据字典权限</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">any</span> dictionary <span class="keyword">to</span> query;</span><br></pre></td></tr></table></figure>
+        <h2 id="Oracle用户管理"><a href="#Oracle用户管理" class="headerlink" title="Oracle用户管理"></a>Oracle用户管理</h2><h3 id="创建只读用户"><a href="#创建只读用户" class="headerlink" title="创建只读用户"></a>创建只读用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> query identified <span class="keyword">by</span> query <span class="keyword">default</span> tablespace cc;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">connect</span> <span class="keyword">to</span> query ;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span> <span class="keyword">ANY</span> <span class="keyword">TABLE</span> <span class="keyword">to</span> query;</span><br><span class="line"><span class="comment">--grant select on  aaa to query;</span></span><br><span class="line"><span class="comment">--数据字典权限</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">any</span> dictionary <span class="keyword">to</span> query;</span><br></pre></td></tr></table></figure>
 
 <h3 id="创建sysdba权限用户"><a href="#创建sysdba权限用户" class="headerlink" title="创建sysdba权限用户"></a>创建sysdba权限用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> zdbackup identified <span class="keyword">by</span> zdbackup ;</span><br><span class="line"><span class="keyword">grant</span> sysdba <span class="keyword">to</span> zdbackup;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">create</span> session, <span class="keyword">connect</span>, resource <span class="keyword">to</span> zdbackup ;</span><br></pre></td></tr></table></figure>
 
@@ -340,7 +340,7 @@
 
 <h3 id="不知道密码的情况下，修改新密码等于旧密码"><a href="#不知道密码的情况下，修改新密码等于旧密码" class="headerlink" title="不知道密码的情况下，修改新密码等于旧密码"></a>不知道密码的情况下，修改新密码等于旧密码</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> dba_users;</span><br><span class="line">FSSC_LINK                      <span class="number">737</span>A7F19A6C8315B</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> FSSC_LINK identified <span class="keyword">by</span> <span class="keyword">values</span> <span class="string">&#x27;737A7F19A6C8315B&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user xxxDROP USER XXx CASCADE</span><br></pre></td></tr></table></figure>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> xxxDROP <span class="keyword">USER</span> XXx CASCADE</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
