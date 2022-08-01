@@ -6,7 +6,7 @@
   <link href="https://biglovewheat.gihub.io/atom.xml" rel="self"/>
   
   <link href="https://biglovewheat.gihub.io/"/>
-  <updated>2022-07-27T00:30:25.000Z</updated>
+  <updated>2022-08-01T06:58:40.000Z</updated>
   <id>https://biglovewheat.gihub.io/</id>
   
   <author>
@@ -15,6 +15,131 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>shell循环例子</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/01/shell%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/01/shell%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/</id>
+    <published>2022-08-01T07:10:31.892Z</published>
+    <updated>2022-08-01T06:58:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exmple 1</span></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> $(<span class="built_in">cat</span> aa.txt);<span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$row</span> ;<span class="built_in">sleep</span> 2; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># exmple 3</span></span><br><span class="line"><span class="keyword">for</span> ((i=1; i&lt;=100; i ++))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exmple 1</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span> <span class="built_in">date</span>; <span class="built_in">uptime</span>; <span class="built_in">sleep</span> 5; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># exmple 2</span></span><br><span class="line"><span class="built_in">cat</span> a.txt | <span class="keyword">while</span> <span class="built_in">read</span> row</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$row</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;for循环&quot;&gt;&lt;a href=&quot;#for循环&quot; class=&quot;headerlink&quot; title=&quot;for循环&quot;&gt;&lt;/a&gt;for循环&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;</summary>
+      
+    
+    
+    
+    <category term="shell" scheme="https://biglovewheat.gihub.io/categories/shell/"/>
+    
+    
+    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle用户管理</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</id>
+    <published>2022-08-01T07:10:31.468Z</published>
+    <updated>2022-08-01T07:08:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="创建只读用户"><a href="#创建只读用户" class="headerlink" title="创建只读用户"></a>创建只读用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> query identified <span class="keyword">by</span> query <span class="keyword">default</span> tablespace cc;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">connect</span> <span class="keyword">to</span> query ;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span> <span class="keyword">ANY</span> <span class="keyword">TABLE</span> <span class="keyword">to</span> query;</span><br><span class="line"><span class="comment">--grant select on  aaa to query;</span></span><br><span class="line"><span class="comment">--数据字典权限</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">any</span> dictionary <span class="keyword">to</span> query;</span><br></pre></td></tr></table></figure><h3 id="创建sysdba权限用户"><a href="#创建sysdba权限用户" class="headerlink" title="创建sysdba权限用户"></a>创建sysdba权限用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> zdbackup identified <span class="keyword">by</span> zdbackup ;</span><br><span class="line"><span class="keyword">grant</span> sysdba <span class="keyword">to</span> zdbackup;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">create</span> session, <span class="keyword">connect</span>, resource <span class="keyword">to</span> zdbackup ;</span><br></pre></td></tr></table></figure><h3 id="用户解锁"><a href="#用户解锁" class="headerlink" title="用户解锁"></a>用户解锁</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> scott account unlock;</span><br></pre></td></tr></table></figure><h3 id="用户更改密码"><a href="#用户更改密码" class="headerlink" title="用户更改密码"></a>用户更改密码</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> user01 identified <span class="keyword">by</span> user10;</span><br></pre></td></tr></table></figure><h3 id="不知道密码的情况下，修改新密码等于旧密码"><a href="#不知道密码的情况下，修改新密码等于旧密码" class="headerlink" title="不知道密码的情况下，修改新密码等于旧密码"></a>不知道密码的情况下，修改新密码等于旧密码</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> dba_users;</span><br><span class="line">FSSC_LINK                      <span class="number">737</span>A7F19A6C8315B</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> FSSC_LINK identified <span class="keyword">by</span> <span class="keyword">values</span> <span class="string">&#x27;737A7F19A6C8315B&#x27;</span>;</span><br></pre></td></tr></table></figure><h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user xxxDROP USER XXx CASCADE</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;创建只读用户&quot;&gt;&lt;a href=&quot;#创建只读用户&quot; class=&quot;headerlink&quot; title=&quot;创建只读用户&quot;&gt;&lt;/a&gt;创建只读用户&lt;/h3&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte</summary>
+      
+    
+    
+    
+    <category term="oracle" scheme="https://biglovewheat.gihub.io/categories/oracle/"/>
+    
+    
+    <category term="oracle" scheme="https://biglovewheat.gihub.io/tags/oracle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql数据导入导出</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/01/mysql%E6%96%87%E6%9C%AC%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/01/mysql%E6%96%87%E6%9C%AC%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/</id>
+    <published>2022-08-01T07:10:31.028Z</published>
+    <updated>2022-08-01T07:08:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导出到文本"><a href="#导出到文本" class="headerlink" title="导出到文本"></a>导出到文本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SOURCE_USER=root</span><br><span class="line">SOURCE_DB=aa</span><br><span class="line">OUTFILE=aa.txt</span><br><span class="line">LoG=aa.log</span><br><span class="line"><span class="comment">#分隔符|</span></span><br><span class="line"></span><br><span class="line">mysql -u<span class="variable">$SOURCE_USER</span> -D<span class="variable">$SOURCE_DB</span> &lt;&lt;! 2&gt;&gt; <span class="variable">$LOG</span> 1&gt;&amp;2</span><br><span class="line">select tablename,keymap from cut_table <span class="built_in">where</span> iskeymap=1</span><br><span class="line">into outfile <span class="string">&quot;<span class="variable">$OUTFILE</span>&quot;</span></span><br><span class="line">FIELDS TERMINATED BY <span class="string">&#x27;|&#x27;</span> ;</span><br><span class="line">!</span><br></pre></td></tr></table></figure><h2 id="导入文本"><a href="#导入文本" class="headerlink" title="导入文本"></a>导入文本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SOURCE_USER=root</span><br><span class="line">SOURCE_DB=aa</span><br><span class="line">OUTFILE=aa.txt</span><br><span class="line">LoG=aa.log</span><br><span class="line"><span class="comment">#分隔符|</span></span><br><span class="line"></span><br><span class="line">mysql -u<span class="variable">$SOURCE_USER</span> -D<span class="variable">$SOURCE_DB</span> &lt;&lt;! 2&gt;&gt; <span class="variable">$LOG</span> 1&gt;&amp;2</span><br><span class="line">load data infile <span class="string">&#x27;$OUTFILE&#x27;</span> into table cut_pkey fields terminated by <span class="string">&#x27;|&#x27;</span></span><br><span class="line">(dbname,list_code,pkeyname,pkeyvalue,status);</span><br><span class="line">!</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;导出到文本&quot;&gt;&lt;a href=&quot;#导出到文本&quot; class=&quot;headerlink&quot; title=&quot;导出到文本&quot;&gt;&lt;/a&gt;导出到文本&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;</summary>
+      
+    
+    
+    
+    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
+    
+    
+    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
+    
+    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql数据同步脚本</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/01/mysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/01/mysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/</id>
+    <published>2022-08-01T07:10:30.586Z</published>
+    <updated>2022-08-01T06:36:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Mysql数据同步脚本"><a href="#Mysql数据同步脚本" class="headerlink" title="Mysql数据同步脚本"></a>Mysql数据同步脚本</h2><p><em>用mysqldump同步两个数据库</em></p><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── db.lst                   <span class="comment">## 数据库对照表</span></span><br><span class="line">├── ignore-table.lst         <span class="comment">## 只同步结构，不同步数据的表</span></span><br><span class="line">├── mysql_sync.sh            <span class="comment">## 主程序</span></span><br><span class="line">├── source.lst               <span class="comment">## 源数据库的配置信息</span></span><br><span class="line">└── target.lst               <span class="comment">## 目标数据库的配置信息</span></span><br></pre></td></tr></table></figure><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat db.lst</span></span><br><span class="line"><span class="comment">##sourcedb|targetdb</span></span><br><span class="line">telematics|telematics</span><br><span class="line">iot_sit|iot</span><br><span class="line">baseinfo_sit|base_info</span><br><span class="line"></span><br><span class="line"><span class="comment"># cat ignore-table.lst </span></span><br><span class="line"><span class="comment">#sourcedb.table</span></span><br><span class="line">farm_sit.t_task_machinery_msg_log_20220511</span><br><span class="line">smart_farm_test.t_ag_machinery_work_log</span><br><span class="line">farm_sit.t_task_machinery_msg_log</span><br><span class="line">smart_farm_test.um_user_action_log</span><br><span class="line">farm_sit.t_synergy_task_realtime_info</span><br><span class="line">smart_farm_test.t_drainirrigate_eq_log</span><br><span class="line"></span><br><span class="line"><span class="comment"># cat source.lst</span></span><br><span class="line">[client]</span><br><span class="line">user=super</span><br><span class="line">password=123456</span><br><span class="line">host=172.31.40.125</span><br><span class="line">port=3306</span><br><span class="line"></span><br><span class="line"><span class="comment"># cat target.lst </span></span><br><span class="line">[client]</span><br><span class="line">user=root</span><br><span class="line">password=123456</span><br><span class="line">host=localhost</span><br><span class="line">port=3306</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> db <span class="keyword">in</span> $(<span class="built_in">cat</span> db.lst|grep -v ^<span class="comment">#)</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">sdb=$(<span class="built_in">echo</span> <span class="variable">$db</span>|awk -F\| <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>)</span><br><span class="line">tdb=$(<span class="built_in">echo</span> <span class="variable">$db</span>|awk -F\| <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">date</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;sync <span class="variable">$sdb</span> --&gt; <span class="variable">$tdb</span> &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;drop database if exists \`<span class="variable">$tdb</span>\`;&quot;</span>|mysql --defaults-extra-file=target.lst</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;create database \`<span class="variable">$tdb</span>\`;&quot;</span>|mysql --defaults-extra-file=target.lst</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> grep -q <span class="variable">$x</span> ^<span class="variable">$sdb</span> ignore-table.lst</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> $(grep ^<span class="variable">$sdb</span> ignore-table.lst)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">row1=$(<span class="built_in">echo</span> row |awk -F\. <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line">row2=<span class="variable">$row</span></span><br><span class="line">str1=<span class="variable">$str1</span><span class="string">&quot; &quot;</span><span class="variable">$row1</span></span><br><span class="line">str2=<span class="variable">$str2</span><span class="string">&quot; --ignore-table &quot;</span><span class="variable">$row2</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str1</span> <span class="variable">$str2</span></span><br><span class="line">mysqldump --defaults-extra-file=source.lst --opt <span class="variable">$sdb</span> --tables <span class="variable">$str1</span> --no-data| mysql --defaults-extra-file=target.lst -C <span class="variable">$tdb</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">mysqldump --defaults-extra-file=source.lst --opt <span class="variable">$sdb</span> <span class="variable">$str2</span> | mysql --defaults-extra-file=target.lst -C <span class="variable">$tdb</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## no data</span></span><br><span class="line"><span class="comment">#mysqldump --defaults-extra-file=source.lst --opt $sdb $str2 --no-data | mysql --defaults-extra-file=target.lst -C $tdb</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Mysql数据同步脚本&quot;&gt;&lt;a href=&quot;#Mysql数据同步脚本&quot; class=&quot;headerlink&quot; title=&quot;Mysql数据同步脚本&quot;&gt;&lt;/a&gt;Mysql数据同步脚本&lt;/h2&gt;&lt;p&gt;&lt;em&gt;用mysqldump同步两个数据库&lt;/em&gt;&lt;/p&gt;
+&lt;h3</summary>
+      
+    
+    
+    
+    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
+    
+    
+    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
+    
+    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql实现dblink</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/01/mysql%E5%AE%9E%E7%8E%B0dblink/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/01/mysql%E5%AE%9E%E7%8E%B0dblink/</id>
+    <published>2022-08-01T07:10:30.154Z</published>
+    <updated>2022-08-01T06:43:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server version: 8.0.23 MySQL Community Server - GPL</span><br></pre></td></tr></table></figure><h2 id="查看引擎"><a href="#查看引擎" class="headerlink" title="查看引擎"></a>查看引擎</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">show engines;</span><br><span class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</span><br><span class="line">| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |</span><br><span class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</span><br><span class="line">| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |</span><br><span class="line">| BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         |</span><br><span class="line">| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |</span><br><span class="line">| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |</span><br><span class="line">| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |</span><br><span class="line">| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |</span><br><span class="line">| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |</span><br><span class="line">| MEMORY             | YES     | Hash based, stored <span class="keyword">in</span> memory, useful <span class="keyword">for</span> temporary tables      | NO           | NO   | NO         |</span><br><span class="line">| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |</span><br><span class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</span><br><span class="line"></span><br><span class="line"><span class="comment">#federated 有安装但没有开启</span></span><br></pre></td></tr></table></figure><h2 id="设置参数并重启数据库"><a href="#设置参数并重启数据库" class="headerlink" title="设置参数并重启数据库"></a>设置参数并重启数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;federated&quot;</span> &gt;&gt;/etc/my.cnf</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `t_tasks_operate` (</span><br><span class="line">  `id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;主键ID&#x27;</span>,</span><br><span class="line">  `tasks_id` <span class="type">bigint</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;调度任务id&#x27;</span>,</span><br><span class="line">  KEY `tasks_id_index` (`tasks_id`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE<span class="operator">=</span>FEDERATED <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8mb4_general_ci ROW_FORMAT<span class="operator">=</span>COMPACT CONNECTION<span class="operator">=</span><span class="string">&#x27;mysql://root:123456@192.168.1.1:3306/farm_test/t_tasks_operate&#x27;</span> ;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;版本&quot;&gt;&lt;a href=&quot;#版本&quot; class=&quot;headerlink&quot; title=&quot;版本&quot;&gt;&lt;/a&gt;版本&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c</summary>
+      
+    
+    
+    
+    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>rsync同步</title>
