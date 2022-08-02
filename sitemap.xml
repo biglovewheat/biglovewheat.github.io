@@ -250,6 +250,20 @@
   </url>
   
   <url>
+    <loc>https://biglovewheat.gihub.io/tags/AWS/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/linux/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://biglovewheat.gihub.io/tags/devops/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -285,6 +299,20 @@
   </url>
   
   <url>
+    <loc>https://biglovewheat.gihub.io/tags/FS/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/mysql/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://biglovewheat.gihub.io/tags/middleware/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -299,42 +327,7 @@
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/tags/python/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/tags/mq/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/tags/AWS/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/tags/linux/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/tags/FS/</loc>
+    <loc>https://biglovewheat.gihub.io/tags/oracle/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -348,13 +341,6 @@
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/tags/mysql/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://biglovewheat.gihub.io/tags/Python/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -362,14 +348,28 @@
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/tags/backup/</loc>
+    <loc>https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/tags/oracle/</loc>
+    <loc>https://biglovewheat.gihub.io/tags/python/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/mq/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/backup/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -385,35 +385,14 @@
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/categories/devops/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/categories/middleware/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/categories/%E7%9B%91%E6%8E%A7/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/categories/shell/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://biglovewheat.gihub.io/categories/AWS/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/categories/devops/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -434,7 +413,28 @@
   </url>
   
   <url>
+    <loc>https://biglovewheat.gihub.io/categories/middleware/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://biglovewheat.gihub.io/categories/oracle/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/categories/%E7%9B%91%E6%8E%A7/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/categories/shell/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
