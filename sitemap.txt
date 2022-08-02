@@ -24,10 +24,10 @@ https://biglovewheat.gihub.io/2022/07/26/jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A
 https://biglovewheat.gihub.io/categories/index.html
 https://biglovewheat.gihub.io/tags/index.html
 https://biglovewheat.gihub.io/
-https://biglovewheat.gihub.io/tags/frp/
-https://biglovewheat.gihub.io/tags/network/
 https://biglovewheat.gihub.io/tags/AWS/
 https://biglovewheat.gihub.io/tags/linux/
+https://biglovewheat.gihub.io/tags/frp/
+https://biglovewheat.gihub.io/tags/network/
 https://biglovewheat.gihub.io/tags/devops/
 https://biglovewheat.gihub.io/tags/gitlab/
 https://biglovewheat.gihub.io/tags/jenkins/
@@ -44,8 +44,8 @@ https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/
 https://biglovewheat.gihub.io/tags/python/
 https://biglovewheat.gihub.io/tags/mq/
 https://biglovewheat.gihub.io/tags/backup/
-https://biglovewheat.gihub.io/categories/network/
 https://biglovewheat.gihub.io/categories/AWS/
+https://biglovewheat.gihub.io/categories/network/
 https://biglovewheat.gihub.io/categories/devops/
 https://biglovewheat.gihub.io/categories/linux/
 https://biglovewheat.gihub.io/categories/mysql/

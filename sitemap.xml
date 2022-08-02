@@ -236,20 +236,6 @@
 
   
   <url>
-    <loc>https://biglovewheat.gihub.io/tags/frp/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/tags/network/</loc>
-    <lastmod>2022-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://biglovewheat.gihub.io/tags/AWS/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -258,6 +244,20 @@
   
   <url>
     <loc>https://biglovewheat.gihub.io/tags/linux/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/frp/</loc>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/network/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -378,14 +378,14 @@
 
   
   <url>
-    <loc>https://biglovewheat.gihub.io/categories/network/</loc>
+    <loc>https://biglovewheat.gihub.io/categories/AWS/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/categories/AWS/</loc>
+    <loc>https://biglovewheat.gihub.io/categories/network/</loc>
     <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
