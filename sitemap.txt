@@ -1,3 +1,7 @@
+https://biglovewheat.gihub.io/2022/08/05/nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/
+https://biglovewheat.gihub.io/2022/08/05/postgresql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/
+https://biglovewheat.gihub.io/2022/08/05/https%E6%8F%A1%E6%89%8B%E6%B5%81%E7%A8%8B/
+https://biglovewheat.gihub.io/2022/08/05/nginx-too-many-open-files/
 https://biglovewheat.gihub.io/2022/08/04/iftop%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/
 https://biglovewheat.gihub.io/2022/08/04/kubernetes-centos7-%E5%AE%89%E8%A3%85/
 https://biglovewheat.gihub.io/2022/08/04/linux-swap%E6%89%A9%E5%AE%B9/
@@ -41,6 +45,8 @@ https://biglovewheat.gihub.io/tags/devops/
 https://biglovewheat.gihub.io/tags/gitlab/
 https://biglovewheat.gihub.io/tags/shell/
 https://biglovewheat.gihub.io/tags/python/
+https://biglovewheat.gihub.io/tags/http/
+https://biglovewheat.gihub.io/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/
 https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/
 https://biglovewheat.gihub.io/tags/jenkins/
 https://biglovewheat.gihub.io/tags/k8s/
@@ -49,7 +55,9 @@ https://biglovewheat.gihub.io/tags/FS/
 https://biglovewheat.gihub.io/tags/mysql/
 https://biglovewheat.gihub.io/tags/middleware/
 https://biglovewheat.gihub.io/tags/nacos/
+https://biglovewheat.gihub.io/tags/nginx/
 https://biglovewheat.gihub.io/tags/oracle/
+https://biglovewheat.gihub.io/tags/PG/
 https://biglovewheat.gihub.io/tags/prometheus/
 https://biglovewheat.gihub.io/tags/Python/
 https://biglovewheat.gihub.io/tags/mq/
@@ -58,11 +66,13 @@ https://biglovewheat.gihub.io/categories/AWS/
 https://biglovewheat.gihub.io/categories/network/
 https://biglovewheat.gihub.io/categories/GIS/
 https://biglovewheat.gihub.io/categories/devops/
+https://biglovewheat.gihub.io/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/
 https://biglovewheat.gihub.io/categories/%E7%9B%91%E6%8E%A7/
 https://biglovewheat.gihub.io/categories/K8S/
 https://biglovewheat.gihub.io/categories/linux/
 https://biglovewheat.gihub.io/categories/mysql/
 https://biglovewheat.gihub.io/categories/middleware/
 https://biglovewheat.gihub.io/categories/oracle/
+https://biglovewheat.gihub.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/
 https://biglovewheat.gihub.io/categories/python/
 https://biglovewheat.gihub.io/categories/shell/
