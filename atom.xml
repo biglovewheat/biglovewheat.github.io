@@ -6,7 +6,7 @@
   <link href="https://biglovewheat.gihub.io/atom.xml" rel="self"/>
   
   <link href="https://biglovewheat.gihub.io/"/>
-  <updated>2022-08-08T06:59:56.000Z</updated>
+  <updated>2022-08-08T07:26:53.000Z</updated>
   <id>https://biglovewheat.gihub.io/</id>
   
   <author>
@@ -17,29 +17,100 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HTTPS握手流程</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/08/%E6%B5%8B%E8%AF%95/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/08/%E6%B5%8B%E8%AF%95/</id>
-    <published>2022-08-08T07:02:42.962Z</published>
-    <updated>2022-08-08T06:59:56.000Z</updated>
+    <title>Shell清理脚本</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/08/shell%E6%B8%85%E7%90%86%E8%84%9A%E6%9C%AC/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/08/shell%E6%B8%85%E7%90%86%E8%84%9A%E6%9C%AC/</id>
+    <published>2022-08-08T07:27:43.665Z</published>
+    <updated>2022-08-08T07:26:53.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="HTTPS握手流程"><a href="#HTTPS握手流程" class="headerlink" title="HTTPS握手流程"></a>HTTPS握手流程</h2><p>1、客户端向服务器端发起https通信请求</p><p>2、服务器端响应并发送公钥</p><p>3、客户端验证公钥</p><p>4、客户端生成通信秘钥（随机数）</p><p>5、客户端用公钥加密通信秘钥并发送到服务器端</p><p>6、服务器端用私钥解密获取通信秘钥</p><p>7、服务器端和客户端利用通信秘钥对数据进行加密通讯</p><p><img src="/../images/1.png"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="Shell清理脚本"><a href="#Shell清理脚本" class="headerlink" title="Shell清理脚本"></a>Shell清理脚本</h2><h3 id="清理脚本"><a href="#清理脚本" class="headerlink" title="清理脚本"></a>清理脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">date</span></span><br><span class="line"><span class="comment">## cleanup /data/webapp/*/bak/*.tar.gz; leave last 10 file</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line">find /data/webapp/*/bak -<span class="built_in">type</span> d |<span class="keyword">while</span> <span class="built_in">read</span> row</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$row</span></span><br><span class="line"><span class="built_in">ls</span> -t *.tar.gz |sed -n <span class="string">&#x27;11,$p&#x27;</span> | xargs <span class="built_in">rm</span> -vf</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="comment">## cleanup /data/*/logs/*.log</span></span><br><span class="line"><span class="comment">##  找到并清空文件</span></span><br><span class="line">find /data/*/logs/ -name <span class="string">&quot;*.log&quot;</span> |awk <span class="string">&#x27;&#123;print &quot;echo 11 &gt;&quot;$0&#125;&#x27;</span> |sh</span><br><span class="line"><span class="comment">## cleanup /data/*/app/*.jar; leave last 10 file</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line">find /data/*/app -<span class="built_in">type</span> d |<span class="keyword">while</span> <span class="built_in">read</span> row</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$row</span></span><br><span class="line"><span class="built_in">ls</span> -t *.jar |sed -n <span class="string">&#x27;11,$p&#x27;</span> | xargs <span class="built_in">rm</span> -vf</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure><h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">33 5 * * * /data/cleanup.sh &gt;&gt; /data/cleanup.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;HTTPS握手流程&quot;&gt;&lt;a href=&quot;#HTTPS握手流程&quot; class=&quot;headerlink&quot; title=&quot;HTTPS握手流程&quot;&gt;&lt;/a&gt;HTTPS握手流程&lt;/h2&gt;&lt;p&gt;1、客户端向服务器端发起https通信请求&lt;/p&gt;
-&lt;p&gt;2、服务器端响应并发送公钥</summary>
+    <summary type="html">&lt;h2 id=&quot;Shell清理脚本&quot;&gt;&lt;a href=&quot;#Shell清理脚本&quot; class=&quot;headerlink&quot; title=&quot;Shell清理脚本&quot;&gt;&lt;/a&gt;Shell清理脚本&lt;/h2&gt;&lt;h3 id=&quot;清理脚本&quot;&gt;&lt;a href=&quot;#清理脚本&quot; class=&quot;headerli</summary>
       
     
     
     
-    <category term="理论知识" scheme="https://biglovewheat.gihub.io/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/"/>
+    <category term="shell" scheme="https://biglovewheat.gihub.io/categories/shell/"/>
     
     
-    <category term="http" scheme="https://biglovewheat.gihub.io/tags/http/"/>
+    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
     
-    <category term="理论知识" scheme="https://biglovewheat.gihub.io/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/"/>
+  </entry>
+  
+  <entry>
+    <title>Shell-if判断</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/08/shell-if%E5%88%A4%E6%96%AD/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/08/shell-if%E5%88%A4%E6%96%AD/</id>
+    <published>2022-08-08T07:27:43.221Z</published>
+    <updated>2022-08-08T07:26:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Shell-if判断"><a href="#Shell-if判断" class="headerlink" title="Shell-if判断"></a>Shell-if判断</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;v<span class="variable">$&#123;MODE&#125;</span>&quot;</span> == <span class="string">&quot;vstandalone&quot;</span> ]];<span class="keyword">then</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> 111</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Shell-if判断&quot;&gt;&lt;a href=&quot;#Shell-if判断&quot; class=&quot;headerlink&quot; title=&quot;Shell-if判断&quot;&gt;&lt;/a&gt;Shell-if判断&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr</summary>
+      
+    
+    
+    
+    <category term="shell" scheme="https://biglovewheat.gihub.io/categories/shell/"/>
+    
+    
+    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nmon监控脚本</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/08/nmon%E7%9B%91%E6%8E%A7%E8%84%9A%E6%9C%AC/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/08/nmon%E7%9B%91%E6%8E%A7%E8%84%9A%E6%9C%AC/</id>
+    <published>2022-08-08T07:27:42.796Z</published>
+    <updated>2022-08-08T07:26:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="nmon监控脚本"><a href="#nmon监控脚本" class="headerlink" title="nmon监控脚本"></a>nmon监控脚本</h2><h3 id="监控脚本"><a href="#监控脚本" class="headerlink" title="监控脚本"></a>监控脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##保留一周</span></span><br><span class="line"><span class="built_in">cat</span> /data/nmon/moni.sh</span><br><span class="line">a=`hostname`</span><br><span class="line">b=`<span class="built_in">date</span> |awk <span class="string">&#x27;&#123;print substr($3,1,2)&#125;&#x27;</span>`</span><br><span class="line">/usr/bin/nmon -f -s 300 -c 288 -t -F /tmp/nmondata/<span class="variable">$a</span><span class="string">&quot;_&quot;</span><span class="variable">$b</span>.nmon</span><br><span class="line"></span><br><span class="line"><span class="comment">##保留一月</span></span><br><span class="line">a=`hostname`</span><br><span class="line">b=`<span class="built_in">date</span> | awk <span class="string">&#x27;&#123;print substr($0,1,3)&#125;&#x27;</span>`</span><br><span class="line"><span class="keyword">if</span> [ -f /tmp/nmondata/<span class="variable">$a</span><span class="string">&quot;_&quot;</span><span class="variable">$b</span>.nmon ];<span class="keyword">then</span></span><br><span class="line"><span class="built_in">rm</span>  /tmp/nmondata/<span class="variable">$a</span><span class="string">&quot;_&quot;</span><span class="variable">$b</span>.nmon</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">/usr/bin/nmon -f -s 300 -c 288 -t -F /tmp/nmondata/<span class="variable">$a</span><span class="string">&quot;_&quot;</span><span class="variable">$b</span>.nmon</span><br></pre></td></tr></table></figure><h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 0 * * * /data/nmon/moni.sh</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;nmon监控脚本&quot;&gt;&lt;a href=&quot;#nmon监控脚本&quot; class=&quot;headerlink&quot; title=&quot;nmon监控脚本&quot;&gt;&lt;/a&gt;nmon监控脚本&lt;/h2&gt;&lt;h3 id=&quot;监控脚本&quot;&gt;&lt;a href=&quot;#监控脚本&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="监控" scheme="https://biglovewheat.gihub.io/categories/%E7%9B%91%E6%8E%A7/"/>
+    
+    
+    <category term="监控" scheme="https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>chattr-crontab加锁</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/08/chattr-crontab%E5%8A%A0%E9%94%81/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/08/chattr-crontab%E5%8A%A0%E9%94%81/</id>
+    <published>2022-08-08T07:27:42.379Z</published>
+    <updated>2022-08-08T07:26:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="chattr-crontab加锁"><a href="#chattr-crontab加锁" class="headerlink" title="chattr-crontab加锁"></a>chattr-crontab加锁</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## crontab加锁</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> `<span class="built_in">ls</span> /var/spool/cron/`; <span class="keyword">do</span> chattr +i /var/spool/cron/<span class="variable">$a</span>; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 查看锁</span></span><br><span class="line">lsattr /var/spool/cron/*</span><br><span class="line"></span><br><span class="line"><span class="comment">## 解锁</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> `<span class="built_in">ls</span> /var/spool/cron/`; <span class="keyword">do</span> chattr -i /var/spool/cron/<span class="variable">$a</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;chattr-crontab加锁&quot;&gt;&lt;a href=&quot;#chattr-crontab加锁&quot; class=&quot;headerlink&quot; title=&quot;chattr-crontab加锁&quot;&gt;&lt;/a&gt;chattr-crontab加锁&lt;/h2&gt;&lt;figure class=&quot;hi</summary>
+      
+    
+    
+    
+    <category term="安全" scheme="https://biglovewheat.gihub.io/categories/%E5%AE%89%E5%85%A8/"/>
+    
+    
+    <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
+    
+    <category term="安全" scheme="https://biglovewheat.gihub.io/tags/%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -441,80 +512,6 @@
     
     
     <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shell循环例子</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/01/shell%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/01/shell%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/</id>
-    <published>2022-08-01T07:19:52.825Z</published>
-    <updated>2022-08-01T07:19:01.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="shell循环例子"><a href="#shell循环例子" class="headerlink" title="shell循环例子"></a>shell循环例子</h2><h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exmple 1</span></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> $(<span class="built_in">cat</span> aa.txt);<span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$row</span> ;<span class="built_in">sleep</span> 2; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># exmple 3</span></span><br><span class="line"><span class="keyword">for</span> ((i=1; i&lt;=100; i ++))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exmple 1</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span> <span class="built_in">date</span>; <span class="built_in">uptime</span>; <span class="built_in">sleep</span> 5; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># exmple 2</span></span><br><span class="line"><span class="built_in">cat</span> a.txt | <span class="keyword">while</span> <span class="built_in">read</span> row</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$row</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;shell循环例子&quot;&gt;&lt;a href=&quot;#shell循环例子&quot; class=&quot;headerlink&quot; title=&quot;shell循环例子&quot;&gt;&lt;/a&gt;shell循环例子&lt;/h2&gt;&lt;h3 id=&quot;for循环&quot;&gt;&lt;a href=&quot;#for循环&quot; class=&quot;header</summary>
-      
-    
-    
-    
-    <category term="shell" scheme="https://biglovewheat.gihub.io/categories/shell/"/>
-    
-    
-    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Oracle用户管理</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/01/oracle%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</id>
-    <published>2022-08-01T07:19:52.339Z</published>
-    <updated>2022-08-01T07:18:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Oracle用户管理"><a href="#Oracle用户管理" class="headerlink" title="Oracle用户管理"></a>Oracle用户管理</h2><h3 id="创建只读用户"><a href="#创建只读用户" class="headerlink" title="创建只读用户"></a>创建只读用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> query identified <span class="keyword">by</span> query <span class="keyword">default</span> tablespace cc;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">connect</span> <span class="keyword">to</span> query ;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span> <span class="keyword">ANY</span> <span class="keyword">TABLE</span> <span class="keyword">to</span> query;</span><br><span class="line"><span class="comment">--grant select on  aaa to query;</span></span><br><span class="line"><span class="comment">--数据字典权限</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">any</span> dictionary <span class="keyword">to</span> query;</span><br></pre></td></tr></table></figure><h3 id="创建sysdba权限用户"><a href="#创建sysdba权限用户" class="headerlink" title="创建sysdba权限用户"></a>创建sysdba权限用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> zdbackup identified <span class="keyword">by</span> zdbackup ;</span><br><span class="line"><span class="keyword">grant</span> sysdba <span class="keyword">to</span> zdbackup;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">create</span> session, <span class="keyword">connect</span>, resource <span class="keyword">to</span> zdbackup ;</span><br></pre></td></tr></table></figure><h3 id="用户解锁"><a href="#用户解锁" class="headerlink" title="用户解锁"></a>用户解锁</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> scott account unlock;</span><br></pre></td></tr></table></figure><h3 id="用户更改密码"><a href="#用户更改密码" class="headerlink" title="用户更改密码"></a>用户更改密码</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> user01 identified <span class="keyword">by</span> user10;</span><br></pre></td></tr></table></figure><h3 id="不知道密码的情况下，修改新密码等于旧密码"><a href="#不知道密码的情况下，修改新密码等于旧密码" class="headerlink" title="不知道密码的情况下，修改新密码等于旧密码"></a>不知道密码的情况下，修改新密码等于旧密码</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> dba_users;</span><br><span class="line">FSSC_LINK                      <span class="number">737</span>A7F19A6C8315B</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> FSSC_LINK identified <span class="keyword">by</span> <span class="keyword">values</span> <span class="string">&#x27;737A7F19A6C8315B&#x27;</span>;</span><br></pre></td></tr></table></figure><h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> xxxDROP <span class="keyword">USER</span> XXx CASCADE</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Oracle用户管理&quot;&gt;&lt;a href=&quot;#Oracle用户管理&quot; class=&quot;headerlink&quot; title=&quot;Oracle用户管理&quot;&gt;&lt;/a&gt;Oracle用户管理&lt;/h2&gt;&lt;h3 id=&quot;创建只读用户&quot;&gt;&lt;a href=&quot;#创建只读用户&quot; class=&quot;</summary>
-      
-    
-    
-    
-    <category term="oracle" scheme="https://biglovewheat.gihub.io/categories/oracle/"/>
-    
-    
-    <category term="oracle" scheme="https://biglovewheat.gihub.io/tags/oracle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql数据导入导出</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/01/mysql%E6%96%87%E6%9C%AC%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/01/mysql%E6%96%87%E6%9C%AC%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/</id>
-    <published>2022-08-01T07:19:51.917Z</published>
-    <updated>2022-08-01T07:18:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Mysql数据导入导出"><a href="#Mysql数据导入导出" class="headerlink" title="Mysql数据导入导出"></a>Mysql数据导入导出</h2><h3 id="导出到文本"><a href="#导出到文本" class="headerlink" title="导出到文本"></a>导出到文本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SOURCE_USER=root</span><br><span class="line">SOURCE_DB=aa</span><br><span class="line">OUTFILE=aa.txt</span><br><span class="line">LoG=aa.log</span><br><span class="line"><span class="comment">#分隔符|</span></span><br><span class="line"></span><br><span class="line">mysql -u<span class="variable">$SOURCE_USER</span> -D<span class="variable">$SOURCE_DB</span> &lt;&lt;! 2&gt;&gt; <span class="variable">$LOG</span> 1&gt;&amp;2</span><br><span class="line">select tablename,keymap from cut_table <span class="built_in">where</span> iskeymap=1</span><br><span class="line">into outfile <span class="string">&quot;<span class="variable">$OUTFILE</span>&quot;</span></span><br><span class="line">FIELDS TERMINATED BY <span class="string">&#x27;|&#x27;</span> ;</span><br><span class="line">!</span><br></pre></td></tr></table></figure><h3 id="导入文本"><a href="#导入文本" class="headerlink" title="导入文本"></a>导入文本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SOURCE_USER=root</span><br><span class="line">SOURCE_DB=aa</span><br><span class="line">OUTFILE=aa.txt</span><br><span class="line">LoG=aa.log</span><br><span class="line"><span class="comment">#分隔符|</span></span><br><span class="line"></span><br><span class="line">mysql -u<span class="variable">$SOURCE_USER</span> -D<span class="variable">$SOURCE_DB</span> &lt;&lt;! 2&gt;&gt; <span class="variable">$LOG</span> 1&gt;&amp;2</span><br><span class="line">load data infile <span class="string">&#x27;$OUTFILE&#x27;</span> into table cut_pkey fields terminated by <span class="string">&#x27;|&#x27;</span></span><br><span class="line">(dbname,list_code,pkeyname,pkeyvalue,status);</span><br><span class="line">!</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Mysql数据导入导出&quot;&gt;&lt;a href=&quot;#Mysql数据导入导出&quot; class=&quot;headerlink&quot; title=&quot;Mysql数据导入导出&quot;&gt;&lt;/a&gt;Mysql数据导入导出&lt;/h2&gt;&lt;h3 id=&quot;导出到文本&quot;&gt;&lt;a href=&quot;#导出到文本&quot; class</summary>
-      
-    
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
-    
-    
-    <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
     
   </entry>
   
