@@ -6,7 +6,7 @@
   <link href="https://biglovewheat.gihub.io/atom.xml" rel="self"/>
   
   <link href="https://biglovewheat.gihub.io/"/>
-  <updated>2022-08-08T07:26:53.000Z</updated>
+  <updated>2022-08-09T03:05:55.000Z</updated>
   <id>https://biglovewheat.gihub.io/</id>
   
   <author>
@@ -15,6 +15,86 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>k8s-ingress-安装</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/</id>
+    <published>2022-08-09T03:08:55.386Z</published>
+    <updated>2022-08-09T03:05:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="k8s-ingress-安装"><a href="#k8s-ingress-安装" class="headerlink" title="k8s-ingress-安装"></a>k8s-ingress-安装</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">helm repo add nginx-stable https://helm.nginx.com/stable</span><br><span class="line"></span><br><span class="line">helm upgrade --install nginx-ingress nginx-stable/nginx-ingress -n kube-system \</span><br><span class="line">--<span class="built_in">set</span> controller.kind=daemonset \</span><br><span class="line">--<span class="built_in">set</span> ingressClass=nginx \</span><br><span class="line">--<span class="built_in">set</span> setAsDefaultIngress=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">kubectl patch daemonset nginx-ingress-nginx-ingress -n kube-system -p=<span class="string">&#x27;&#123;&quot;spec&quot;:&#123;&quot;template&quot;: &#123;&quot;spec&quot;:  &#123;&quot;tolerations&quot;: [&#123;&quot;key&quot;: &quot;node-role.kubernetes.io/master&quot;, &quot;effect&quot;: &quot;NoSchedule&quot;&#125;]&#125;&#125;&#125;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## for k8s 1.18</span></span><br><span class="line">--version 0.10.4</span><br></pre></td></tr></table></figure><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">ing-nginx</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">app</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/ingress.class:</span>  <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">ng.biglovewheat1.com</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">pathType:</span> <span class="string">Prefix</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">&quot;/&quot;</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">service:</span></span><br><span class="line">            <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">            <span class="attr">port:</span></span><br><span class="line">              <span class="attr">number:</span> <span class="number">80</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">saas-operation</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">dev-3</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/ingress.class:</span>  <span class="string">nginx</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/cors-allow-credentials:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/cors-allow-headers:</span> <span class="string">&#x27;*&#x27;</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/cors-allow-methods:</span> <span class="string">PUT,</span> <span class="string">GET,</span> <span class="string">POST,</span> <span class="string">OPTIONS,</span> <span class="string">DELETE</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/cors-allow-origin:</span> <span class="string">http://saas-operation.abc.com</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/enable-cors:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">saas-operation.abc.com</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">serviceName:</span> <span class="string">saas-operation</span></span><br><span class="line">          <span class="attr">servicePort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure><h3 id="ingress-413-错误"><a href="#ingress-413-错误" class="headerlink" title="ingress-413-错误"></a>ingress-413-错误</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## ingress error</span></span><br><span class="line"><span class="comment">## 413 Request Entity Too Large</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/proxy-read-timeout:</span> <span class="string">&quot;600&quot;</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/proxy-send-timeout:</span> <span class="string">&quot;600&quot;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;k8s-ingress-安装&quot;&gt;&lt;a href=&quot;#k8s-ingress-安装&quot; class=&quot;headerlink&quot; title=&quot;k8s-ingress-安装&quot;&gt;&lt;/a&gt;k8s-ingress-安装&lt;/h2&gt;&lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot;</summary>
+      
+    
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
+    
+    <category term="K8S" scheme="https://biglovewheat.gihub.io/tags/K8S/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>k8s-Evicted-Pod处理</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/09/k8s-Evicted-Pod%E5%A4%84%E7%90%86/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/09/k8s-Evicted-Pod%E5%A4%84%E7%90%86/</id>
+    <published>2022-08-09T03:08:54.931Z</published>
+    <updated>2022-08-09T02:58:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="k8s-Evicted-Pod处理"><a href="#k8s-Evicted-Pod处理" class="headerlink" title="k8s-Evicted-Pod处理"></a>k8s-Evicted-Pod处理</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>k8s出现很多Evicted Pod</p><h3 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pods farm-server-789ddb7b4c-5jltb -n dev-3 |grep -i message</span><br><span class="line">Message: Pod The node had condition: [DiskPressure].</span><br></pre></td></tr></table></figure><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>k8s节点磁盘达到85%触发node驱逐pod</p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.降低磁盘使用率</span></span><br><span class="line"><span class="comment">## 2.修改kubelet启动参数</span></span><br><span class="line">vi /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf</span><br><span class="line">Environment=<span class="string">&quot;KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --eviction-hard=nodefs.available&lt;5%&quot;</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart kubelet</span><br><span class="line"></span><br><span class="line"><span class="comment">## 删除evicted的pod</span></span><br><span class="line">kubectl -n base get pods |grep Evicted |awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> |xargs kubectl -n base delete pods</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;k8s-Evicted-Pod处理&quot;&gt;&lt;a href=&quot;#k8s-Evicted-Pod处理&quot; class=&quot;headerlink&quot; title=&quot;k8s-Evicted-Pod处理&quot;&gt;&lt;/a&gt;k8s-Evicted-Pod处理&lt;/h2&gt;&lt;h3 id=&quot;现象&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
+    
+    <category term="K8S" scheme="https://biglovewheat.gihub.io/tags/K8S/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jenkins-Gitlab-webhook配置</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-08-09T03:08:54.533Z</published>
+    <updated>2022-08-09T02:58:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Jenkins-Gitlab-webhook配置"><a href="#Jenkins-Gitlab-webhook配置" class="headerlink" title="Jenkins-Gitlab-webhook配置"></a>Jenkins-Gitlab-webhook配置</h2><h3 id="Gitlab设置access-token"><a href="#Gitlab设置access-token" class="headerlink" title="Gitlab设置access token"></a>Gitlab设置access token</h3><p>用户头像–Preferences–访问令牌<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_01.jpg"></p><p>把key复制下来<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_02.jpg"></p><h3 id="Gitlab项目配置webhook"><a href="#Gitlab项目配置webhook" class="headerlink" title="Gitlab项目配置webhook"></a>Gitlab项目配置webhook</h3><p>项目–设置–webhook</p><p>分别填入：</p><p>网址：jenkins网址+generic-webhook-trigger&#x2F;invoke?token&#x3D;yourtoken</p><p>推送事件：可以指定分支或tag</p><p>去掉启用ssl验证<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_03.jpg"></p><h3 id="jenkins安装Generic-Webhook-Trigger插件"><a href="#jenkins安装Generic-Webhook-Trigger插件" class="headerlink" title="jenkins安装Generic Webhook Trigger插件"></a>jenkins安装Generic Webhook Trigger插件</h3><h3 id="jenkins项目配置webhook"><a href="#jenkins项目配置webhook" class="headerlink" title="jenkins项目配置webhook"></a>jenkins项目配置webhook</h3><p><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_04.jpg"></p><p>配置完成后，只要分支有推送事件，会触发jenkins构建</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Jenkins-Gitlab-webhook配置&quot;&gt;&lt;a href=&quot;#Jenkins-Gitlab-webhook配置&quot; class=&quot;headerlink&quot; title=&quot;Jenkins-Gitlab-webhook配置&quot;&gt;&lt;/a&gt;Jenkins-Gitlab</summary>
+      
+    
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
+    
+    <category term="jenkins" scheme="https://biglovewheat.gihub.io/tags/jenkins/"/>
+    
+    <category term="git" scheme="https://biglovewheat.gihub.io/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>Shell清理脚本</title>
@@ -440,78 +520,6 @@
     
     
     <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql-too-many-connections错误</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/02/mysql-too-many-connections%E9%94%99%E8%AF%AF/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/02/mysql-too-many-connections%E9%94%99%E8%AF%AF/</id>
-    <published>2022-08-02T06:07:36.549Z</published>
-    <updated>2022-08-02T01:19:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Mysql-too-many-connections错误"><a href="#Mysql-too-many-connections错误" class="headerlink" title="Mysql-too-many-connections错误"></a>Mysql-too-many-connections错误</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## 查看最大连接数</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%max_connections%&#x27;</span>;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> max_connections <span class="operator">=</span> <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">show</span> processlist;  </span><br><span class="line"><span class="keyword">show</span> status <span class="keyword">like</span> <span class="string">&#x27;Threads%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">## 查看timeout</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%timeout&#x27;</span>;</span><br><span class="line"></span><br><span class="line">## 设置timeout</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> wait_timeout<span class="operator">=</span><span class="number">300</span>;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> interactive_timeout<span class="operator">=</span><span class="number">500</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Mysql-too-many-connections错误&quot;&gt;&lt;a href=&quot;#Mysql-too-many-connections错误&quot; class=&quot;headerlink&quot; title=&quot;Mysql-too-many-connections错误&quot;&gt;&lt;/a&gt;My</summary>
-      
-    
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql-RPM-安装</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/02/mysql-rpm-%E5%AE%89%E8%A3%85/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/02/mysql-rpm-%E5%AE%89%E8%A3%85/</id>
-    <published>2022-08-02T06:07:36.144Z</published>
-    <updated>2022-08-02T01:20:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Mysql-RPM-安装"><a href="#Mysql-RPM-安装" class="headerlink" title="Mysql-RPM-安装"></a>Mysql-RPM-安装</h2><h3 id="mysql5-7-centos7"><a href="#mysql5-7-centos7" class="headerlink" title="mysql5.7+centos7"></a>mysql5.7+centos7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 卸载mysql-libs</span></span><br><span class="line">rpm -qa |grep mysql</span><br><span class="line">rpm -e mysql-libs-5.1.73-8.el6_8.x86_64 --nodeps</span><br><span class="line"></span><br><span class="line"><span class="comment">## 安装rpm包</span></span><br><span class="line">rpm -ivh mysql-community-common-5.7.24-1.el6.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.24-1.el6.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-compat-5.7.24-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.24-1.el6.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.24-1.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动</span></span><br><span class="line">systemctl start mysqld</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化</span></span><br><span class="line"><span class="built_in">cat</span> /var/log/mysqld.log |grep password</span><br><span class="line">mysql_secure_installation</span><br><span class="line">mysql&gt;use mysql</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;123abc!!!&#x27;</span>;</span><br><span class="line">mysql&gt;flush privileges;</span><br><span class="line">mysql&gt;quit</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="mysql8-centos7"><a href="#mysql8-centos7" class="headerlink" title="mysql8+centos7"></a>mysql8+centos7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 卸载mariadb</span></span><br><span class="line">rpm -e $(rpm -qa |grep maria) --nodeps</span><br><span class="line">yum install -y net-tools.x86_64 libaio.x86_64 perl.x86_64</span><br><span class="line"></span><br><span class="line"><span class="comment">## 安装rpm包</span></span><br><span class="line">rpm -ivh mysql-community-common-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-client-plugins-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-client-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-server-8*.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动</span></span><br><span class="line">systemctl start mysqld</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化</span></span><br><span class="line"><span class="built_in">cat</span> /var/log/mysqld.log |grep password</span><br><span class="line">mysql_secure_installation</span><br><span class="line"></span><br><span class="line">mysql&gt;use mysql</span><br><span class="line">mysql&gt;create user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;123abc!!!&#x27;</span>;</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">mysql&gt;flush privileges;</span><br><span class="line">mysql&gt;quit</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Mysql-RPM-安装&quot;&gt;&lt;a href=&quot;#Mysql-RPM-安装&quot; class=&quot;headerlink&quot; title=&quot;Mysql-RPM-安装&quot;&gt;&lt;/a&gt;Mysql-RPM-安装&lt;/h2&gt;&lt;h3 id=&quot;mysql5-7-centos7&quot;&gt;&lt;a href</summary>
-      
-    
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux设置最大文件打开数</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/02/linux%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80%E6%95%B0/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/02/linux%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80%E6%95%B0/</id>
-    <published>2022-08-02T06:07:35.739Z</published>
-    <updated>2022-08-02T01:36:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Linux设置最大文件打开数"><a href="#Linux设置最大文件打开数" class="headerlink" title="Linux设置最大文件打开数"></a>Linux设置最大文件打开数</h2><h3 id="系统级"><a href="#系统级" class="headerlink" title="系统级"></a>系统级</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#file-max一般为内存大小（KB）的10%来计算，一般我们不需要主动设置这个值，除非这个值确实较小</span></span><br><span class="line"><span class="built_in">cat</span> /proc/sys/fs/file-max</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改方法</span></span><br><span class="line">vi /etc/sysctl.conf</span><br><span class="line">fs.file-max = 2000000</span><br><span class="line"></span><br><span class="line"><span class="comment">#生效</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure><h3 id="用户级"><a href="#用户级" class="headerlink" title="用户级"></a>用户级</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看</span></span><br><span class="line"><span class="built_in">ulimit</span> -a</span><br><span class="line">或</span><br><span class="line"><span class="built_in">ulimit</span> -n</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改（session生效）</span></span><br><span class="line"><span class="built_in">ulimit</span> -n 65535</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改（永久）</span></span><br><span class="line">vi /etc/security/limits.conf</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line">* soft <span class="built_in">nproc</span> 65535</span><br><span class="line">* hard <span class="built_in">nproc</span> 65535</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Linux设置最大文件打开数&quot;&gt;&lt;a href=&quot;#Linux设置最大文件打开数&quot; class=&quot;headerlink&quot; title=&quot;Linux设置最大文件打开数&quot;&gt;&lt;/a&gt;Linux设置最大文件打开数&lt;/h2&gt;&lt;h3 id=&quot;系统级&quot;&gt;&lt;a href=&quot;#系统</summary>
-      
-    
-    
-    
-    <category term="linux" scheme="https://biglovewheat.gihub.io/categories/linux/"/>
-    
-    
-    <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
     
   </entry>
   

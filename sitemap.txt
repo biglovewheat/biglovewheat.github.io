@@ -1,3 +1,6 @@
+https://biglovewheat.gihub.io/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/
+https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/
+https://biglovewheat.gihub.io/2022/08/09/k8s-Evicted-Pod%E5%A4%84%E7%90%86/
 https://biglovewheat.gihub.io/2022/08/08/shell%E6%B8%85%E7%90%86%E8%84%9A%E6%9C%AC/
 https://biglovewheat.gihub.io/2022/08/08/shell-if%E5%88%A4%E6%96%AD/
 https://biglovewheat.gihub.io/2022/08/08/chattr-crontab%E5%8A%A0%E9%94%81/
@@ -67,6 +70,7 @@ https://biglovewheat.gihub.io/tags/Python/
 https://biglovewheat.gihub.io/tags/mq/
 https://biglovewheat.gihub.io/tags/backup/
 https://biglovewheat.gihub.io/tags/%E5%AE%89%E5%85%A8/
+https://biglovewheat.gihub.io/tags/git/
 https://biglovewheat.gihub.io/categories/AWS/
 https://biglovewheat.gihub.io/categories/network/
 https://biglovewheat.gihub.io/categories/GIS/
