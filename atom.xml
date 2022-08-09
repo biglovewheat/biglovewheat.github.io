@@ -6,7 +6,7 @@
   <link href="https://biglovewheat.gihub.io/atom.xml" rel="self"/>
   
   <link href="https://biglovewheat.gihub.io/"/>
-  <updated>2022-08-09T03:05:55.000Z</updated>
+  <updated>2022-08-09T08:29:41.000Z</updated>
   <id>https://biglovewheat.gihub.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux-iftop-流量监控</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/</id>
+    <published>2022-08-09T08:30:56.532Z</published>
+    <updated>2022-08-09T08:29:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Linux-iftop-流量监控"><a href="#Linux-iftop-流量监控" class="headerlink" title="Linux-iftop-流量监控"></a>Linux-iftop-流量监控</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">yum install -y epel-release</span><br><span class="line">yum install -y iftop</span><br><span class="line"></span><br><span class="line"><span class="comment">## 参数</span></span><br><span class="line">-i 指定网卡</span><br><span class="line">-n 直接显示IP</span><br><span class="line">-N 直接显示端口号</span><br><span class="line">-P 同时显示IP和端口号</span><br><span class="line"></span><br><span class="line">iftop -i eth0 -PNn</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Linux-iftop-流量监控&quot;&gt;&lt;a href=&quot;#Linux-iftop-流量监控&quot; class=&quot;headerlink&quot; title=&quot;Linux-iftop-流量监控&quot;&gt;&lt;/a&gt;Linux-iftop-流量监控&lt;/h2&gt;&lt;figure class=&quot;hi</summary>
+      
+    
+    
+    
+    <category term="监控" scheme="https://biglovewheat.gihub.io/categories/%E7%9B%91%E6%8E%A7/"/>
+    
+    
+    <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
+    
+    <category term="监控" scheme="https://biglovewheat.gihub.io/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>k8s-ingress-安装</title>
@@ -494,30 +520,6 @@
     
     
     <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql备份恢复</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/</id>
-    <published>2022-08-02T06:07:36.950Z</published>
-    <updated>2022-08-02T01:19:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Mysql备份恢复"><a href="#Mysql备份恢复" class="headerlink" title="Mysql备份恢复"></a>Mysql备份恢复</h2><h3 id="mysqldump备份恢复"><a href="#mysqldump备份恢复" class="headerlink" title="mysqldump备份恢复"></a>mysqldump备份恢复</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">ROOT_PATH=/mysqldata_backup</span><br><span class="line">DATETIME=$(<span class="built_in">date</span> +<span class="string">&quot;%Y%m%d%H%M&quot;</span>)</span><br><span class="line"></span><br><span class="line">passwd=$(grep password /etc/my.cnf |awk  <span class="string">&#x27;&#123;print $3&#125;&#x27;</span> |<span class="built_in">head</span> -1)</span><br><span class="line">mysqldump -uroot -p<span class="variable">$passwd</span> --all-databases --set-gtid-purged=OFF |gzip &gt;<span class="variable">$ROOT_PATH</span>/mysqlbackup_all_show_<span class="variable">$DATETIME</span>.sql.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">## 上传到aws s3</span></span><br><span class="line">/usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$ROOT_PATH</span>/mysqlbackup_all_show_<span class="variable">$DATETIME</span>.sql.gz s3://aaa/backup/</span><br><span class="line"></span><br><span class="line"><span class="comment">## 清理过期</span></span><br><span class="line">find <span class="variable">$ROOT_PATH</span> -mtime +1 -<span class="built_in">type</span> f -name <span class="string">&quot;*.sql.gz&quot;</span> | xargs <span class="built_in">rm</span> -vf</span><br><span class="line"></span><br><span class="line"><span class="comment">##恢复</span></span><br><span class="line"><span class="comment">#gunzip &lt; test.tar.gz |mysql -hlocalhost -uroot -pxxxxx</span></span><br></pre></td></tr></table></figure><h3 id="xtrabackup备份恢复"><a href="#xtrabackup备份恢复" class="headerlink" title="xtrabackup备份恢复"></a>xtrabackup备份恢复</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##全量备份</span></span><br><span class="line">$ xtrabackup --backup --target-dir=/data/backups/</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复1-修改root密码为备份数据库密码</span></span><br><span class="line">use mysql；</span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复2-新建目录，修改my.cnf指向目录，并修改目录权限mysql:mysql</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复3-准备步骤</span></span><br><span class="line">$ xtrabackup --prepare --target-dir=/&lt;备份文件所在目录&gt;/</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复4-拷贝文件</span></span><br><span class="line">$ xtrabackup --copy-back --target-dir=/&lt;备份文件所在目录&gt;/</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复5-修改目录权限mysql:mysql</span></span><br><span class="line"><span class="built_in">chown</span> -R mysql:mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">##启动数据库</span></span><br><span class="line">systemctl start mysql</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Mysql备份恢复&quot;&gt;&lt;a href=&quot;#Mysql备份恢复&quot; class=&quot;headerlink&quot; title=&quot;Mysql备份恢复&quot;&gt;&lt;/a&gt;Mysql备份恢复&lt;/h2&gt;&lt;h3 id=&quot;mysqldump备份恢复&quot;&gt;&lt;a href=&quot;#mysqldump备份恢</summary>
-      
-    
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
-    
     
     <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
     
