@@ -38,9 +38,9 @@
     
     <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
     
-    <category term="jenkins" scheme="https://biglovewheat.gihub.io/tags/jenkins/"/>
-    
     <category term="git" scheme="https://biglovewheat.gihub.io/tags/git/"/>
+    
+    <category term="jenkins" scheme="https://biglovewheat.gihub.io/tags/jenkins/"/>
     
   </entry>
   
@@ -415,11 +415,11 @@
     <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
     
     
+    <category term="git" scheme="https://biglovewheat.gihub.io/tags/git/"/>
+    
     <category term="shell" scheme="https://biglovewheat.gihub.io/tags/shell/"/>
     
     <category term="python" scheme="https://biglovewheat.gihub.io/tags/python/"/>
-    
-    <category term="git" scheme="https://biglovewheat.gihub.io/tags/git/"/>
     
   </entry>
   
@@ -443,9 +443,9 @@
     <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
     
     
-    <category term="python" scheme="https://biglovewheat.gihub.io/tags/python/"/>
-    
     <category term="git" scheme="https://biglovewheat.gihub.io/tags/git/"/>
+    
+    <category term="python" scheme="https://biglovewheat.gihub.io/tags/python/"/>
     
   </entry>
   
