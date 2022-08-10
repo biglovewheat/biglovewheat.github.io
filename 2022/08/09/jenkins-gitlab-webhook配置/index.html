@@ -17,22 +17,28 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>AWS-Linux-Chrony-时间同步 | biglovewheat</title>
-  <meta name="description" content="AWS-Linux-Chrony-时间同步配置chrony同步12345678910111213141516171819202122232425262728293031323334353637383940## 配置aws时间服务器vi &#x2F;etc&#x2F;chrony.conf server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4## 重启chro">
+  <title>Jenkins-Gitlab-webhook配置 | biglovewheat</title>
+  <meta name="description" content="Jenkins-Gitlab-webhook配置Gitlab设置access token用户头像–Preferences–访问令牌 把key复制下来 Gitlab项目配置webhook项目–设置–webhook 分别填入： 网址：jenkins网址+generic-webhook-trigger&#x2F;invoke?token&#x3D;yourtoken 推送事件：可以指定分支或tag 去掉">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AWS-Linux-Chrony-时间同步">
-<meta property="og:url" content="https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="Jenkins-Gitlab-webhook配置">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="biglovewheat">
-<meta property="og:description" content="AWS-Linux-Chrony-时间同步配置chrony同步12345678910111213141516171819202122232425262728293031323334353637383940## 配置aws时间服务器vi &#x2F;etc&#x2F;chrony.conf server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4## 重启chro">
+<meta property="og:description" content="Jenkins-Gitlab-webhook配置Gitlab设置access token用户头像–Preferences–访问令牌 把key复制下来 Gitlab项目配置webhook项目–设置–webhook 分别填入： 网址：jenkins网址+generic-webhook-trigger&#x2F;invoke?token&#x3D;yourtoken 推送事件：可以指定分支或tag 去掉">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-10T03:10:58.000Z">
+<meta property="og:image" content="https://biglovewheat.gihub.io/images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_01.jpg">
+<meta property="og:image" content="https://biglovewheat.gihub.io/images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_02.jpg">
+<meta property="og:image" content="https://biglovewheat.gihub.io/images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_03.jpg">
+<meta property="og:image" content="https://biglovewheat.gihub.io/images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_04.jpg">
+<meta property="article:published_time" content="2022-08-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-10T01:57:52.000Z">
 <meta property="article:author" content="biglovewheat">
-<meta property="article:tag" content="aws">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="devops">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="jenkins">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://biglovewheat.gihub.io/images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_01.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/index.html">
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/index.html">
   
     <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
   
@@ -172,7 +178,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/aws/">aws</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/k8s/">k8s</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">5</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/aws/">aws</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/k8s/">k8s</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -182,7 +188,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/aws/" style="font-size: 13.17px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 13.67px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.17px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/jenkins/" style="font-size: 13.17px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.5px;">k8s</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.17px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.83px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nginx/" style="font-size: 13.17px;">nginx</a> <a href="/tags/oracle/" style="font-size: 13px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.17px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/shell/" style="font-size: 14px;">shell</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">理论知识</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.5px;">监控</a>
+      <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/aws/" style="font-size: 13.17px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 13.67px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.17px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.5px;">git</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/jenkins/" style="font-size: 13.33px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.5px;">k8s</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.17px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.83px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nginx/" style="font-size: 13.17px;">nginx</a> <a href="/tags/oracle/" style="font-size: 13px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.17px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/shell/" style="font-size: 14px;">shell</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">理论知识</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.5px;">监控</a>
     </div>
   </div>
 
@@ -191,7 +197,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">29</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -210,10 +216,25 @@
                 <a class="category-link" href="/categories/aws/">aws</a>
               </p>
               <p class="item-title">
-                <a href="/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="title">AWS-Linux-Chrony-时间同步</a>
+                <a href="/2022/08/10/AWS-Linux-Chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/" class="title">AWS-Linux-Chrony-时间同步</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-08-09T16:00:00.000Z" itemprop="datePublished">2022-08-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="title">Jenkins-Gitlab-webhook配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
               </p>
             </div>
           </li>
@@ -263,21 +284,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a>
-              </p>
-              <p class="item-title">
-                <a href="/2022/08/08/chattr-crontab%E5%8A%A0%E9%94%81/" class="title">chattr-crontab加锁</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2022-08-07T16:00:00.000Z" itemprop="datePublished">2022-08-08</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -298,7 +304,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      AWS-Linux-Chrony-时间同步
+      Jenkins-Gitlab-webhook配置
     </h1>
   
 
@@ -306,32 +312,41 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="article-date">
-	  <time datetime="2022-08-09T16:00:00.000Z" itemprop="datePublished">2022-08-10</time>
+	<a href="/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/aws/">aws</a>
+    <a class="article-category-link" href="/categories/devops/">devops</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/aws/" rel="tag">aws</a>, <a class="article-tag-link-link" href="/tags/linux/" rel="tag">linux</a>
+	<a class="article-tag-link-link" href="/tags/devops/" rel="tag">devops</a>, <a class="article-tag-link-link" href="/tags/git/" rel="tag">git</a>, <a class="article-tag-link-link" href="/tags/jenkins/" rel="tag">jenkins</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="AWS-Linux-Chrony-时间同步"><a href="#AWS-Linux-Chrony-时间同步" class="headerlink" title="AWS-Linux-Chrony-时间同步"></a>AWS-Linux-Chrony-时间同步</h2><h3 id="配置chrony同步"><a href="#配置chrony同步" class="headerlink" title="配置chrony同步"></a>配置chrony同步</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 配置aws时间服务器</span></span><br><span class="line">vi /etc/chrony.conf </span><br><span class="line"></span><br><span class="line">server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4</span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启chrony</span></span><br><span class="line">systemctl restart chronyd</span><br><span class="line"></span><br><span class="line"><span class="comment">## 查看同步情况</span></span><br><span class="line">chronyc sources -v</span><br><span class="line"></span><br><span class="line">210 Number of sources = 1</span><br><span class="line"></span><br><span class="line">  .-- Source mode  <span class="string">&#x27;^&#x27;</span> = server, <span class="string">&#x27;=&#x27;</span> = peer, <span class="string">&#x27;#&#x27;</span> = <span class="built_in">local</span> clock.</span><br><span class="line"> / .- Source state <span class="string">&#x27;*&#x27;</span> = current synced, <span class="string">&#x27;+&#x27;</span> = combined , <span class="string">&#x27;-&#x27;</span> = not combined,</span><br><span class="line">| /   <span class="string">&#x27;?&#x27;</span> = unreachable, <span class="string">&#x27;x&#x27;</span> = time may be <span class="keyword">in</span> error, <span class="string">&#x27;~&#x27;</span> = time too variable.</span><br><span class="line">||                                                 .- xxxx [ yyyy ] +/- zzzz</span><br><span class="line">||      Reachability register (octal) -.           |  xxxx = adjusted offset,</span><br><span class="line">||      Log2(Polling interval) --.      |          |  yyyy = measured offset,</span><br><span class="line">||                                \     |          |  zzzz = estimated error.</span><br><span class="line">||                                 |    |           \</span><br><span class="line">MS Name/IP address         Stratum Poll Reach LastRx Last sample               </span><br><span class="line">===============================================================================</span><br><span class="line">^* 169.254.169.123               3   4   377    11  -5483ns[  -10us] +/-  410us</span><br><span class="line"></span><br><span class="line"><span class="comment">## 验证 </span></span><br><span class="line">chronyc tracking</span><br><span class="line">Reference ID    : A9FEA97B (169.254.169.123)</span><br><span class="line">Stratum         : 4</span><br><span class="line">Ref time (UTC)  : Wed Aug 10 03:04:51 2022</span><br><span class="line">System time     : 0.000002134 seconds fast of NTP time</span><br><span class="line">Last offset     : +0.000002142 seconds</span><br><span class="line">RMS offset      : 0.000007061 seconds</span><br><span class="line">Frequency       : 2.554 ppm slow</span><br><span class="line">Residual freq   : +0.003 ppm</span><br><span class="line">Skew            : 0.200 ppm</span><br><span class="line">Root delay      : 0.000296080 seconds</span><br><span class="line">Root dispersion : 0.000277362 seconds</span><br><span class="line">Update interval : 16.3 seconds</span><br><span class="line">Leap status     : Normal</span><br></pre></td></tr></table></figure>
+        <h2 id="Jenkins-Gitlab-webhook配置"><a href="#Jenkins-Gitlab-webhook配置" class="headerlink" title="Jenkins-Gitlab-webhook配置"></a>Jenkins-Gitlab-webhook配置</h2><h3 id="Gitlab设置access-token"><a href="#Gitlab设置access-token" class="headerlink" title="Gitlab设置access token"></a>Gitlab设置access token</h3><p>用户头像–Preferences–访问令牌<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_01.jpg"></p>
+<p>把key复制下来<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_02.jpg"></p>
+<h3 id="Gitlab项目配置webhook"><a href="#Gitlab项目配置webhook" class="headerlink" title="Gitlab项目配置webhook"></a>Gitlab项目配置webhook</h3><p>项目–设置–webhook</p>
+<p>分别填入：</p>
+<p>网址：jenkins网址+generic-webhook-trigger&#x2F;invoke?token&#x3D;yourtoken</p>
+<p>推送事件：可以指定分支或tag</p>
+<p>去掉启用ssl验证<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_03.jpg"></p>
+<h3 id="jenkins安装Generic-Webhook-Trigger插件"><a href="#jenkins安装Generic-Webhook-Trigger插件" class="headerlink" title="jenkins安装Generic Webhook Trigger插件"></a>jenkins安装Generic Webhook Trigger插件</h3><h3 id="jenkins项目配置webhook"><a href="#jenkins项目配置webhook" class="headerlink" title="jenkins项目配置webhook"></a>jenkins项目配置webhook</h3><p><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_04.jpg"></p>
+<p>配置完成后，只要分支有推送事件，会触发jenkins构建</p>
+
       
     </div>
     <div class="article-footer">
@@ -340,7 +355,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" title="AWS-Linux-Chrony-时间同步" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook配置/</a>
+      <a href="https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" title="Jenkins-Gitlab-webhook配置" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook配置/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -385,6 +400,10 @@
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/08/10/AWS-Linux-Chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/" title="AWS-Linux-Chrony-时间同步"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
     
     
     <li class="next">

@@ -6,7 +6,7 @@
   <link href="https://biglovewheat.gihub.io/atom.xml" rel="self"/>
   
   <link href="https://biglovewheat.gihub.io/"/>
-  <updated>2022-08-10T03:10:58.000Z</updated>
+  <updated>2022-08-10T03:14:04.000Z</updated>
   <id>https://biglovewheat.gihub.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>AWS-Linux-Chrony-时间同步</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</id>
+    <link href="https://biglovewheat.gihub.io/2022/08/10/AWS-Linux-Chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/10/AWS-Linux-Chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/</id>
     <published>2022-08-09T16:00:00.000Z</published>
-    <updated>2022-08-10T03:10:58.000Z</updated>
+    <updated>2022-08-10T03:14:04.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="AWS-Linux-Chrony-时间同步"><a href="#AWS-Linux-Chrony-时间同步" class="headerlink" title="AWS-Linux-Chrony-时间同步"></a>AWS-Linux-Chrony-时间同步</h2><h3 id="配置chrony同步"><a href="#配置chrony同步" class="headerlink" title="配置chrony同步"></a>配置chrony同步</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 配置aws时间服务器</span></span><br><span class="line">vi /etc/chrony.conf </span><br><span class="line"></span><br><span class="line">server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4</span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启chrony</span></span><br><span class="line">systemctl restart chronyd</span><br><span class="line"></span><br><span class="line"><span class="comment">## 查看同步情况</span></span><br><span class="line">chronyc sources -v</span><br><span class="line"></span><br><span class="line">210 Number of sources = 1</span><br><span class="line"></span><br><span class="line">  .-- Source mode  <span class="string">&#x27;^&#x27;</span> = server, <span class="string">&#x27;=&#x27;</span> = peer, <span class="string">&#x27;#&#x27;</span> = <span class="built_in">local</span> clock.</span><br><span class="line"> / .- Source state <span class="string">&#x27;*&#x27;</span> = current synced, <span class="string">&#x27;+&#x27;</span> = combined , <span class="string">&#x27;-&#x27;</span> = not combined,</span><br><span class="line">| /   <span class="string">&#x27;?&#x27;</span> = unreachable, <span class="string">&#x27;x&#x27;</span> = time may be <span class="keyword">in</span> error, <span class="string">&#x27;~&#x27;</span> = time too variable.</span><br><span class="line">||                                                 .- xxxx [ yyyy ] +/- zzzz</span><br><span class="line">||      Reachability register (octal) -.           |  xxxx = adjusted offset,</span><br><span class="line">||      Log2(Polling interval) --.      |          |  yyyy = measured offset,</span><br><span class="line">||                                \     |          |  zzzz = estimated error.</span><br><span class="line">||                                 |    |           \</span><br><span class="line">MS Name/IP address         Stratum Poll Reach LastRx Last sample               </span><br><span class="line">===============================================================================</span><br><span class="line">^* 169.254.169.123               3   4   377    11  -5483ns[  -10us] +/-  410us</span><br><span class="line"></span><br><span class="line"><span class="comment">## 验证 </span></span><br><span class="line">chronyc tracking</span><br><span class="line">Reference ID    : A9FEA97B (169.254.169.123)</span><br><span class="line">Stratum         : 4</span><br><span class="line">Ref time (UTC)  : Wed Aug 10 03:04:51 2022</span><br><span class="line">System time     : 0.000002134 seconds fast of NTP time</span><br><span class="line">Last offset     : +0.000002142 seconds</span><br><span class="line">RMS offset      : 0.000007061 seconds</span><br><span class="line">Frequency       : 2.554 ppm slow</span><br><span class="line">Residual freq   : +0.003 ppm</span><br><span class="line">Skew            : 0.200 ppm</span><br><span class="line">Root delay      : 0.000296080 seconds</span><br><span class="line">Root dispersion : 0.000277362 seconds</span><br><span class="line">Update interval : 16.3 seconds</span><br><span class="line">Leap status     : Normal</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -39,6 +39,34 @@
     <category term="aws" scheme="https://biglovewheat.gihub.io/tags/aws/"/>
     
     <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jenkins-Gitlab-webhook配置</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-08-08T16:00:00.000Z</published>
+    <updated>2022-08-10T01:57:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Jenkins-Gitlab-webhook配置"><a href="#Jenkins-Gitlab-webhook配置" class="headerlink" title="Jenkins-Gitlab-webhook配置"></a>Jenkins-Gitlab-webhook配置</h2><h3 id="Gitlab设置access-token"><a href="#Gitlab设置access-token" class="headerlink" title="Gitlab设置access token"></a>Gitlab设置access token</h3><p>用户头像–Preferences–访问令牌<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_01.jpg"></p><p>把key复制下来<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_02.jpg"></p><h3 id="Gitlab项目配置webhook"><a href="#Gitlab项目配置webhook" class="headerlink" title="Gitlab项目配置webhook"></a>Gitlab项目配置webhook</h3><p>项目–设置–webhook</p><p>分别填入：</p><p>网址：jenkins网址+generic-webhook-trigger&#x2F;invoke?token&#x3D;yourtoken</p><p>推送事件：可以指定分支或tag</p><p>去掉启用ssl验证<br><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_03.jpg"></p><h3 id="jenkins安装Generic-Webhook-Trigger插件"><a href="#jenkins安装Generic-Webhook-Trigger插件" class="headerlink" title="jenkins安装Generic Webhook Trigger插件"></a>jenkins安装Generic Webhook Trigger插件</h3><h3 id="jenkins项目配置webhook"><a href="#jenkins项目配置webhook" class="headerlink" title="jenkins项目配置webhook"></a>jenkins项目配置webhook</h3><p><img src="/../images/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE_04.jpg"></p><p>配置完成后，只要分支有推送事件，会触发jenkins构建</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Jenkins-Gitlab-webhook配置&quot;&gt;&lt;a href=&quot;#Jenkins-Gitlab-webhook配置&quot; class=&quot;headerlink&quot; title=&quot;Jenkins-Gitlab-webhook配置&quot;&gt;&lt;/a&gt;Jenkins-Gitlab</summary>
+      
+    
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
+    
+    <category term="git" scheme="https://biglovewheat.gihub.io/tags/git/"/>
+    
+    <category term="jenkins" scheme="https://biglovewheat.gihub.io/tags/jenkins/"/>
     
   </entry>
   
@@ -492,30 +520,6 @@
     
     
     <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql-RPM-安装</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/02/mysql-rpm-%E5%AE%89%E8%A3%85/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/02/mysql-rpm-%E5%AE%89%E8%A3%85/</id>
-    <published>2022-08-01T16:00:00.000Z</published>
-    <updated>2022-08-10T01:57:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Mysql-RPM-安装"><a href="#Mysql-RPM-安装" class="headerlink" title="Mysql-RPM-安装"></a>Mysql-RPM-安装</h2><h3 id="mysql5-7-centos7"><a href="#mysql5-7-centos7" class="headerlink" title="mysql5.7+centos7"></a>mysql5.7+centos7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 卸载mysql-libs</span></span><br><span class="line">rpm -qa |grep mysql</span><br><span class="line">rpm -e mysql-libs-5.1.73-8.el6_8.x86_64 --nodeps</span><br><span class="line"></span><br><span class="line"><span class="comment">## 安装rpm包</span></span><br><span class="line">rpm -ivh mysql-community-common-5.7.24-1.el6.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.24-1.el6.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-compat-5.7.24-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.24-1.el6.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.24-1.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动</span></span><br><span class="line">systemctl start mysqld</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化</span></span><br><span class="line"><span class="built_in">cat</span> /var/log/mysqld.log |grep password</span><br><span class="line">mysql_secure_installation</span><br><span class="line">mysql&gt;use mysql</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;123abc!!!&#x27;</span>;</span><br><span class="line">mysql&gt;flush privileges;</span><br><span class="line">mysql&gt;quit</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="mysql8-centos7"><a href="#mysql8-centos7" class="headerlink" title="mysql8+centos7"></a>mysql8+centos7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 卸载mariadb</span></span><br><span class="line">rpm -e $(rpm -qa |grep maria) --nodeps</span><br><span class="line">yum install -y net-tools.x86_64 libaio.x86_64 perl.x86_64</span><br><span class="line"></span><br><span class="line"><span class="comment">## 安装rpm包</span></span><br><span class="line">rpm -ivh mysql-community-common-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-client-plugins-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-client-8*.rpm</span><br><span class="line">rpm -ivh mysql-community-server-8*.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动</span></span><br><span class="line">systemctl start mysqld</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化</span></span><br><span class="line"><span class="built_in">cat</span> /var/log/mysqld.log |grep password</span><br><span class="line">mysql_secure_installation</span><br><span class="line"></span><br><span class="line">mysql&gt;use mysql</span><br><span class="line">mysql&gt;create user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;123abc!!!&#x27;</span>;</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">mysql&gt;flush privileges;</span><br><span class="line">mysql&gt;quit</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Mysql-RPM-安装&quot;&gt;&lt;a href=&quot;#Mysql-RPM-安装&quot; class=&quot;headerlink&quot; title=&quot;Mysql-RPM-安装&quot;&gt;&lt;/a&gt;Mysql-RPM-安装&lt;/h2&gt;&lt;h3 id=&quot;mysql5-7-centos7&quot;&gt;&lt;a href</summary>
-      
-    
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="https://biglovewheat.gihub.io/tags/mysql/"/>
     
   </entry>
   

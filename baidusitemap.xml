@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/05/https%E6%8F%A1%E6%89%8B%E6%B5%81%E7%A8%8B/</loc>
+    <loc>https://biglovewheat.gihub.io/2022/08/10/AWS-Linux-Chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/</loc>
     <lastmod>2022-08-10</lastmod>
   </url>
   <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/10/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://biglovewheat.gihub.io/2022/08/05/https%E6%8F%A1%E6%89%8B%E6%B5%81%E7%A8%8B/</loc>
     <lastmod>2022-08-10</lastmod>
   </url>
   <url>
@@ -58,6 +58,10 @@
   </url>
   <url>
     <loc>https://biglovewheat.gihub.io/2022/08/03/gitlab-%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2022-08-10</lastmod>
+  </url>
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2022-08-10</lastmod>
   </url>
   <url>
