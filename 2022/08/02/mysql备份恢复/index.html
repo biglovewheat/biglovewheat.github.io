@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Mysql备份恢复 | biglovewheat</title>
-  <meta name="description" content="Mysql备份恢复mysqldump备份恢复12345678910111213141516#!&#x2F;bin&#x2F;bashROOT_PATH&#x3D;&#x2F;mysqldata_backupDATETIME&#x3D;$(date +&quot;%Y%m%d%H%M&quot;)passwd&#x3D;$(grep password &#x2F;etc&#x2F;my.cnf |awk  &amp;#x27;&amp;#123;print $3&amp;#125;&amp;#x27; |he">
+  <title>Mysql-Mysqldump备份恢复 | biglovewheat</title>
+  <meta name="description" content="Mysql-Mysqldump备份恢复mysqldump备份恢复12345678910111213141516#!&#x2F;bin&#x2F;bashROOT_PATH&#x3D;&#x2F;mysqldata_backupDATETIME&#x3D;$(date +&quot;%Y%m%d%H%M&quot;)passwd&#x3D;$(grep password &#x2F;etc&#x2F;my.cnf |awk  &amp;#x27;&amp;#123;print $3&amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql备份恢复">
+<meta property="og:title" content="Mysql-Mysqldump备份恢复">
 <meta property="og:url" content="https://biglovewheat.gihub.io/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/index.html">
 <meta property="og:site_name" content="biglovewheat">
-<meta property="og:description" content="Mysql备份恢复mysqldump备份恢复12345678910111213141516#!&#x2F;bin&#x2F;bashROOT_PATH&#x3D;&#x2F;mysqldata_backupDATETIME&#x3D;$(date +&quot;%Y%m%d%H%M&quot;)passwd&#x3D;$(grep password &#x2F;etc&#x2F;my.cnf |awk  &amp;#x27;&amp;#123;print $3&amp;#125;&amp;#x27; |he">
+<meta property="og:description" content="Mysql-Mysqldump备份恢复mysqldump备份恢复12345678910111213141516#!&#x2F;bin&#x2F;bashROOT_PATH&#x3D;&#x2F;mysqldata_backupDATETIME&#x3D;$(date +&quot;%Y%m%d%H%M&quot;)passwd&#x3D;$(grep password &#x2F;etc&#x2F;my.cnf |awk  &amp;#x27;&amp;#123;print $3&amp;#125;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-02T06:07:36.950Z">
-<meta property="article:modified_time" content="2022-08-02T01:19:52.000Z">
+<meta property="article:published_time" content="2022-08-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-10T01:57:52.000Z">
 <meta property="article:author" content="biglovewheat">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
@@ -171,7 +171,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GIS/">GIS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/K8S/">K8S</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/oracle/">oracle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">6</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/aws/">aws</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/k8s/">k8s</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/oracle/">oracle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -181,7 +181,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/AWS/" style="font-size: 13px;">AWS</a> <a href="/tags/FS/" style="font-size: 13px;">FS</a> <a href="/tags/GIS/" style="font-size: 13px;">GIS</a> <a href="/tags/K8S/" style="font-size: 13.29px;">K8S</a> <a href="/tags/PG/" style="font-size: 13px;">PG</a> <a href="/tags/Postgresql/" style="font-size: 13px;">Postgresql</a> <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 13.71px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/gitlab/" style="font-size: 13.29px;">gitlab</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/jenkins/" style="font-size: 13.29px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13px;">k8s</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.14px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.86px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nginx/" style="font-size: 13.14px;">nginx</a> <a href="/tags/oracle/" style="font-size: 13px;">oracle</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.43px;">python</a> <a href="/tags/shell/" style="font-size: 14px;">shell</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">理论知识</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.57px;">监控</a>
+      <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/aws/" style="font-size: 13px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 13.67px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.17px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.5px;">git</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/jenkins/" style="font-size: 13.33px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.5px;">k8s</a> <a href="/tags/linux/" style="font-size: 13.83px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.17px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.83px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nginx/" style="font-size: 13.17px;">nginx</a> <a href="/tags/oracle/" style="font-size: 13px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.17px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/shell/" style="font-size: 14px;">shell</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">理论知识</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.5px;">监控</a>
     </div>
   </div>
 
@@ -190,7 +190,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">29</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -206,28 +206,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a>
-              </p>
-              <p class="item-title">
-                <a href="/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/" class="title">Linux-iftop-流量监控</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2022-08-09T08:30:56.532Z" itemprop="datePublished">2022-08-09</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
                 <a class="category-link" href="/categories/devops/">devops</a>
               </p>
               <p class="item-title">
-                <a href="/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/" class="title">k8s-ingress-安装</a>
+                <a href="/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="title">Jenkins-Gitlab-webhook配置</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-09T03:08:55.386Z" itemprop="datePublished">2022-08-09</time>
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
               </p>
             </div>
           </li>
@@ -242,7 +227,7 @@
                 <a href="/2022/08/09/k8s-Evicted-Pod%E5%A4%84%E7%90%86/" class="title">k8s-Evicted-Pod处理</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-09T03:08:54.931Z" itemprop="datePublished">2022-08-09</time>
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
               </p>
             </div>
           </li>
@@ -254,10 +239,10 @@
                 <a class="category-link" href="/categories/devops/">devops</a>
               </p>
               <p class="item-title">
-                <a href="/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="title">Jenkins-Gitlab-webhook配置</a>
+                <a href="/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/" class="title">k8s-ingress-安装</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-09T03:08:54.533Z" itemprop="datePublished">2022-08-09</time>
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
               </p>
             </div>
           </li>
@@ -266,13 +251,28 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/shell/">shell</a>
+                <a class="category-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a>
               </p>
               <p class="item-title">
-                <a href="/2022/08/08/shell%E6%B8%85%E7%90%86%E8%84%9A%E6%9C%AC/" class="title">Shell清理脚本</a>
+                <a href="/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/" class="title">Linux-iftop-流量监控</a>
               </p>
               <p class="item-date">
-                <time datetime="2022-08-08T07:27:43.665Z" itemprop="datePublished">2022-08-08</time>
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/08/chattr-crontab%E5%8A%A0%E9%94%81/" class="title">chattr-crontab加锁</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-07T16:00:00.000Z" itemprop="datePublished">2022-08-08</time>
               </p>
             </div>
           </li>
@@ -297,7 +297,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Mysql备份恢复
+      Mysql-Mysqldump备份恢复
     </h1>
   
 
@@ -306,7 +306,7 @@
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" class="article-date">
-	  <time datetime="2022-08-02T06:07:36.950Z" itemprop="datePublished">2022-08-02</time>
+	  <time datetime="2022-08-01T16:00:00.000Z" itemprop="datePublished">2022-08-02</time>
 	</a>
 </span>
         
@@ -330,7 +330,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="Mysql备份恢复"><a href="#Mysql备份恢复" class="headerlink" title="Mysql备份恢复"></a>Mysql备份恢复</h2><h3 id="mysqldump备份恢复"><a href="#mysqldump备份恢复" class="headerlink" title="mysqldump备份恢复"></a>mysqldump备份恢复</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">ROOT_PATH=/mysqldata_backup</span><br><span class="line">DATETIME=$(<span class="built_in">date</span> +<span class="string">&quot;%Y%m%d%H%M&quot;</span>)</span><br><span class="line"></span><br><span class="line">passwd=$(grep password /etc/my.cnf |awk  <span class="string">&#x27;&#123;print $3&#125;&#x27;</span> |<span class="built_in">head</span> -1)</span><br><span class="line">mysqldump -uroot -p<span class="variable">$passwd</span> --all-databases --set-gtid-purged=OFF |gzip &gt;<span class="variable">$ROOT_PATH</span>/mysqlbackup_all_show_<span class="variable">$DATETIME</span>.sql.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">## 上传到aws s3</span></span><br><span class="line">/usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$ROOT_PATH</span>/mysqlbackup_all_show_<span class="variable">$DATETIME</span>.sql.gz s3://aaa/backup/</span><br><span class="line"></span><br><span class="line"><span class="comment">## 清理过期</span></span><br><span class="line">find <span class="variable">$ROOT_PATH</span> -mtime +1 -<span class="built_in">type</span> f -name <span class="string">&quot;*.sql.gz&quot;</span> | xargs <span class="built_in">rm</span> -vf</span><br><span class="line"></span><br><span class="line"><span class="comment">##恢复</span></span><br><span class="line"><span class="comment">#gunzip &lt; test.tar.gz |mysql -hlocalhost -uroot -pxxxxx</span></span><br></pre></td></tr></table></figure>
+        <h2 id="Mysql-Mysqldump备份恢复"><a href="#Mysql-Mysqldump备份恢复" class="headerlink" title="Mysql-Mysqldump备份恢复"></a>Mysql-Mysqldump备份恢复</h2><h3 id="mysqldump备份恢复"><a href="#mysqldump备份恢复" class="headerlink" title="mysqldump备份恢复"></a>mysqldump备份恢复</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">ROOT_PATH=/mysqldata_backup</span><br><span class="line">DATETIME=$(<span class="built_in">date</span> +<span class="string">&quot;%Y%m%d%H%M&quot;</span>)</span><br><span class="line"></span><br><span class="line">passwd=$(grep password /etc/my.cnf |awk  <span class="string">&#x27;&#123;print $3&#125;&#x27;</span> |<span class="built_in">head</span> -1)</span><br><span class="line">mysqldump -uroot -p<span class="variable">$passwd</span> --all-databases --set-gtid-purged=OFF |gzip &gt;<span class="variable">$ROOT_PATH</span>/mysqlbackup_all_show_<span class="variable">$DATETIME</span>.sql.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">## 上传到aws s3</span></span><br><span class="line">/usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$ROOT_PATH</span>/mysqlbackup_all_show_<span class="variable">$DATETIME</span>.sql.gz s3://aaa/backup/</span><br><span class="line"></span><br><span class="line"><span class="comment">## 清理过期</span></span><br><span class="line">find <span class="variable">$ROOT_PATH</span> -mtime +1 -<span class="built_in">type</span> f -name <span class="string">&quot;*.sql.gz&quot;</span> | xargs <span class="built_in">rm</span> -vf</span><br><span class="line"></span><br><span class="line"><span class="comment">##恢复</span></span><br><span class="line"><span class="comment">#gunzip &lt; test.tar.gz |mysql -hlocalhost -uroot -pxxxxx</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="xtrabackup备份恢复"><a href="#xtrabackup备份恢复" class="headerlink" title="xtrabackup备份恢复"></a>xtrabackup备份恢复</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##全量备份</span></span><br><span class="line">$ xtrabackup --backup --target-dir=/data/backups/</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复1-修改root密码为备份数据库密码</span></span><br><span class="line">use mysql；</span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复2-新建目录，修改my.cnf指向目录，并修改目录权限mysql:mysql</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复3-准备步骤</span></span><br><span class="line">$ xtrabackup --prepare --target-dir=/&lt;备份文件所在目录&gt;/</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复4-拷贝文件</span></span><br><span class="line">$ xtrabackup --copy-back --target-dir=/&lt;备份文件所在目录&gt;/</span><br><span class="line"></span><br><span class="line"><span class="comment">##异地恢复5-修改目录权限mysql:mysql</span></span><br><span class="line"><span class="built_in">chown</span> -R mysql:mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">##启动数据库</span></span><br><span class="line">systemctl start mysql</span><br></pre></td></tr></table></figure>
       
@@ -341,7 +341,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://biglovewheat.gihub.io/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" title="Mysql备份恢复" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/08/02/mysql备份恢复/</a>
+      <a href="https://biglovewheat.gihub.io/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" title="Mysql-Mysqldump备份恢复" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/08/02/mysql备份恢复/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -388,12 +388,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2022/08/02/shell-%E8%8E%B7%E5%8F%96mysql%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E5%80%BC/" title="Shell-获取Mysql查询返回值"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2022/08/02/mysql-too-many-connections%E9%94%99%E8%AF%AF/" title="Mysql-too-many-connections错误"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2022/08/02/mysql-too-many-connections%E9%94%99%E8%AF%AF/" title="Mysql-too-many-connections错误"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/08/02/shell-%E8%8E%B7%E5%8F%96mysql%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E5%80%BC/" title="Shell-获取Mysql查询返回值"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
