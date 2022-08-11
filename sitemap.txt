@@ -24,8 +24,8 @@ https://biglovewheat.gihub.io/2022/07/27/minio%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%
 https://biglovewheat.gihub.io/2022/08/02/mysql-rpm-%E5%AE%89%E8%A3%85/
 https://biglovewheat.gihub.io/2022/08/02/mysql-too-many-connections%E9%94%99%E8%AF%AF/
 https://biglovewheat.gihub.io/2022/08/02/mysql%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/
-https://biglovewheat.gihub.io/2022/08/01/mysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/
 https://biglovewheat.gihub.io/2022/08/01/mysql%E5%AE%9E%E7%8E%B0dblink/
+https://biglovewheat.gihub.io/2022/08/01/mysql%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/
 https://biglovewheat.gihub.io/2022/07/26/nacos-%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE/
 https://biglovewheat.gihub.io/2022/08/05/nginx-too-many-open-files/
 https://biglovewheat.gihub.io/2022/08/05/nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/
