@@ -36,9 +36,9 @@
     <category term="aws" scheme="https://biglovewheat.gihub.io/categories/aws/"/>
     
     
-    <category term="aws" scheme="https://biglovewheat.gihub.io/tags/aws/"/>
-    
     <category term="linux" scheme="https://biglovewheat.gihub.io/tags/linux/"/>
+    
+    <category term="aws" scheme="https://biglovewheat.gihub.io/tags/aws/"/>
     
   </entry>
   
