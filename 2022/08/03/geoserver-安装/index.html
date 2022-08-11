@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Geoserver-安装 | biglovewheat</title>
+  <meta name="description" content="Geoserver-安装版本1234567centos7&#x2F;8jdk-1.8geoserver-2.14tomcat-9postgresql-13.2postgis-3.1.1pgrouting-3.3.0  安装postgresql1234567891011121314151617181920212223## 安装仓库# centos8yum install -y https:&#x2F;&#x2F;download">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Geoserver-安装">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="Geoserver-安装版本1234567centos7&#x2F;8jdk-1.8geoserver-2.14tomcat-9postgresql-13.2postgis-3.1.1pgrouting-3.3.0  安装postgresql1234567891011121314151617181920212223## 安装仓库# centos8yum install -y https:&#x2F;&#x2F;download">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-11T08:07:47.931Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="gis">
+<meta property="article:tag" content="postgresql">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/aws/">aws</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/k8s/">k8s</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/aws/" style="font-size: 13.17px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 13.67px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.17px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gitlab/" style="font-size: 13px;">gitlab</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/jenkins/" style="font-size: 13.33px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.5px;">k8s</a> <a href="/tags/linux/" style="font-size: 13.83px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.17px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nginx/" style="font-size: 13.17px;">nginx</a> <a href="/tags/oracle/" style="font-size: 13px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.17px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/shell/" style="font-size: 13.83px;">shell</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">理论知识</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.5px;">监控</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/mysql-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE/" class="title">Mysql-主从复制配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/mysql-%E6%85%A2%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86/" class="title">Mysql-慢日志处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/aws/">aws</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/10/aws-linux-chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/" class="title">AWS-Linux-Chrony-时间同步</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-09T16:00:00.000Z" itemprop="datePublished">2022-08-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/" class="title">Jenkins-Gitlab-webhook配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/09/k8s-evicted-pod%E5%A4%84%E7%90%86/" class="title">K8s-Evicted-Pod处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-08T16:00:00.000Z" itemprop="datePublished">2022-08-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-geoserver-安装" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Geoserver-安装
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2022-08-02T16:00:00.000Z" itemprop="datePublished">2022-08-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/gis/">gis</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/gis/" rel="tag">gis</a>, <a class="article-tag-link-link" href="/tags/postgresql/" rel="tag">postgresql</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Geoserver-安装"><a href="#Geoserver-安装" class="headerlink" title="Geoserver-安装"></a>Geoserver-安装</h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">centos7/8</span><br><span class="line">jdk-1.8</span><br><span class="line">geoserver-2.14</span><br><span class="line">tomcat-9</span><br><span class="line">postgresql-13.2</span><br><span class="line">postgis-3.1.1</span><br><span class="line">pgrouting-3.3.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装postgresql"><a href="#安装postgresql" class="headerlink" title="安装postgresql"></a>安装postgresql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装仓库</span></span><br><span class="line"><span class="comment"># centos8</span></span><br><span class="line">yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm</span><br><span class="line"><span class="comment"># centos7</span></span><br><span class="line">yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm</span><br><span class="line"><span class="comment">## 安装postgresql</span></span><br><span class="line">yum install -y postgresql13-server</span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化</span></span><br><span class="line">/usr/pgsql-13/bin/postgresql-13-setup initdb</span><br><span class="line"></span><br><span class="line"><span class="comment">## 放开访问，其中 trust--信任，不用输密码; md5--密码认证</span></span><br><span class="line">sed -i <span class="string">&#x27;s|host    all             all             127.0.0.1/32            scram-sha-256|host  all  all  0.0.0.0/0  md5|g&#x27;</span>  /var/lib/pgsql/13/data/pg_hba.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 修改监听网段</span></span><br><span class="line">sed -i <span class="string">&quot;s|#listen_addresses = &#x27;localhost&#x27;|listen_addresses = &#x27;*&#x27;|g&quot;</span>  /var/lib/pgsql/13/data/postgresql.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 修改监听端口</span></span><br><span class="line">sed -i <span class="string">&quot;s|#port = 5432|port = 5083|g&quot;</span>  /var/lib/pgsql/13/data/postgresql.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启数据库</span></span><br><span class="line">systemctl <span class="built_in">enable</span> postgresql-13</span><br><span class="line">systemctl restart postgresql-13</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装postgis和pgrouting"><a href="#安装postgis和pgrouting" class="headerlink" title="安装postgis和pgrouting"></a>安装postgis和pgrouting</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install -y postgis32_13.x86_64</span><br><span class="line">yum install -y postgis32_13-utils</span><br><span class="line">yum install -y postgis32_13-client</span><br><span class="line">yum install -y pgrouting_13.x86_64</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据库设置"><a href="#数据库设置" class="headerlink" title="数据库设置"></a>数据库设置</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--每个database都需创建</span></span><br><span class="line"><span class="keyword">create</span> extension postgis;</span><br><span class="line"><span class="keyword">create</span> extension postgis_topology;</span><br><span class="line"><span class="keyword">create</span> extension fuzzystrmatch;</span><br><span class="line"><span class="keyword">create</span> extension address_standardizer;</span><br><span class="line"><span class="keyword">create</span> extension address_standardizer_data_us;</span><br><span class="line"><span class="keyword">create</span> extension postgis_tiger_geocoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> extension pgrouting;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装tomcat和geoserver"><a href="#安装tomcat和geoserver" class="headerlink" title="安装tomcat和geoserver"></a>安装tomcat和geoserver</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">## 下载tomcat9和gerserver.war包，把war包放到tomcat的webapps目录下</span></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/data/soft/jdk1.8.0_301</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line"></span><br><span class="line">/data/geoserver/apache-tomcat-9.0.64/bin/startup.sh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>404-bad-request</p>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://docs.geoserver.org/stable/en/user/security/webadmin/csrf.html">https://docs.geoserver.org/stable/en/user/security/webadmin/csrf.html</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 启动脚本加上环境变量,关闭或开启白名单</span></span><br><span class="line"><span class="built_in">export</span> GEOSERVER_CSRF_WHITELIST=xxx.com</span><br><span class="line"><span class="comment">## or</span></span><br><span class="line"><span class="built_in">export</span> GEOSERVER_CSRF_DISABLED=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/" title="Geoserver-安装" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/08/03/geoserver-安装/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/08/04/linux-swap%E6%89%A9%E5%AE%B9/" title="Linux-swap扩容"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/08/03/gitlab-%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/" title="Gitlab-批量操作"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
