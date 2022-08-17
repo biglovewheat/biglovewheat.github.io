@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>ELK-安装 | biglovewheat</title>
+  <meta name="description" content="ELK-安装ElasticSearch 安装配置12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849## 安装tar -xvf elasticsearch-7.13.1-linux-x86_64.tar.gzmv elasticsearch-7.13.1-linux-x86">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK-安装">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2022/08/17/elk-%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="ELK-安装ElasticSearch 安装配置12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849## 安装tar -xvf elasticsearch-7.13.1-linux-x86_64.tar.gzmv elasticsearch-7.13.1-linux-x86">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-17T02:39:35.836Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="日志">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/08/17/elk-%E5%AE%89%E8%A3%85/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/aws/">aws</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/k8s/">k8s</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/aws/" style="font-size: 13.17px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 13.67px;">devops</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.17px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gitlab/" style="font-size: 13px;">gitlab</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/jenkins/" style="font-size: 13.33px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.5px;">k8s</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/middleware/" style="font-size: 13.17px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nginx/" style="font-size: 13.17px;">nginx</a> <a href="/tags/oracle/" style="font-size: 13px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.17px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/shell/" style="font-size: 13.83px;">shell</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="font-size: 13px;">理论知识</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.5px;">监控</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/17/elk-%E5%AE%89%E8%A3%85/" class="title">ELK-安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-16T16:00:00.000Z" itemprop="datePublished">2022-08-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/15/linux-vsftp-%E5%AE%89%E8%A3%85/" class="title">Linux-Vsftp-安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-14T16:00:00.000Z" itemprop="datePublished">2022-08-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/mysql-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE/" class="title">Mysql-主从复制配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/11/mysql-%E6%85%A2%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86/" class="title">Mysql-慢日志处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-10T16:00:00.000Z" itemprop="datePublished">2022-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/aws/">aws</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/08/10/aws-linux-chrony-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/" class="title">AWS-Linux-Chrony-时间同步</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-08-09T16:00:00.000Z" itemprop="datePublished">2022-08-10</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-elk-安装" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ELK-安装
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/08/17/elk-%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2022-08-16T16:00:00.000Z" itemprop="datePublished">2022-08-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/17/elk-%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="ELK-安装"><a href="#ELK-安装" class="headerlink" title="ELK-安装"></a>ELK-安装</h2><h3 id="ElasticSearch-安装配置"><a href="#ElasticSearch-安装配置" class="headerlink" title="ElasticSearch 安装配置"></a>ElasticSearch 安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">tar -xvf elasticsearch-7.13.1-linux-x86_64.tar.gz</span><br><span class="line"><span class="built_in">mv</span> elasticsearch-7.13.1-linux-x86_64 /usr/local/elasticsearch</span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建用户</span></span><br><span class="line">useradd es</span><br><span class="line">passwd es</span><br><span class="line"><span class="built_in">chown</span> -R es:es /usr/local/elasticsearch</span><br><span class="line"></span><br><span class="line"><span class="comment">## linux参数设置</span></span><br><span class="line">vi /etc/sysctl.conf</span><br><span class="line">fs.file-max=655360</span><br><span class="line">vm.max_map_count = 262144</span><br><span class="line"></span><br><span class="line">sysctl -p</span><br><span class="line"></span><br><span class="line">vi /etc/security/limits.conf</span><br><span class="line">*        soft    <span class="built_in">nproc</span>           20480</span><br><span class="line">*        hard    <span class="built_in">nproc</span>           20480</span><br><span class="line">*        soft    nofile          65536</span><br><span class="line">*        hard    nofile          65536</span><br><span class="line">*        soft    memlock         unlimited</span><br><span class="line">*        hard    memlock         unlimited</span><br><span class="line"><span class="comment">##重新登录生效，查看</span></span><br><span class="line"><span class="built_in">ulimit</span> -a</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -f /etc/security/limits.d/20-nproc.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">vi /usr/local/elasticsearch/config/elasticsearch.yml</span><br><span class="line"></span><br><span class="line"><span class="comment">#cluster.name: elkbigdata</span></span><br><span class="line"><span class="comment">#node.name: server1</span></span><br><span class="line"><span class="comment">#node.master: true</span></span><br><span class="line"><span class="comment">#node.data: true</span></span><br><span class="line">path.data: /data/elasticsearch</span><br><span class="line"><span class="comment">#path.logs: /usr/local/elasticsearch/logs</span></span><br><span class="line"><span class="comment">#bootstrap.memory_lock: true</span></span><br><span class="line">network.host: 192.168.8.221</span><br><span class="line"><span class="comment">#http.port: 9200</span></span><br><span class="line"><span class="comment">#discovery.zen.minimum_master_nodes: 1</span></span><br><span class="line"><span class="comment">#discovery.seed_hosts: [&quot;127.0.0.1&quot;, &quot;[::1]&quot;]</span></span><br><span class="line"><span class="comment">#discovery.seed_providers: file</span></span><br><span class="line">cluster.initial_master_nodes: <span class="string">&quot;vm221&quot;</span></span><br><span class="line"><span class="comment">##discovery.zen.ping.unicast.hosts: [&quot;172.16.213.37:9300&quot;,&quot;172.16.213.78:9300&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">su - es -c <span class="string">&quot;/usr/local/elasticsearch/bin/elasticsearch -d&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ES常用命令"><a href="#ES常用命令" class="headerlink" title="ES常用命令"></a>ES常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看索引</span></span><br><span class="line">curl localhost:9200/_cat/indices?v</span><br></pre></td></tr></table></figure>
+
+<h3 id="zookepper-安装配置"><a href="#zookepper-安装配置" class="headerlink" title="zookepper 安装配置"></a>zookepper 安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">tar -xvf tar -xvf apache-zookeeper-3.6.3-bin.tar.gz</span><br><span class="line"><span class="built_in">mv</span> apache-zookeeper-3.6.3-bin /usr/local/zookeeper</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">vi /usr/local/zookeeper/conf/zoo.cfg</span><br><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/data/zookeeper</span><br><span class="line">clientPort=2181</span><br><span class="line">server.1=192.168.8.225:2888:3888</span><br><span class="line">server.2=192.168.8.226:2888:3888</span><br><span class="line">server.3=192.168.8.227:2888:3888</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> myid file</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;1&quot;</span> &gt;/data/zookeeper/myid</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">/usr/local/zookeeper/bin/zkServer.sh start</span><br></pre></td></tr></table></figure>
+
+<h3 id="kafka-安装配置"><a href="#kafka-安装配置" class="headerlink" title="kafka 安装配置"></a>kafka 安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">tar -xvf kafka_2.11-2.2.2.tgz</span><br><span class="line"><span class="built_in">mv</span> kafka_2.11-2.2.2 /usr/local/kafka</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置文件</span></span><br><span class="line">vi /usr/local/kafka/config/server.properties</span><br><span class="line"></span><br><span class="line">broker.id=0</span><br><span class="line">num.network.threads=3</span><br><span class="line">num.io.threads=8</span><br><span class="line">socket.send.buffer.bytes=102400</span><br><span class="line">socket.receive.buffer.bytes=102400</span><br><span class="line">socket.request.max.bytes=104857600</span><br><span class="line">log.dirs=/usr/local/kafka/logs</span><br><span class="line">num.partitions=3</span><br><span class="line">num.recovery.threads.per.data.dir=1</span><br><span class="line">offsets.topic.replication.factor=1</span><br><span class="line">transaction.state.log.replication.factor=1</span><br><span class="line">transaction.state.log.min.isr=1</span><br><span class="line">log.retention.hours=60</span><br><span class="line">log.segment.bytes=1073741824</span><br><span class="line">log.retention.check.interval.ms=300000</span><br><span class="line">zookeeper.connect=192.168.8.225:2181,192.168.8.226:2181,192.168.8.227:2181</span><br><span class="line">zookeeper.connection.timeout.ms=6000</span><br><span class="line">group.initial.rebalance.delay.ms=0</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">nohup</span> /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties 1&gt;kafka.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">tail</span> -f kafka.log</span><br><span class="line"></span><br><span class="line"><span class="comment">## 常用操作</span></span><br><span class="line"><span class="comment"># 查看topic</span></span><br><span class="line">bin/kafka-topics.sh --zookeeper 192.168.8.225:2181,192.168.8.226:2181,192.168.8.227:2181 --list</span><br><span class="line"><span class="comment"># 创建topic</span></span><br><span class="line">bin/kafka-topics.sh --zookeeper 192.168.8.225:2181,192.168.8.226:2181,192.168.8.227:2181 --create --topic elktopic \</span><br><span class="line">&gt;         --partitions 3 --replication-factor 1</span><br><span class="line"><span class="comment"># 查看topic内容</span></span><br><span class="line">bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic elktopic --from-beginning</span><br></pre></td></tr></table></figure>
+
+<h3 id="filebeat-安装配置"><a href="#filebeat-安装配置" class="headerlink" title="filebeat 安装配置"></a>filebeat 安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">tar -xvf filebeat-7.13.1-linux-x86_64.tar.gz</span><br><span class="line"><span class="built_in">mv</span> filebeat-7.13.1-linux-x86_64 /usr/local/filebeat</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">vi /usr/local/filebeat/filebeat.yml</span><br><span class="line"></span><br><span class="line">filebeat.inputs:</span><br><span class="line">- <span class="built_in">type</span>: <span class="built_in">log</span></span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  paths:</span><br><span class="line">    - /var/log/secure</span><br><span class="line">  fields:</span><br><span class="line">    log_topic: topic1</span><br><span class="line"></span><br><span class="line">output.kafka:</span><br><span class="line">  hosts: [<span class="string">&quot;192.168.8.225:9092&quot;</span>, <span class="string">&quot;192.168.8.226:9092&quot;</span>, <span class="string">&quot;192.168.8.227:9092&quot;</span>]</span><br><span class="line">  enabled: <span class="literal">true</span></span><br><span class="line">  topic: <span class="string">&#x27;%&#123;[fields.log_topic]&#125;&#x27;</span></span><br><span class="line">  partition.round_robin:</span><br><span class="line">    reachable_only: <span class="literal">false</span></span><br><span class="line">  required_acks: 1</span><br><span class="line">  compression: gzip</span><br><span class="line">  max_message_bytes: 1000000</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">/usr/local/filebeat/filebeat -e -c /usr/local/filebeat/filebeat.yml &gt;filebeat.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">tail</span> -f filebeat.log</span><br></pre></td></tr></table></figure>
+<h3 id="logstash-安装配置"><a href="#logstash-安装配置" class="headerlink" title="logstash 安装配置"></a>logstash 安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">tar -xvf logstash-7.13.1-linux-x86_64.tar.gz</span><br><span class="line"><span class="built_in">mv</span> logstash-7.13.1-linux-x86_64 /usr/local/logstash</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line"><span class="built_in">cat</span> /usr/local/logstash/config/logstash.conf</span><br><span class="line">input &#123;</span><br><span class="line">        kafka &#123;</span><br><span class="line">        bootstrap_servers =&gt; <span class="string">&quot;192.168.8.225:9092,192.168.8.226:9092,192.168.8.227:9092&quot;</span></span><br><span class="line">        topics =&gt; [<span class="string">&quot;topic1&quot;</span>]</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">output &#123;</span><br><span class="line">        elasticsearch &#123;</span><br><span class="line">        hosts =&gt; <span class="string">&quot;192.168.8.221:9200&quot;</span></span><br><span class="line">        index =&gt; <span class="string">&quot;securelog-%&#123;+YYYY-MM-dd&#125;&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">/usr/local/logstash/bin/logstash -f /usr/local/logstash/config/logstash.conf &gt;logstash.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Kibana-安装配置"><a href="#Kibana-安装配置" class="headerlink" title="Kibana 安装配置"></a>Kibana 安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装</span></span><br><span class="line">tar -xvf logstash-7.13.1-linux-x86_64.tar.gz</span><br><span class="line"><span class="built_in">mv</span> logstash-7.13.1-linux-x86_64 /usr/local/logstash</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置</span></span><br><span class="line">vi /usr/local/kibana/config/kibana.yml</span><br><span class="line">server.port: 5601</span><br><span class="line">server.host: <span class="string">&quot;192.168.8.221&quot;</span></span><br><span class="line">elasticsearch.hosts: <span class="string">&quot;http://192.168.8.221:9200&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">nohup</span> /usr/local/kibana/bin/kibana --allow-root &gt;kibana.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 索引设置</span></span><br><span class="line"><span class="comment">## Management--&gt;Stack Management--&gt;Kibana--&gt;Index Patterns</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2022/08/17/elk-%E5%AE%89%E8%A3%85/" title="ELK-安装" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/08/17/elk-安装/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/08/15/linux-vsftp-%E5%AE%89%E8%A3%85/" title="Linux-Vsftp-安装"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
