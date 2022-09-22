@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Seata-安装 | biglovewheat</title>
+  <meta name="description" content="Seata-安装Seata 是一款开源的分布式事务解决方案 http:&#x2F;&#x2F;seata.io&#x2F;zh-cn&#x2F; 版本v1.4.2 数据库配置创建seata数据库，然后运行以下建表语句 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seata-安装">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2022/09/21/seata-%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="Seata-安装Seata 是一款开源的分布式事务解决方案 http:&#x2F;&#x2F;seata.io&#x2F;zh-cn&#x2F; 版本v1.4.2 数据库配置创建seata数据库，然后运行以下建表语句 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-22T14:08:07.792Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="seata">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/09/21/seata-%E5%AE%89%E8%A3%85/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">基础概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/aws/" style="font-size: 13.38px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 14px;">devops</a> <a href="/tags/docker/" style="font-size: 13px;">docker</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.13px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.38px;">git</a> <a href="/tags/gitlab/" style="font-size: 13px;">gitlab</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/jenkins/" style="font-size: 13.38px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.63px;">k8s</a> <a href="/tags/keepalived/" style="font-size: 13px;">keepalived</a> <a href="/tags/linux/" style="font-size: 13.88px;">linux</a> <a href="/tags/lvs/" style="font-size: 13px;">lvs</a> <a href="/tags/middleware/" style="font-size: 13.25px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.88px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13.13px;">nacos</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/nexus/" style="font-size: 13px;">nexus</a> <a href="/tags/nginx/" style="font-size: 13.13px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13px;">nodejs</a> <a href="/tags/oracle/" style="font-size: 13.38px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.25px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/s3/" style="font-size: 13px;">s3</a> <a href="/tags/seata/" style="font-size: 13px;">seata</a> <a href="/tags/shell/" style="font-size: 13.75px;">shell</a> <a href="/tags/ssl/" style="font-size: 13px;">ssl</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13px;">基础概念</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">正则表达式</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.38px;">监控</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">阿里云</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">43</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/09/21/seata-%E5%AE%89%E8%A3%85/" class="title">Seata-安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-09-20T16:00:00.000Z" itemprop="datePublished">2022-09-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/09/14/gitlab-cl/" class="title">Gitlab-CI</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-09-13T16:00:00.000Z" itemprop="datePublished">2022-09-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/09/13/jenkins-npm-%E6%9E%84%E5%BB%BA%E6%8A%A5%E9%94%99/" class="title">Jenkins-npm-构建报错</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-09-12T16:00:00.000Z" itemprop="datePublished">2022-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/09/08/ansible-%E4%BF%AE%E6%94%B9hosts/" class="title">Ansible-修改hosts</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-09-07T16:00:00.000Z" itemprop="datePublished">2022-09-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/09/07/oracle-undo/" class="title">Oracle-undo</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-09-06T16:00:00.000Z" itemprop="datePublished">2022-09-07</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-seata-安装" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Seata-安装
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/09/21/seata-%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2022-09-20T16:00:00.000Z" itemprop="datePublished">2022-09-21</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/seata/" rel="tag">seata</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/09/21/seata-%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Seata-安装"><a href="#Seata-安装" class="headerlink" title="Seata-安装"></a>Seata-安装</h2><p><em>Seata 是一款开源的分布式事务解决方案</em></p>
+<p><em><a target="_blank" rel="noopener" href="http://seata.io/zh-cn/">http://seata.io/zh-cn/</a></em></p>
+<p><em>版本v1.4.2</em></p>
+<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>创建seata数据库，然后运行以下建表语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--https://github.com/seata/seata/tree/develop/script/server/db</span></span><br><span class="line"><span class="comment">-- -------------------------------- The script used when storeMode is &#x27;db&#x27; --------------------------------</span></span><br><span class="line"><span class="comment">-- the table to store GlobalSession data</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `global_table`</span><br><span class="line">(</span><br><span class="line">    `xid`                       <span class="type">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `transaction_id`            <span class="type">BIGINT</span>,</span><br><span class="line">    `status`                    TINYINT      <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `application_id`            <span class="type">VARCHAR</span>(<span class="number">32</span>),</span><br><span class="line">    `transaction_service_group` <span class="type">VARCHAR</span>(<span class="number">32</span>),</span><br><span class="line">    `transaction_name`          <span class="type">VARCHAR</span>(<span class="number">128</span>),</span><br><span class="line">    `timeout`                   <span class="type">INT</span>,</span><br><span class="line">    `begin_time`                <span class="type">BIGINT</span>,</span><br><span class="line">    `application_data`          <span class="type">VARCHAR</span>(<span class="number">2000</span>),</span><br><span class="line">    `gmt_create`                DATETIME,</span><br><span class="line">    `gmt_modified`              DATETIME,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`xid`),</span><br><span class="line">    KEY `idx_status_gmt_modified` (`status` , `gmt_modified`),</span><br><span class="line">    KEY `idx_transaction_id` (`transaction_id`)</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB</span><br><span class="line">  <span class="keyword">DEFAULT</span> CHARSET <span class="operator">=</span> utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- the table to store BranchSession data</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `branch_table`</span><br><span class="line">(</span><br><span class="line">    `branch_id`         <span class="type">BIGINT</span>       <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `xid`               <span class="type">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `transaction_id`    <span class="type">BIGINT</span>,</span><br><span class="line">    `resource_group_id` <span class="type">VARCHAR</span>(<span class="number">32</span>),</span><br><span class="line">    `resource_id`       <span class="type">VARCHAR</span>(<span class="number">256</span>),</span><br><span class="line">    `branch_type`       <span class="type">VARCHAR</span>(<span class="number">8</span>),</span><br><span class="line">    `status`            TINYINT,</span><br><span class="line">    `client_id`         <span class="type">VARCHAR</span>(<span class="number">64</span>),</span><br><span class="line">    `application_data`  <span class="type">VARCHAR</span>(<span class="number">2000</span>),</span><br><span class="line">    `gmt_create`        DATETIME(<span class="number">6</span>),</span><br><span class="line">    `gmt_modified`      DATETIME(<span class="number">6</span>),</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`branch_id`),</span><br><span class="line">    KEY `idx_xid` (`xid`)</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB</span><br><span class="line">  <span class="keyword">DEFAULT</span> CHARSET <span class="operator">=</span> utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- the table to store lock data</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `lock_table`</span><br><span class="line">(</span><br><span class="line">    `row_key`        <span class="type">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `xid`            <span class="type">VARCHAR</span>(<span class="number">128</span>),</span><br><span class="line">    `transaction_id` <span class="type">BIGINT</span>,</span><br><span class="line">    `branch_id`      <span class="type">BIGINT</span>       <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `resource_id`    <span class="type">VARCHAR</span>(<span class="number">256</span>),</span><br><span class="line">    `table_name`     <span class="type">VARCHAR</span>(<span class="number">32</span>),</span><br><span class="line">    `pk`             <span class="type">VARCHAR</span>(<span class="number">36</span>),</span><br><span class="line">    `status`         TINYINT      <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span> COMMENT <span class="string">&#x27;0:locked ,1:rollbacking&#x27;</span>,</span><br><span class="line">    `gmt_create`     DATETIME,</span><br><span class="line">    `gmt_modified`   DATETIME,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`row_key`),</span><br><span class="line">    KEY `idx_status` (`status`),</span><br><span class="line">    KEY `idx_branch_id` (`branch_id`),</span><br><span class="line">    KEY `idx_xid` (`xid`)</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB</span><br><span class="line">  <span class="keyword">DEFAULT</span> CHARSET <span class="operator">=</span> utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `distributed_lock`</span><br><span class="line">(</span><br><span class="line">    `lock_key`       <span class="type">CHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `lock_value`     <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    `expire`         <span class="type">BIGINT</span>,</span><br><span class="line">    <span class="keyword">primary</span> key (`lock_key`)</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB</span><br><span class="line">  <span class="keyword">DEFAULT</span> CHARSET <span class="operator">=</span> utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `distributed_lock` (lock_key, lock_value, expire) <span class="keyword">VALUES</span> (<span class="string">&#x27;AsyncCommitting&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `distributed_lock` (lock_key, lock_value, expire) <span class="keyword">VALUES</span> (<span class="string">&#x27;RetryCommitting&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `distributed_lock` (lock_key, lock_value, expire) <span class="keyword">VALUES</span> (<span class="string">&#x27;RetryRollbacking&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `distributed_lock` (lock_key, lock_value, expire) <span class="keyword">VALUES</span> (<span class="string">&#x27;TxTimeoutCheck&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="nacos配置"><a href="#nacos配置" class="headerlink" title="nacos配置"></a>nacos配置</h3><p>新建配置seataServer.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#For details about configuration items, see https://seata.io/zh-cn/docs/user/configurations.html</span></span><br><span class="line"><span class="comment">#Transport configuration, for client and server</span></span><br><span class="line"><span class="attr">transport.type</span>=<span class="string">TCP</span></span><br><span class="line"><span class="attr">transport.server</span>=<span class="string">NIO</span></span><br><span class="line"><span class="attr">transport.heartbeat</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">transport.enableTmClientBatchSendRequest</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">transport.enableRmClientBatchSendRequest</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">transport.enableTcServerBatchSendResponse</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">transport.rpcRmRequestTimeout</span>=<span class="string">30000</span></span><br><span class="line"><span class="attr">transport.rpcTmRequestTimeout</span>=<span class="string">30000</span></span><br><span class="line"><span class="attr">transport.rpcTcRequestTimeout</span>=<span class="string">30000</span></span><br><span class="line"><span class="attr">transport.threadFactory.bossThreadPrefix</span>=<span class="string">NettyBoss</span></span><br><span class="line"><span class="attr">transport.threadFactory.workerThreadPrefix</span>=<span class="string">NettyServerNIOWorker</span></span><br><span class="line"><span class="attr">transport.threadFactory.serverExecutorThreadPrefix</span>=<span class="string">NettyServerBizHandler</span></span><br><span class="line"><span class="attr">transport.threadFactory.shareBossWorker</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">transport.threadFactory.clientSelectorThreadPrefix</span>=<span class="string">NettyClientSelector</span></span><br><span class="line"><span class="attr">transport.threadFactory.clientSelectorThreadSize</span>=<span class="string">1</span></span><br><span class="line"><span class="attr">transport.threadFactory.clientWorkerThreadPrefix</span>=<span class="string">NettyClientWorkerThread</span></span><br><span class="line"><span class="attr">transport.threadFactory.bossThreadSize</span>=<span class="string">1</span></span><br><span class="line"><span class="attr">transport.threadFactory.workerThreadSize</span>=<span class="string">default</span></span><br><span class="line"><span class="attr">transport.shutdown.wait</span>=<span class="string">3</span></span><br><span class="line"><span class="attr">transport.serialization</span>=<span class="string">seata</span></span><br><span class="line"><span class="attr">transport.compressor</span>=<span class="string">none</span></span><br><span class="line"><span class="comment">#Transaction routing rules configuration, only for the client</span></span><br><span class="line"><span class="comment"># 默认的事务分组</span></span><br><span class="line"><span class="attr">service.vgroupMapping.default_tx_group</span>=<span class="string">default</span></span><br><span class="line"><span class="comment">#If you use a registry, you can ignore it</span></span><br><span class="line"><span class="attr">service.default.grouplist</span>=<span class="string">172.31.43.98:8491</span></span><br><span class="line"><span class="attr">service.enableDegrade</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">service.disableGlobalTransaction</span>=<span class="string">false</span></span><br><span class="line"><span class="comment">#Transaction rule configuration, only for the client</span></span><br><span class="line"><span class="attr">client.rm.asyncCommitBufferLimit</span>=<span class="string">10000</span></span><br><span class="line"><span class="attr">client.rm.lock.retryInterval</span>=<span class="string">10</span></span><br><span class="line"><span class="attr">client.rm.lock.retryTimes</span>=<span class="string">30</span></span><br><span class="line"><span class="attr">client.rm.lock.retryPolicyBranchRollbackOnConflict</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">client.rm.reportRetryCount</span>=<span class="string">5</span></span><br><span class="line"><span class="attr">client.rm.tableMetaCheckEnable</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">client.rm.tableMetaCheckerInterval</span>=<span class="string">60000</span></span><br><span class="line"><span class="attr">client.rm.sqlParserType</span>=<span class="string">druid</span></span><br><span class="line"><span class="attr">client.rm.reportSuccessEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">client.rm.sagaBranchRegisterEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">client.rm.sagaJsonParser</span>=<span class="string">fastjson</span></span><br><span class="line"><span class="attr">client.rm.tccActionInterceptorOrder</span>=<span class="string">-2147482648</span></span><br><span class="line"><span class="attr">client.tm.commitRetryCount</span>=<span class="string">5</span></span><br><span class="line"><span class="attr">client.tm.rollbackRetryCount</span>=<span class="string">5</span></span><br><span class="line"><span class="attr">client.tm.defaultGlobalTransactionTimeout</span>=<span class="string">60000</span></span><br><span class="line"><span class="attr">client.tm.degradeCheck</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">client.tm.degradeCheckAllowTimes</span>=<span class="string">10</span></span><br><span class="line"><span class="attr">client.tm.degradeCheckPeriod</span>=<span class="string">2000</span></span><br><span class="line"><span class="attr">client.tm.interceptorOrder</span>=<span class="string">-2147482648</span></span><br><span class="line"><span class="attr">client.undo.dataValidation</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">client.undo.logSerialization</span>=<span class="string">jackson</span></span><br><span class="line"><span class="attr">client.undo.onlyCareUpdateColumns</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">server.undo.logSaveDays</span>=<span class="string">7</span></span><br><span class="line"><span class="attr">server.undo.logDeletePeriod</span>=<span class="string">86400000</span></span><br><span class="line"><span class="attr">client.undo.logTable</span>=<span class="string">undo_log</span></span><br><span class="line"><span class="attr">client.undo.compress.enable</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">client.undo.compress.type</span>=<span class="string">zip</span></span><br><span class="line"><span class="attr">client.undo.compress.threshold</span>=<span class="string">64k</span></span><br><span class="line"><span class="comment">#For TCC transaction mode</span></span><br><span class="line"><span class="attr">tcc.fence.logTableName</span>=<span class="string">tcc_fence_log</span></span><br><span class="line"><span class="attr">tcc.fence.cleanPeriod</span>=<span class="string">1h</span></span><br><span class="line"><span class="comment">#Log rule configuration, for client and server</span></span><br><span class="line"><span class="attr">log.exceptionRate</span>=<span class="string">100</span></span><br><span class="line"><span class="comment">#Transaction storage configuration, only for the server. The file, DB, and redis configuration values are optional.</span></span><br><span class="line"><span class="comment"># Seata服务器的数据存储方式设置为数据库存储</span></span><br><span class="line"><span class="attr">store.mode</span>=<span class="string">db</span></span><br><span class="line"><span class="attr">store.lock.mode</span>=<span class="string">db</span></span><br><span class="line"><span class="attr">store.session.mode</span>=<span class="string">file</span></span><br><span class="line"><span class="comment">#Used for password encryption</span></span><br><span class="line"><span class="attr">store.publicKey</span>=<span class="string"></span></span><br><span class="line"><span class="comment">#If `store.mode,store.lock.mode,store.session.mode` are not equal to `file`, you can remove the configuration block.</span></span><br><span class="line"><span class="attr">store.file.dir</span>=<span class="string">file_store/data</span></span><br><span class="line"><span class="attr">store.file.maxBranchSessionSize</span>=<span class="string">16384</span></span><br><span class="line"><span class="attr">store.file.maxGlobalSessionSize</span>=<span class="string">512</span></span><br><span class="line"><span class="attr">store.file.fileWriteBufferCacheSize</span>=<span class="string">16384</span></span><br><span class="line"><span class="attr">store.file.flushDiskMode</span>=<span class="string">async</span></span><br><span class="line"><span class="attr">store.file.sessionReloadReadSize</span>=<span class="string">100</span></span><br><span class="line"><span class="comment">#These configurations are required if the `store mode` is `db`. If `store.mode,store.lock.mode,store.session.mode` are not equal to `db`, you can remove the configuration block.</span></span><br><span class="line"><span class="attr">store.db.datasource</span>=<span class="string">druid</span></span><br><span class="line"><span class="attr">store.db.dbType</span>=<span class="string">mysql</span></span><br><span class="line"><span class="attr">store.db.driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="comment">### 设置数据库得连接信息</span></span><br><span class="line"><span class="attr">store.db.url</span>=<span class="string">jdbc:mysql://192.168.8.1:3306/seata?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai</span></span><br><span class="line"><span class="attr">store.db.user</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">store.db.password</span>=<span class="string">123456</span></span><br><span class="line"><span class="attr">store.db.minConn</span>=<span class="string">5</span></span><br><span class="line"><span class="attr">store.db.maxConn</span>=<span class="string">30</span></span><br><span class="line"><span class="attr">store.db.globalTable</span>=<span class="string">global_table</span></span><br><span class="line"><span class="attr">store.db.branchTable</span>=<span class="string">branch_table</span></span><br><span class="line"><span class="attr">store.db.distributedLockTable</span>=<span class="string">distributed_lock</span></span><br><span class="line"><span class="attr">store.db.queryLimit</span>=<span class="string">100</span></span><br><span class="line"><span class="attr">store.db.lockTable</span>=<span class="string">lock_table</span></span><br><span class="line"><span class="attr">store.db.maxWait</span>=<span class="string">5000</span></span><br><span class="line"><span class="comment">#Transaction rule configuration, only for the server</span></span><br><span class="line"><span class="attr">server.recovery.committingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.recovery.asynCommittingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.recovery.rollbackingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.recovery.timeoutRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">server.maxCommitRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="attr">server.maxRollbackRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="attr">server.rollbackRetryTimeoutUnlockEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">server.distributedLockExpireTime</span>=<span class="string">10000</span></span><br><span class="line"><span class="attr">server.xaerNotaRetryTimeout</span>=<span class="string">60000</span></span><br><span class="line"><span class="attr">server.session.branchAsyncQueueSize</span>=<span class="string">5000</span></span><br><span class="line"><span class="attr">server.session.enableBranchAsyncRemove</span>=<span class="string">false</span></span><br><span class="line"><span class="comment">#Metrics configuration, only for the server</span></span><br><span class="line"><span class="attr">metrics.enabled</span>=<span class="string">false</span></span><br><span class="line"><span class="attr">metrics.registryType</span>=<span class="string">compact</span></span><br><span class="line"><span class="attr">metrics.exporterList</span>=<span class="string">prometheus</span></span><br><span class="line"><span class="attr">metrics.exporterPrometheusPort</span>=<span class="string">9898</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="seata配置文件"><a href="#seata配置文件" class="headerlink" title="seata配置文件"></a>seata配置文件</h3><p>主要修改nacos部分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## vi registry.conf</span></span><br><span class="line"></span><br><span class="line">registry &#123;</span><br><span class="line">  <span class="comment"># file 、nacos 、eureka、redis、zk、consul、etcd3、sofa</span></span><br><span class="line">  <span class="built_in">type</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line"></span><br><span class="line">  nacos &#123;</span><br><span class="line">    application = <span class="string">&quot;seata-server&quot;</span></span><br><span class="line">    serverAddr = <span class="string">&quot;192.168.8.1:8848&quot;</span></span><br><span class="line">    group = <span class="string">&quot;DEFAULT_GROUP&quot;</span></span><br><span class="line">    namespace = <span class="string">&quot;da7aaaa2-7505-4c1d-98c6-9e2e7778ef55&quot;</span></span><br><span class="line">    cluster = <span class="string">&quot;default&quot;</span></span><br><span class="line">    username = <span class="string">&quot;&quot;</span></span><br><span class="line">    password = <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  eureka &#123;</span><br><span class="line">    serviceUrl = <span class="string">&quot;http://localhost:8761/eureka&quot;</span></span><br><span class="line">    application = <span class="string">&quot;default&quot;</span></span><br><span class="line">    weight = <span class="string">&quot;1&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  redis &#123;</span><br><span class="line">    serverAddr = <span class="string">&quot;localhost:6379&quot;</span></span><br><span class="line">    db = 0</span><br><span class="line">    password = <span class="string">&quot;&quot;</span></span><br><span class="line">    cluster = <span class="string">&quot;default&quot;</span></span><br><span class="line">    <span class="built_in">timeout</span> = 0</span><br><span class="line">  &#125;</span><br><span class="line">  zk &#123;</span><br><span class="line">    cluster = <span class="string">&quot;default&quot;</span></span><br><span class="line">    serverAddr = <span class="string">&quot;127.0.0.1:2181&quot;</span></span><br><span class="line">    sessionTimeout = 6000</span><br><span class="line">    connectTimeout = 2000</span><br><span class="line">    username = <span class="string">&quot;&quot;</span></span><br><span class="line">    password = <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  consul &#123;</span><br><span class="line">    cluster = <span class="string">&quot;default&quot;</span></span><br><span class="line">    serverAddr = <span class="string">&quot;127.0.0.1:8500&quot;</span></span><br><span class="line">    aclToken = <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  etcd3 &#123;</span><br><span class="line">    cluster = <span class="string">&quot;default&quot;</span></span><br><span class="line">    serverAddr = <span class="string">&quot;http://localhost:2379&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  sofa &#123;</span><br><span class="line">    serverAddr = <span class="string">&quot;127.0.0.1:9603&quot;</span></span><br><span class="line">    application = <span class="string">&quot;default&quot;</span></span><br><span class="line">    region = <span class="string">&quot;DEFAULT_ZONE&quot;</span></span><br><span class="line">    datacenter = <span class="string">&quot;DefaultDataCenter&quot;</span></span><br><span class="line">    cluster = <span class="string">&quot;default&quot;</span></span><br><span class="line">    group = <span class="string">&quot;SEATA_GROUP&quot;</span></span><br><span class="line">    addressWaitTime = <span class="string">&quot;3000&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  file &#123;</span><br><span class="line">    name = <span class="string">&quot;file.conf&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">config &#123;</span><br><span class="line">  <span class="comment"># file、nacos 、apollo、zk、consul、etcd3</span></span><br><span class="line">  <span class="built_in">type</span> = <span class="string">&quot;nacos&quot;</span></span><br><span class="line"></span><br><span class="line">  nacos &#123;</span><br><span class="line">    serverAddr = <span class="string">&quot;192.168.8.1:8848&quot;</span></span><br><span class="line">    namespace = <span class="string">&quot;&quot;</span></span><br><span class="line">    group = <span class="string">&quot;DEFAULT_GROUP&quot;</span></span><br><span class="line">    username = <span class="string">&quot;&quot;</span></span><br><span class="line">    password = <span class="string">&quot;&quot;</span></span><br><span class="line">    dataId = <span class="string">&quot;seataServer.properties&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  consul &#123;</span><br><span class="line">    serverAddr = <span class="string">&quot;127.0.0.1:8500&quot;</span></span><br><span class="line">    aclToken = <span class="string">&quot;&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  apollo &#123;</span><br><span class="line">    appId = <span class="string">&quot;seata-server&quot;</span></span><br><span class="line">    <span class="comment">## apolloConfigService will cover apolloMeta</span></span><br><span class="line">    apolloMeta = <span class="string">&quot;http://192.168.1.204:8801&quot;</span></span><br><span class="line">    apolloConfigService = <span class="string">&quot;http://192.168.1.204:8080&quot;</span></span><br><span class="line">    namespace = <span class="string">&quot;application&quot;</span></span><br><span class="line">    apolloAccesskeySecret = <span class="string">&quot;&quot;</span></span><br><span class="line">    cluster = <span class="string">&quot;seata&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  zk &#123;</span><br><span class="line">    serverAddr = <span class="string">&quot;127.0.0.1:2181&quot;</span></span><br><span class="line">    sessionTimeout = 6000</span><br><span class="line">    connectTimeout = 2000</span><br><span class="line">    username = <span class="string">&quot;&quot;</span></span><br><span class="line">    password = <span class="string">&quot;&quot;</span></span><br><span class="line">    nodePath = <span class="string">&quot;/seata/seata.properties&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  etcd3 &#123;</span><br><span class="line">    serverAddr = <span class="string">&quot;http://localhost:2379&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  file &#123;</span><br><span class="line">    name = <span class="string">&quot;file.conf&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动脚本"><a href="#启动脚本" class="headerlink" title="启动脚本"></a>启动脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; /data/seata/startup.sh</span></span><br><span class="line"><span class="string">#!/bin/sh</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export JAVA_HOME=/data/soft/jdk-11.0.11</span></span><br><span class="line"><span class="string">export PATH=$JAVA_HOME/bin:$PATH</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">nohup /data/seata/seata-server-1.4.2/bin/seata-server.sh  -p 8491 &gt;&gt;  /data/seata/seata.log 2&gt;&amp;1 &amp;</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="做成service方便管理"><a href="#做成service方便管理" class="headerlink" title="做成service方便管理"></a>做成service方便管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt;/usr/lib/systemd/system/seata.service</span></span><br><span class="line"><span class="string">[Unit]</span></span><br><span class="line"><span class="string">Description=seata</span></span><br><span class="line"><span class="string">After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">Type=forking</span></span><br><span class="line"><span class="string">User=root</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ExecStart=/data/seata/startup.sh</span></span><br><span class="line"><span class="string">ExecReload=/bin/kill -s HUP $MAINPID</span></span><br><span class="line"><span class="string">ExecStop=/bin/kill -s QUIT $MAINPID</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Install]</span></span><br><span class="line"><span class="string">WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">systemctl daemon-reload </span><br><span class="line">systemctl <span class="built_in">enable</span> seata</span><br><span class="line">systemctl restart seata</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2022/09/21/seata-%E5%AE%89%E8%A3%85/" title="Seata-安装" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/09/21/seata-安装/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2022/09/14/gitlab-cl/" title="Gitlab-CI"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
