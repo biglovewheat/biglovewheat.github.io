@@ -292,32 +292,6 @@
   </entry>
   
   <entry>
-    <title>K8s-crontabjob</title>
-    <link href="https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/"/>
-    <id>https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/</id>
-    <published>2022-08-29T16:00:00.000Z</published>
-    <updated>2022-09-22T14:08:07.777Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="K8s-crontabjob"><a href="#K8s-crontabjob" class="headerlink" title="K8s-crontabjob"></a>K8s-crontabjob</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Cronjob的时区和kube-controller-manager服务的时区一致,默认为0时区,需-8小时</span></span><br><span class="line"><span class="comment">## 或修改kube-controller-manager时区</span></span><br><span class="line">apiVersion: batch/v1beta1</span><br><span class="line">kind: CronJob</span><br><span class="line">metadata:</span><br><span class="line">  name: hx-python-jiage</span><br><span class="line">  namespace: dev</span><br><span class="line">spec:</span><br><span class="line">  schedule: <span class="string">&quot;2 16 * * *&quot;</span></span><br><span class="line">  jobTemplate:</span><br><span class="line">    spec:</span><br><span class="line">      template:</span><br><span class="line">        spec:</span><br><span class="line">          containers:</span><br><span class="line">          - name: hx-python-jiage</span><br><span class="line">            image: 10.9.127.243:30002/library/hx-python-jiage:1.0</span><br><span class="line">            imagePullPolicy: IfNotPresent</span><br><span class="line">          restartPolicy: OnFailure</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;K8s-crontabjob&quot;&gt;&lt;a href=&quot;#K8s-crontabjob&quot; class=&quot;headerlink&quot; title=&quot;K8s-crontabjob&quot;&gt;&lt;/a&gt;K8s-crontabjob&lt;/h2&gt;&lt;figure class=&quot;highlight </summary>
-      
-    
-    
-    
-    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
-    
-    
-    <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
-    
-    <category term="k8s" scheme="https://biglovewheat.gihub.io/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
     <title>K8s-组件安装</title>
     <link href="https://biglovewheat.gihub.io/2022/08/30/k8s-%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
     <id>https://biglovewheat.gihub.io/2022/08/30/k8s-%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/</id>
@@ -390,6 +364,32 @@
     
     
     <category term="ssl" scheme="https://biglovewheat.gihub.io/tags/ssl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>K8s-crontabjob</title>
+    <link href="https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/"/>
+    <id>https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/</id>
+    <published>2022-08-29T16:00:00.000Z</published>
+    <updated>2022-09-22T14:08:07.777Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="K8s-crontabjob"><a href="#K8s-crontabjob" class="headerlink" title="K8s-crontabjob"></a>K8s-crontabjob</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Cronjob的时区和kube-controller-manager服务的时区一致,默认为0时区,需-8小时</span></span><br><span class="line"><span class="comment">## 或修改kube-controller-manager时区</span></span><br><span class="line">apiVersion: batch/v1beta1</span><br><span class="line">kind: CronJob</span><br><span class="line">metadata:</span><br><span class="line">  name: hx-python-jiage</span><br><span class="line">  namespace: dev</span><br><span class="line">spec:</span><br><span class="line">  schedule: <span class="string">&quot;2 16 * * *&quot;</span></span><br><span class="line">  jobTemplate:</span><br><span class="line">    spec:</span><br><span class="line">      template:</span><br><span class="line">        spec:</span><br><span class="line">          containers:</span><br><span class="line">          - name: hx-python-jiage</span><br><span class="line">            image: 10.9.127.243:30002/library/hx-python-jiage:1.0</span><br><span class="line">            imagePullPolicy: IfNotPresent</span><br><span class="line">          restartPolicy: OnFailure</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;K8s-crontabjob&quot;&gt;&lt;a href=&quot;#K8s-crontabjob&quot; class=&quot;headerlink&quot; title=&quot;K8s-crontabjob&quot;&gt;&lt;/a&gt;K8s-crontabjob&lt;/h2&gt;&lt;figure class=&quot;highlight </summary>
+      
+    
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
+    
+    
+    <category term="devops" scheme="https://biglovewheat.gihub.io/tags/devops/"/>
+    
+    <category term="k8s" scheme="https://biglovewheat.gihub.io/tags/k8s/"/>
     
   </entry>
   

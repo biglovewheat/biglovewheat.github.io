@@ -42,9 +42,9 @@ https://biglovewheat.gihub.io/2022/08/18/k8s-helm-%E5%AE%89%E8%A3%85%E5%B8%B8%E7
 https://biglovewheat.gihub.io/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/
 https://biglovewheat.gihub.io/2022/08/30/k8s-%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/
 https://biglovewheat.gihub.io/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/
+https://biglovewheat.gihub.io/2022/08/09/k8s-evicted-pod%E5%A4%84%E7%90%86/
 https://biglovewheat.gihub.io/2022/08/04/k8s-centos7-%E5%AE%89%E8%A3%85/
 https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/
-https://biglovewheat.gihub.io/2022/08/09/k8s-evicted-pod%E5%A4%84%E7%90%86/
 https://biglovewheat.gihub.io/2022/09/13/jenkins-npm-%E6%9E%84%E5%BB%BA%E6%8A%A5%E9%94%99/
 https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/
 https://biglovewheat.gihub.io/2022/09/01/java%E7%A8%8B%E5%BA%8F%E5%8D%A0%E7%94%A8cpu%E9%AB%98%E6%8E%92%E6%9F%A5/
