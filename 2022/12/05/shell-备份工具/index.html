@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>shell-备份工具 | biglovewheat</title>
+  <meta name="description" content="shell-备份工具一个自己写的shell脚本备份工具 配置文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647## 主配置文件cat backup.lst #1pg|2gis_sit|3IP|4Port|5user|6password|7cycle|pg|gis_sit|17">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell-备份工具">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2022/12/05/shell-%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="shell-备份工具一个自己写的shell脚本备份工具 配置文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647## 主配置文件cat backup.lst #1pg|2gis_sit|3IP|4Port|5user|6password|7cycle|pg|gis_sit|17">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-05T08:10:43.963Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2022/12/05/shell-%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">基础概念</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ansible/" style="font-size: 13px;">ansible</a> <a href="/tags/aws/" style="font-size: 13.33px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/devops/" style="font-size: 14px;">devops</a> <a href="/tags/docker/" style="font-size: 13.11px;">docker</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.11px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.22px;">git</a> <a href="/tags/gitlab/" style="font-size: 13px;">gitlab</a> <a href="/tags/http/" style="font-size: 13.11px;">http</a> <a href="/tags/java/" style="font-size: 13.11px;">java</a> <a href="/tags/jenkins/" style="font-size: 13.44px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.67px;">k8s</a> <a href="/tags/keepalived/" style="font-size: 13px;">keepalived</a> <a href="/tags/linux/" style="font-size: 13.89px;">linux</a> <a href="/tags/lvs/" style="font-size: 13px;">lvs</a> <a href="/tags/middleware/" style="font-size: 13.22px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.78px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13.11px;">nacos</a> <a href="/tags/network/" style="font-size: 13.11px;">network</a> <a href="/tags/nexus/" style="font-size: 13px;">nexus</a> <a href="/tags/nginx/" style="font-size: 13.11px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13px;">nodejs</a> <a href="/tags/oracle/" style="font-size: 13.33px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.33px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.56px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/s3/" style="font-size: 13px;">s3</a> <a href="/tags/seata/" style="font-size: 13px;">seata</a> <a href="/tags/shell/" style="font-size: 13.78px;">shell</a> <a href="/tags/skywalking/" style="font-size: 13px;">skywalking</a> <a href="/tags/ssl/" style="font-size: 13px;">ssl</a> <a href="/tags/vpn/" style="font-size: 13px;">vpn</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13px;">基础概念</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">正则表达式</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.44px;">监控</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">阿里云</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">43</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/05/arthas-java%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/" class="title">arthas-java性能分析工具</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-04T16:00:00.000Z" itemprop="datePublished">2022-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/05/k8s-%E5%85%81%E8%AE%B8master%E8%8A%82%E7%82%B9%E5%8F%82%E4%B8%8E%E8%B0%83%E5%BA%A6/" class="title">k8s-允许master节点参与调度</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-04T16:00:00.000Z" itemprop="datePublished">2022-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/linux/">linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/05/linux-%E6%97%B6%E5%8C%BA%E6%93%8D%E4%BD%9C/" class="title">linux-时区操作</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-04T16:00:00.000Z" itemprop="datePublished">2022-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/05/postgresql-%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/" class="title">Postgresql-创建只读用户</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-04T16:00:00.000Z" itemprop="datePublished">2022-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/shell/">shell</a>
+              </p>
+              <p class="item-title">
+                <a href="/2022/12/05/shell-%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7/" class="title">shell-备份工具</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-12-04T16:00:00.000Z" itemprop="datePublished">2022-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-shell-备份工具" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shell-备份工具
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/12/05/shell-%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7/" class="article-date">
+	  <time datetime="2022-12-04T16:00:00.000Z" itemprop="datePublished">2022-12-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/shell/">shell</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/shell/" rel="tag">shell</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/12/05/shell-%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="shell-备份工具"><a href="#shell-备份工具" class="headerlink" title="shell-备份工具"></a>shell-备份工具</h2><p><em>一个自己写的shell脚本备份工具</em></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 主配置文件</span></span><br><span class="line"><span class="built_in">cat</span> backup.lst </span><br><span class="line"><span class="comment">#1pg|2gis_sit|3IP|4Port|5user|6password|7cycle|</span></span><br><span class="line">pg|gis_sit|172.31.34.25|5083|postgres|abc123!!!|days|</span><br><span class="line">pg|gis_prod|172.31.56.16|5083|postgres|abc123!!!|days|</span><br><span class="line">pg|gis_jx|172.31.71.117|5083|postgres|abc123!!!|days|</span><br><span class="line">pg|gis_old_lite|172.31.45.42|5083|postgres|abc123!!!|days|</span><br><span class="line">pg|gis_old|172.31.45.42|5083|postgres|abc123!!!|weeks|</span><br><span class="line">mysql|jx|3|4|5|6|days|</span><br><span class="line">mysql|sit|3|4|5|6|days|</span><br><span class="line">mysql|show|3|4|5|6|days|</span><br><span class="line">mysql|prod|3|4|5|6|days|</span><br><span class="line">mysql|wiki|3|4|5|6|days|</span><br><span class="line">mysql|bigdata|3|4|5|6|days|</span><br><span class="line"></span><br><span class="line"><span class="comment">## mysql-client配置文件</span></span><br><span class="line"><span class="built_in">cat</span> ./mysql_cnf/jx.lst </span><br><span class="line">[client]</span><br><span class="line">user=root</span><br><span class="line">password=abc123!!!</span><br><span class="line">host=172.31.71.117</span><br><span class="line">port=3306</span><br><span class="line"></span><br><span class="line"><span class="comment">## ansible配置</span></span><br><span class="line"><span class="built_in">cat</span> ansible_host.lst</span><br><span class="line">[nginx_default]</span><br><span class="line">aws-prod-app-01</span><br><span class="line">aws-prod-app-02</span><br><span class="line">aws-prod-app-03</span><br><span class="line">aws-prod-app-04</span><br><span class="line">aws-prod-app-05</span><br><span class="line">aws-sit-app-01</span><br><span class="line">aws-sit-app-02</span><br><span class="line">aws-sit-app-04</span><br><span class="line">aws-show-app-01</span><br><span class="line"></span><br><span class="line">[nginx_data]</span><br><span class="line">aws-jx-app-01</span><br><span class="line">aws-jx-app-02</span><br><span class="line"></span><br><span class="line">[nginx_default:vars]</span><br><span class="line">ansible_user=ops_root</span><br><span class="line">ansible_password=dNqzrKHu8UQsuxcX</span><br><span class="line"></span><br><span class="line">[nginx_data:vars]</span><br><span class="line">ansible_user=ops_root</span><br><span class="line">ansible_password=dNqzrKHu8UQsuxcX</span><br></pre></td></tr></table></figure>
+
+<h3 id="主脚本"><a href="#主脚本" class="headerlink" title="主脚本"></a>主脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">DATETIME=$(<span class="built_in">date</span> +<span class="string">&quot;%Y%m%d%H%M&quot;</span>)</span><br><span class="line">ROOT=/data/backup</span><br><span class="line">v_backuplist=<span class="variable">$ROOT</span>/backup.lst</span><br><span class="line">v_weekday=$(<span class="built_in">date</span> +%w)</span><br><span class="line">v_day=$(<span class="built_in">date</span> +%d)</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$ROOT</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;***********************************************************************&quot;</span></span><br><span class="line"><span class="built_in">echo</span> $(<span class="built_in">date</span>) <span class="string">&quot; -- backup bgein&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;***********************************************************************&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## backup</span></span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> $(<span class="built_in">cat</span> <span class="variable">$v_backuplist</span>|grep -v ^$|grep -v ^<span class="comment">#)</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="comment">#pg|gis-sit|172.31.34.25|5083|postgres|Hxkj2022!!!|</span></span><br><span class="line">    v_type=$(<span class="built_in">echo</span> <span class="variable">$row</span> |awk -F\| <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>)</span><br><span class="line">    v_name=$(<span class="built_in">echo</span> <span class="variable">$row</span> |awk -F\| <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line">    v_ip=$(<span class="built_in">echo</span> <span class="variable">$row</span> |awk -F\| <span class="string">&#x27;&#123;print $3&#125;&#x27;</span>)</span><br><span class="line">    v_port=$(<span class="built_in">echo</span> <span class="variable">$row</span> |awk -F\| <span class="string">&#x27;&#123;print $4&#125;&#x27;</span>)</span><br><span class="line">    v_user=$(<span class="built_in">echo</span> <span class="variable">$row</span> |awk -F\| <span class="string">&#x27;&#123;print $5&#125;&#x27;</span>)</span><br><span class="line">    v_pass=$(<span class="built_in">echo</span> <span class="variable">$row</span> |awk -F\| <span class="string">&#x27;&#123;print $6&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$v_type</span> <span class="keyword">in</span></span><br><span class="line">    pg)</span><br><span class="line">        <span class="built_in">export</span> PGPASSWORD=<span class="variable">$v_pass</span></span><br><span class="line">        <span class="keyword">case</span> <span class="variable">$v_name</span> <span class="keyword">in</span></span><br><span class="line">        gis_old_lite)</span><br><span class="line">            v_backupfile=<span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.tar</span><br><span class="line">            pg_dumpall -h <span class="variable">$v_ip</span> -U <span class="variable">$v_user</span> -p <span class="variable">$v_port</span> --exclude-database=common -c --if-exists |gzip &gt; <span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.1.sql.gz</span><br><span class="line">            pg_dump -h <span class="variable">$v_ip</span> -U <span class="variable">$v_user</span> -p <span class="variable">$v_port</span> --dbname=common --exclude-schema=offline_map -c --if-exists|gzip &gt; <span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.2.sql.gz</span><br><span class="line">            tar -cvf <span class="variable">$v_backupfile</span> <span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.*.sql.gz --remove-files</span><br><span class="line">            /usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$v_backupfile</span> s3://hxs3/backup/</span><br><span class="line"><span class="comment">#            if [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v01&quot; ]] || [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v15&quot; ]]; then /usr/local/bin/aws s3 cp $v_backupfile s3://hxs3/backup/ s3://hxarchive/永久备份/; fi</span></span><br><span class="line">        ;;</span><br><span class="line">        gis_old)</span><br><span class="line">            <span class="keyword">if</span> [[ <span class="string">&quot;v<span class="variable">$&#123;v_weekday&#125;</span>&quot;</span> == <span class="string">&quot;v6&quot;</span> ]]</span><br><span class="line">            <span class="keyword">then</span></span><br><span class="line">                v_backupfile=<span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.sql.gz</span><br><span class="line">                pg_dumpall -h <span class="variable">$v_ip</span> -U <span class="variable">$v_user</span> -p <span class="variable">$v_port</span> -c --if-exists |gzip &gt; <span class="variable">$v_backupfile</span></span><br><span class="line">                /usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$v_backupfile</span> s3://hxs3/backup/</span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">        *)</span><br><span class="line">            v_backupfile=<span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.sql.gz</span><br><span class="line">            pg_dumpall -h <span class="variable">$v_ip</span> -U <span class="variable">$v_user</span> -p <span class="variable">$v_port</span> -c --if-exists |gzip &gt; <span class="variable">$v_backupfile</span></span><br><span class="line">            /usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$v_backupfile</span> s3://hxs3/backup/</span><br><span class="line"><span class="comment">#            if [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v01&quot; ]] || [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v15&quot; ]]; then /usr/local/bin/aws s3 cp $v_backupfile s3://hxs3/backup/ s3://hxarchive/永久备份/; fi</span></span><br><span class="line">        ;;</span><br><span class="line">        <span class="keyword">esac</span></span><br><span class="line">    ;;</span><br><span class="line">    mysql)</span><br><span class="line">        v_mysqllst=./mysql_cnf/<span class="variable">$&#123;v_name&#125;</span>.lst</span><br><span class="line">        v_backupfile=<span class="variable">$&#123;v_type&#125;</span>_<span class="variable">$&#123;v_name&#125;</span>_<span class="variable">$&#123;DATETIME&#125;</span>.sql.gz</span><br><span class="line">        <span class="keyword">if</span> [[ <span class="string">&quot;v<span class="variable">$&#123;v_name&#125;</span>&quot;</span> == <span class="string">&quot;vbigdata&quot;</span> ]]; <span class="keyword">then</span> mysql_ops=<span class="string">&#x27; --skip-column-statistics&#x27;</span> ; <span class="keyword">fi</span></span><br><span class="line">        mysqldump --defaults-extra-file=<span class="variable">$v_mysqllst</span> --all-databases --set-gtid-purged=OFF  <span class="variable">$mysql_ops</span> -C |  gzip &gt; <span class="variable">$v_backupfile</span></span><br><span class="line">        /usr/local/bin/aws s3 <span class="built_in">cp</span> <span class="variable">$v_backupfile</span> s3://hxs3/backup/</span><br><span class="line"><span class="comment">#        if [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v01&quot; ]] || [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v15&quot; ]]; then /usr/local/bin/aws s3 cp $v_backupfile s3://hxs3/backup/ s3://hxarchive/永久备份/; fi</span></span><br><span class="line">    ;;</span><br><span class="line">    *)</span><br><span class="line">    ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## nacos backup</span></span><br><span class="line">./nacos_backup.py</span><br><span class="line"></span><br><span class="line"><span class="comment">## nginx backup</span></span><br><span class="line">/data/anaconda3/bin/ansible nginx_default -i ansible_hosts.lst -m synchronize -a  <span class="string">&quot;src=/etc/nginx/conf.d dest=nginx_&#123;&#123;inventory_hostname&#125;&#125;  mode=pull&quot;</span></span><br><span class="line">/data/anaconda3/bin/ansible nginx_data -i ansible_hosts.lst -m synchronize -a  <span class="string">&quot;src=/data/nginx/conf/conf.d dest=nginx_&#123;&#123;inventory_hostname&#125;&#125;  mode=pull&quot;</span></span><br><span class="line">tar -czvf nginx_<span class="variable">$&#123;DATETIME&#125;</span>.tgz nginx_aws*  --remove</span><br><span class="line">/usr/local/bin/aws s3 <span class="built_in">cp</span> nginx_<span class="variable">$&#123;DATETIME&#125;</span>.tgz s3://hxs3/backup/</span><br><span class="line"><span class="comment">#if [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v01&quot; ]] || [[ &quot;v$&#123;v_day&#125;&quot; == &quot;v15&quot; ]]; then /usr/local/bin/aws s3 cp nginx_$&#123;DATETIME&#125;.tgz s3://hxarchive/永久备份/; fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## clenaup</span></span><br><span class="line">find <span class="variable">$ROOT</span> -mtime +3 -<span class="built_in">type</span> f -name <span class="string">&quot;*.gz&quot;</span> | xargs <span class="built_in">rm</span> -fv</span><br><span class="line">find <span class="variable">$ROOT</span> -mtime +3 -<span class="built_in">type</span> f -name <span class="string">&quot;*.zip&quot;</span> | xargs <span class="built_in">rm</span> -fv</span><br><span class="line">find <span class="variable">$ROOT</span> -mtime +3 -<span class="built_in">type</span> f -name <span class="string">&quot;*.tgz&quot;</span> | xargs <span class="built_in">rm</span> -fv</span><br><span class="line">find <span class="variable">$ROOT</span> -mtime +3 -<span class="built_in">type</span> f -name <span class="string">&quot;*.tar&quot;</span> | xargs <span class="built_in">rm</span> -fv</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;***********************************************************************&quot;</span></span><br><span class="line"><span class="built_in">echo</span> $(<span class="built_in">date</span>) <span class="string">&quot; -- backup end&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;***********************************************************************&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="nacos-备份脚本"><a href="#nacos-备份脚本" class="headerlink" title="nacos 备份脚本"></a>nacos 备份脚本</h3><p>&#96;&#96;&#96;python<br>#!&#x2F;data&#x2F;anaconda3&#x2F;bin&#x2F;python3.9<br>from fileinput import filename<br>import requests<br>import json<br>import datetime<br>import os<br>from boto3.session import Session</p>
+<h2 id="s3-config"><a href="#s3-config" class="headerlink" title="s3 config"></a>s3 config</h2><p>aws_key &#x3D; “AKIAUPGCAPWX4FD5N2CO”<br>aws_secret &#x3D; “SsOupysZ4ZBptxGCxPm+aLWq+dTfShrgsdITVib2”<br>region_name &#x3D; “cn-northwest-1”<br>session &#x3D; Session(aws_access_key_id&#x3D;aws_key,<br>aws_secret_access_key&#x3D;aws_secret,<br>region_name&#x3D;region_name)</p>
+<p>s3 &#x3D; session.resource(“s3”)<br>client &#x3D; session.client(“s3”)<br>bucket &#x3D; “hxs3”</p>
+<h2 id="nacos"><a href="#nacos" class="headerlink" title="nacos"></a>nacos</h2><p>nacos_list&#x3D;[</p>
+<h1 id="‘http-10-9-127-244-8848-c23a1b4c-e97f-45ae-a5c0-1e7f1a8d22e9-nacos-nacos-nacos-dev-39"><a href="#‘http-10-9-127-244-8848-c23a1b4c-e97f-45ae-a5c0-1e7f1a8d22e9-nacos-nacos-nacos-dev-39" class="headerlink" title="‘http://10.9.127.244:8848|c23a1b4c-e97f-45ae-a5c0-1e7f1a8d22e9|nacos|nacos|nacos-dev&#39;,"></a>‘<a href="http://10.9.127.244:8848|c23a1b4c-e97f-45ae-a5c0-1e7f1a8d22e9|nacos|nacos|nacos-dev&#39;">http://10.9.127.244:8848|c23a1b4c-e97f-45ae-a5c0-1e7f1a8d22e9|nacos|nacos|nacos-dev&#39;</a>,</h1><pre><code>&#39;http://nacos.farmbgy.net:8848|da7aaaa2-7505-4c1d-98c6-9e2e7778ef55|nacos|abc123!!!|nacos-prod&#39;,
+&#39;http://aws-sit-code-pro-01:8848|09a89c03-8f14-40a7-a44b-2be7e9f87e14|nacos|abc123!!!|nacos-sit&#39;,
+&#39;http://aws-jx-middle-01:8848|c876967c-d8dd-4318-9bf1-e7e72eb47d13|nacos|abc123!!!|nacos-jx&#39;,
+&#39;http://aws-show-middle-01:8848|da7aaaa2-7505-4c1d-98c6-9e2e7778ef55|nacos|abc123!!!|nacos-show&#39;
+</code></pre>
+<p>]</p>
+<p>for row in nacos_list:<br>    url,namespace,username,password,filename &#x3D; row.strip().split(‘|’)</p>
+<pre><code>login_url = url+&#39;/nacos/v1/auth/users/login&#39;
+data = &#123;&#39;username&#39;:username,
+        &#39;password&#39;:password&#125;
+s = requests.session()
+resp = s.post(login_url,data)
+token = json.loads(resp.text)[&#39;accessToken&#39;]
+
+backup_url = url+&#39;/nacos/v1/cs/configs?export=true&amp;tenant=&#39;+namespace+&#39;&amp;group=&amp;appName=&amp;dataId=&amp;ids=&amp;accessToken=&#39;+token
+
+filename = os.path.abspath(os.path.dirname(__file__))+&#39;/&#39;+filename+&#39;-&#39;+datetime.datetime.now().strftime(&#39;%Y%m%d&#39;)+&#39;.zip&#39;
+
+r = requests.get(backup_url)
+with open(filename, &quot;wb&quot;) as code:
+    code.write(r.content)
+
+upload_data = open(filename,&quot;rb&quot;)
+upload_key = &quot;backup/&quot;+os.path.basename(filename)
+file_obj = s3.Bucket(bucket).put_object(Key=upload_key, Body=upload_data)
+print(file_obj)
+</code></pre>
+<p>‘’’</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2022/12/05/shell-%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7/" title="shell-备份工具" target="_blank" rel="external">https://biglovewheat.gihub.io/2022/12/05/shell-备份工具/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/12/05/postgresql-%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/" title="Postgresql-创建只读用户"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/11/28/docker-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" title="Docker-基本操作"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
