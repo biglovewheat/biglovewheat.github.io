@@ -6,7 +6,7 @@
   <link href="https://biglovewheat.gihub.io/atom.xml" rel="self"/>
   
   <link href="https://biglovewheat.gihub.io/"/>
-  <updated>2022-12-13T08:46:08.078Z</updated>
+  <updated>2022-12-13T08:46:08.079Z</updated>
   <id>https://biglovewheat.gihub.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java-启动参数修改</title>
+    <link href="https://biglovewheat.gihub.io/2022/12/13/java-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9/"/>
+    <id>https://biglovewheat.gihub.io/2022/12/13/java-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9/</id>
+    <published>2022-12-12T16:00:00.000Z</published>
+    <updated>2022-12-13T08:46:08.079Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="java启动参数修改"><a href="#java启动参数修改" class="headerlink" title="java启动参数修改"></a>java启动参数修改</h2><h3 id="java8转换成java11参数修改"><a href="#java8转换成java11参数修改" class="headerlink" title="java8转换成java11参数修改"></a>java8转换成java11参数修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## java8</span></span><br><span class="line">JAVA_OPS=<span class="string">&quot;-Xms512m -Xmx2g -Xmn1g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/ -XX:+PrintGCDetails -verbosegc -Xloggc:<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/gc.<span class="variable">$&#123;svc&#125;</span>.log&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动报warning</span></span><br><span class="line">[0.001s][warning][gc] -Xloggc is deprecated. Will use -Xlog:gc:/data/logs/analyzeGc/gc.hx-task.log instead.</span><br><span class="line">[0.002s][warning][gc] -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.</span><br><span class="line"></span><br><span class="line"><span class="comment">## java11</span></span><br><span class="line">JAVA_OPS=<span class="string">&quot;-Xms512m -Xmx1g -Xmn512m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/ -Xlog:gc*  -verbosegc -Xlog:gc:<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/gc.<span class="variable">$&#123;svc&#125;</span>.log&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;java启动参数修改&quot;&gt;&lt;a href=&quot;#java启动参数修改&quot; class=&quot;headerlink&quot; title=&quot;java启动参数修改&quot;&gt;&lt;/a&gt;java启动参数修改&lt;/h2&gt;&lt;h3 id=&quot;java8转换成java11参数修改&quot;&gt;&lt;a href=&quot;#jav</summary>
+      
+    
+    
+    
+    <category term="java" scheme="https://biglovewheat.gihub.io/categories/java/"/>
+    
+    
+    <category term="java" scheme="https://biglovewheat.gihub.io/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>Consul-启动失败排查</title>
@@ -39,30 +63,6 @@
     <category term="consul" scheme="https://biglovewheat.gihub.io/tags/consul/"/>
     
     <category term="supervisor" scheme="https://biglovewheat.gihub.io/tags/supervisor/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java-启动参数修改</title>
-    <link href="https://biglovewheat.gihub.io/2022/12/13/java-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9/"/>
-    <id>https://biglovewheat.gihub.io/2022/12/13/java-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9/</id>
-    <published>2022-12-12T16:00:00.000Z</published>
-    <updated>2022-12-13T08:46:08.079Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="java启动参数修改"><a href="#java启动参数修改" class="headerlink" title="java启动参数修改"></a>java启动参数修改</h2><h3 id="java8转换成java11参数修改"><a href="#java8转换成java11参数修改" class="headerlink" title="java8转换成java11参数修改"></a>java8转换成java11参数修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## java8</span></span><br><span class="line">JAVA_OPS=<span class="string">&quot;-Xms512m -Xmx2g -Xmn1g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/ -XX:+PrintGCDetails -verbosegc -Xloggc:<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/gc.<span class="variable">$&#123;svc&#125;</span>.log&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动报warning</span></span><br><span class="line">[0.001s][warning][gc] -Xloggc is deprecated. Will use -Xlog:gc:/data/logs/analyzeGc/gc.hx-task.log instead.</span><br><span class="line">[0.002s][warning][gc] -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.</span><br><span class="line"></span><br><span class="line"><span class="comment">## java11</span></span><br><span class="line">JAVA_OPS=<span class="string">&quot;-Xms512m -Xmx1g -Xmn512m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/ -Xlog:gc*  -verbosegc -Xlog:gc:<span class="variable">$&#123;LOG_HOME&#125;</span>/analyzeGc/gc.<span class="variable">$&#123;svc&#125;</span>.log&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;java启动参数修改&quot;&gt;&lt;a href=&quot;#java启动参数修改&quot; class=&quot;headerlink&quot; title=&quot;java启动参数修改&quot;&gt;&lt;/a&gt;java启动参数修改&lt;/h2&gt;&lt;h3 id=&quot;java8转换成java11参数修改&quot;&gt;&lt;a href=&quot;#jav</summary>
-      
-    
-    
-    
-    <category term="java" scheme="https://biglovewheat.gihub.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="https://biglovewheat.gihub.io/tags/java/"/>
     
   </entry>
   
@@ -467,30 +467,6 @@
   </entry>
   
   <entry>
-    <title>Docker-Dockerfile</title>
-    <link href="https://biglovewheat.gihub.io/2022/09/06/docker-dockerfile/"/>
-    <id>https://biglovewheat.gihub.io/2022/09/06/docker-dockerfile/</id>
-    <published>2022-09-05T16:00:00.000Z</published>
-    <updated>2022-12-13T08:46:08.078Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Docker-Dockerfile"><a href="#Docker-Dockerfile" class="headerlink" title="Docker-Dockerfile"></a>Docker-Dockerfile</h2><h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">From</span> nginx:<span class="number">1.20</span>-alpine</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">cp</span> -a /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./dist /dist</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./nginx.conf  /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;nginx&quot;</span>,<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Docker-Dockerfile&quot;&gt;&lt;a href=&quot;#Docker-Dockerfile&quot; class=&quot;headerlink&quot; title=&quot;Docker-Dockerfile&quot;&gt;&lt;/a&gt;Docker-Dockerfile&lt;/h2&gt;&lt;h3 id=&quot;nginx</summary>
-      
-    
-    
-    
-    <category term="devops" scheme="https://biglovewheat.gihub.io/categories/devops/"/>
-    
-    
-    <category term="docker" scheme="https://biglovewheat.gihub.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Oracle-sqluldr2-导出数据</title>
     <link href="https://biglovewheat.gihub.io/2022/09/06/oracle-sqluldr2-%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/"/>
     <id>https://biglovewheat.gihub.io/2022/09/06/oracle-sqluldr2-%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE/</id>
@@ -503,6 +479,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;Oracle-sqluldr2-导出数据&quot;&gt;&lt;a href=&quot;#Oracle-sqluldr2-导出数据&quot; class=&quot;headerlink&quot; title=&quot;Oracle-sqluldr2-导出数据&quot;&gt;&lt;/a&gt;Oracle-sqluldr2-导出数据&lt;/h2&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="数据库" scheme="https://biglovewheat.gihub.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="oracle" scheme="https://biglovewheat.gihub.io/tags/oracle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle-表空间扩容</title>
+    <link href="https://biglovewheat.gihub.io/2022/09/06/oracle-%E8%A1%A8%E7%A9%BA%E9%97%B4%E6%89%A9%E5%AE%B9/"/>
+    <id>https://biglovewheat.gihub.io/2022/09/06/oracle-%E8%A1%A8%E7%A9%BA%E9%97%B4%E6%89%A9%E5%AE%B9/</id>
+    <published>2022-09-05T16:00:00.000Z</published>
+    <updated>2022-12-13T08:46:08.080Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Oracle-表空间扩容"><a href="#Oracle-表空间扩容" class="headerlink" title="Oracle-表空间扩容"></a>Oracle-表空间扩容</h2><h3 id="查看磁盘空间"><a href="#查看磁盘空间" class="headerlink" title="查看磁盘空间"></a>查看磁盘空间</h3><h3 id="查看表空间使用率"><a href="#查看表空间使用率" class="headerlink" title="查看表空间使用率"></a>查看表空间使用率</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> ts.tablespace_name, ts.status, ts.contents, ts.extent_management, ts.bigfile,   </span><br><span class="line">       size_info.megs_alloc, size_info.megs_free, size_info.megs_used,   </span><br><span class="line">       size_info.pct_free, size_info.pct_used, size_info.max  </span><br><span class="line"><span class="keyword">From</span>  </span><br><span class="line">      (   </span><br><span class="line">      <span class="keyword">select</span>  a.tablespace_name,   </span><br><span class="line">             round(a.bytes_alloc <span class="operator">/</span> <span class="number">1024</span> <span class="operator">/</span> <span class="number">1024</span>) megs_alloc,   </span><br><span class="line">             round(nvl(b.bytes_free, <span class="number">0</span>) <span class="operator">/</span> <span class="number">1024</span> <span class="operator">/</span> <span class="number">1024</span>) megs_free,   </span><br><span class="line">             round((a.bytes_alloc <span class="operator">-</span> nvl(b.bytes_free, <span class="number">0</span>)) <span class="operator">/</span> <span class="number">1024</span> <span class="operator">/</span> <span class="number">1024</span>) megs_used,   </span><br><span class="line">             round((nvl(b.bytes_free, <span class="number">0</span>) <span class="operator">/</span> a.bytes_alloc) <span class="operator">*</span> <span class="number">100</span>) Pct_Free,   </span><br><span class="line">            <span class="number">100</span> <span class="operator">-</span> round((nvl(b.bytes_free, <span class="number">0</span>) <span class="operator">/</span> a.bytes_alloc) <span class="operator">*</span> <span class="number">100</span>) Pct_used,   </span><br><span class="line">             round(maxbytes<span class="operator">/</span><span class="number">1048576</span>) Max  </span><br><span class="line">      <span class="keyword">from</span>  ( <span class="keyword">select</span>  f.tablespace_name,   </span><br><span class="line">                     <span class="built_in">sum</span>(f.bytes) bytes_alloc,   </span><br><span class="line">                     <span class="built_in">sum</span>(decode(f.autoextensible, <span class="string">&#x27;YES&#x27;</span>,f.maxbytes,<span class="string">&#x27;NO&#x27;</span>, f.bytes)) maxbytes   </span><br><span class="line">              <span class="keyword">from</span> dba_data_files f   </span><br><span class="line">              <span class="keyword">group</span> <span class="keyword">by</span> tablespace_name) a,   </span><br><span class="line">            ( <span class="keyword">select</span>  f.tablespace_name,   </span><br><span class="line">                     <span class="built_in">sum</span>(f.bytes)  bytes_free   </span><br><span class="line">              <span class="keyword">from</span> dba_free_space f   </span><br><span class="line">              <span class="keyword">group</span> <span class="keyword">by</span> tablespace_name) b   </span><br><span class="line">      <span class="keyword">where</span> a.tablespace_name <span class="operator">=</span> b.tablespace_name (<span class="operator">+</span>)   </span><br><span class="line">      <span class="keyword">union</span> <span class="keyword">all</span>  </span><br><span class="line">      <span class="keyword">select</span> h.tablespace_name,   </span><br><span class="line">             round(<span class="built_in">sum</span>(h.bytes_free <span class="operator">+</span> h.bytes_used) <span class="operator">/</span> <span class="number">1048576</span>) megs_alloc,   </span><br><span class="line">             round(<span class="built_in">sum</span>((h.bytes_free <span class="operator">+</span> h.bytes_used) <span class="operator">-</span> nvl(p.bytes_used, <span class="number">0</span>)) <span class="operator">/</span> <span class="number">1048576</span>) megs_free,   </span><br><span class="line">             round(<span class="built_in">sum</span>(nvl(p.bytes_used, <span class="number">0</span>))<span class="operator">/</span> <span class="number">1048576</span>) megs_used,   </span><br><span class="line">             round((<span class="built_in">sum</span>((h.bytes_free <span class="operator">+</span> h.bytes_used) <span class="operator">-</span> nvl(p.bytes_used, <span class="number">0</span>)) <span class="operator">/</span> <span class="built_in">sum</span>(h.bytes_used <span class="operator">+</span> h.bytes_free)) <span class="operator">*</span> <span class="number">100</span>) Pct_Free,   </span><br><span class="line">             <span class="number">100</span> <span class="operator">-</span> round((<span class="built_in">sum</span>((h.bytes_free <span class="operator">+</span> h.bytes_used) <span class="operator">-</span> nvl(p.bytes_used, <span class="number">0</span>)) <span class="operator">/</span> <span class="built_in">sum</span>(h.bytes_used <span class="operator">+</span> h.bytes_free)) <span class="operator">*</span> <span class="number">100</span>) pct_used,   </span><br><span class="line">             round(<span class="built_in">sum</span>(decode(f.autoextensible, <span class="string">&#x27;YES&#x27;</span>, f.maxbytes, <span class="string">&#x27;NO&#x27;</span>, f.bytes) <span class="operator">/</span> <span class="number">1048576</span>)) max  </span><br><span class="line">      <span class="keyword">from</span>   sys.v_$TEMP_SPACE_HEADER h, sys.v_$Temp_extent_pool p, dba_temp_files f   </span><br><span class="line">      <span class="keyword">where</span>  p.file_id(<span class="operator">+</span>) <span class="operator">=</span> h.file_id   </span><br><span class="line">      <span class="keyword">and</span>    p.tablespace_name(<span class="operator">+</span>) <span class="operator">=</span> h.tablespace_name   </span><br><span class="line">      <span class="keyword">and</span>    f.file_id <span class="operator">=</span> h.file_id   </span><br><span class="line">      <span class="keyword">and</span>    f.tablespace_name <span class="operator">=</span> h.tablespace_name   </span><br><span class="line">      <span class="keyword">group</span> <span class="keyword">by</span> h.tablespace_name   </span><br><span class="line">      ) size_info,   </span><br><span class="line">      sys.dba_tablespaces ts   </span><br><span class="line"><span class="keyword">where</span> ts.tablespace_name <span class="operator">=</span> size_info.tablespace_name;</span><br></pre></td></tr></table></figure><h3 id="表空间扩容"><a href="#表空间扩容" class="headerlink" title="表空间扩容"></a>表空间扩容</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--数据文件一般按序号添加，所以首先要找到最大一个数据文件的编号，再按顺序增加</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span>space PSAPSR3 <span class="keyword">add</span> datafile <span class="string">&#x27;/dataQF/qfdata/oradata/qfdata3/PSAPSR780.DBF&#x27;</span> size <span class="number">30</span>G;  </span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Oracle-表空间扩容&quot;&gt;&lt;a href=&quot;#Oracle-表空间扩容&quot; class=&quot;headerlink&quot; title=&quot;Oracle-表空间扩容&quot;&gt;&lt;/a&gt;Oracle-表空间扩容&lt;/h2&gt;&lt;h3 id=&quot;查看磁盘空间&quot;&gt;&lt;a href=&quot;#查看磁盘空间&quot;</summary>
       
     
     
