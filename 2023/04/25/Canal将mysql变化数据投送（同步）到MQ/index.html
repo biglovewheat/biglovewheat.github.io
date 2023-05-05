@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Canal将mysql变化数据投送（同步）到MQ | biglovewheat</title>
+  <meta name="description" content="Canal将mysql变化数据投送（同步）到MQ清单123456192.168.8.221 bigdata1  ## admin,deployer192.168.8.222 bigdata2  ## deployer192.168.8.223 bigdata3  ## deployercanal.admin-1.1.5.tar.gzcanal.deployer-1.1.5.tar.gz  集群安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Canal将mysql变化数据投送（同步）到MQ">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="Canal将mysql变化数据投送（同步）到MQ清单123456192.168.8.221 bigdata1  ## admin,deployer192.168.8.222 bigdata2  ## deployer192.168.8.223 bigdata3  ## deployercanal.admin-1.1.5.tar.gzcanal.deployer-1.1.5.tar.gz  集群安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-05T14:40:57.639Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="bigdata">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bigdata/">bigdata</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">基础概念</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ansible/" style="font-size: 13.1px;">ansible</a> <a href="/tags/aws/" style="font-size: 13.3px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/bigdata/" style="font-size: 13.3px;">bigdata</a> <a href="/tags/consul/" style="font-size: 13px;">consul</a> <a href="/tags/database/" style="font-size: 13px;">database</a> <a href="/tags/devops/" style="font-size: 14px;">devops</a> <a href="/tags/docker/" style="font-size: 13.1px;">docker</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.1px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.2px;">git</a> <a href="/tags/gitlab/" style="font-size: 13px;">gitlab</a> <a href="/tags/http/" style="font-size: 13.1px;">http</a> <a href="/tags/java/" style="font-size: 13.2px;">java</a> <a href="/tags/jenkins/" style="font-size: 13.4px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.6px;">k8s</a> <a href="/tags/keepalived/" style="font-size: 13px;">keepalived</a> <a href="/tags/linux/" style="font-size: 13.9px;">linux</a> <a href="/tags/lvs/" style="font-size: 13px;">lvs</a> <a href="/tags/middleware/" style="font-size: 13.2px;">middleware</a> <a href="/tags/mq/" style="font-size: 13px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.8px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13.1px;">nacos</a> <a href="/tags/network/" style="font-size: 13.1px;">network</a> <a href="/tags/nexus/" style="font-size: 13px;">nexus</a> <a href="/tags/nginx/" style="font-size: 13.2px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13px;">nodejs</a> <a href="/tags/oracle/" style="font-size: 13.3px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.3px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.5px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/s3/" style="font-size: 13px;">s3</a> <a href="/tags/seata/" style="font-size: 13px;">seata</a> <a href="/tags/shell/" style="font-size: 13.7px;">shell</a> <a href="/tags/skywalking/" style="font-size: 13px;">skywalking</a> <a href="/tags/ssl/" style="font-size: 13px;">ssl</a> <a href="/tags/supervisor/" style="font-size: 13px;">supervisor</a> <a href="/tags/vpn/" style="font-size: 13px;">vpn</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13px;">基础概念</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13px;">日志</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">正则表达式</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.4px;">监控</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">阿里云</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">43</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/bigdata/">bigdata</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/05/04/Doris+datax%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/" class="title">Doris+Datax数据备份与恢复</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-05-03T16:00:00.000Z" itemprop="datePublished">2023-05-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/bigdata/">bigdata</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/" class="title">Canal将mysql变化数据投送（同步）到MQ</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-24T16:00:00.000Z" itemprop="datePublished">2023-04-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/bigdata/">bigdata</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/13/Cloudera-CM+CDH6%E5%AE%89%E8%A3%85/" class="title">Cloudera-CM+CDH6安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-12T16:00:00.000Z" itemprop="datePublished">2023-04-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/bigdata/">bigdata</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/11/Doris%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" class="title">Doris集群搭建</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-10T16:00:00.000Z" itemprop="datePublished">2023-04-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/27/mysql-%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81%E5%A4%84%E7%90%86/" class="title">Mysql-忘记root密码处理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-26T16:00:00.000Z" itemprop="datePublished">2023-03-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Canal将mysql变化数据投送（同步）到MQ" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Canal将mysql变化数据投送（同步）到MQ
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/" class="article-date">
+	  <time datetime="2023-04-24T16:00:00.000Z" itemprop="datePublished">2023-04-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/bigdata/">bigdata</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/bigdata/" rel="tag">bigdata</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Canal将mysql变化数据投送（同步）到MQ"><a href="#Canal将mysql变化数据投送（同步）到MQ" class="headerlink" title="Canal将mysql变化数据投送（同步）到MQ"></a>Canal将mysql变化数据投送（同步）到MQ</h2><h3 id="清单"><a href="#清单" class="headerlink" title="清单"></a>清单</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">192.168.8.221 bigdata1  <span class="comment">## admin,deployer</span></span><br><span class="line">192.168.8.222 bigdata2  <span class="comment">## deployer</span></span><br><span class="line">192.168.8.223 bigdata3  <span class="comment">## deployer</span></span><br><span class="line"></span><br><span class="line">canal.admin-1.1.5.tar.gz</span><br><span class="line">canal.deployer-1.1.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="集群安装前提"><a href="#集群安装前提" class="headerlink" title="集群安装前提"></a>集群安装前提</h3><p>java 1.8 （安装略）</p>
+<p>zookeeper （安装略）</p>
+<p>mysql（安装略）</p>
+<h3 id="mysql配置"><a href="#mysql配置" class="headerlink" title="mysql配置"></a>mysql配置</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--集群安装需要mysql存储集群数据</span></span><br><span class="line"></span><br><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p  <span class="operator">&lt;</span> <span class="operator">/</span>data<span class="operator">/</span>canal<span class="operator">/</span>admin<span class="operator">/</span>conf<span class="operator">/</span>canal_manager.sql</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;Abc123!!!&#x27;</span>;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> canal_manager.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h3 id="需复制的mysql配置"><a href="#需复制的mysql配置" class="headerlink" title="需复制的mysql配置"></a>需复制的mysql配置</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">需要给canal用户赋予复制的权限</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Abc123@!!!&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装admin"><a href="#安装admin" class="headerlink" title="安装admin"></a>安装admin</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 解压</span></span><br><span class="line">vi conf/application.yml</span><br><span class="line"></span><br><span class="line">server:</span><br><span class="line">  port: 18089</span><br><span class="line">spring:</span><br><span class="line">  jackson:</span><br><span class="line">    date-format: yyyy-MM-<span class="built_in">dd</span> HH:mm:ss</span><br><span class="line">    time-zone: GMT+8</span><br><span class="line"></span><br><span class="line">spring.datasource:</span><br><span class="line">  address: 192.168.8.211:3306</span><br><span class="line">  database: canal_manager</span><br><span class="line">  username: canal</span><br><span class="line">  password: Abc123!!!</span><br><span class="line">  driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">  url: jdbc:mysql://<span class="variable">$&#123;spring.datasource.address&#125;</span>/<span class="variable">$&#123;spring.datasource.database&#125;</span>?useUnicode=<span class="literal">true</span>&amp;characterEncoding=UTF-8&amp;useSSL=<span class="literal">false</span>&amp;allowPublicKeyRetrieval=<span class="literal">true</span></span><br><span class="line">  hikari:</span><br><span class="line">    maximum-pool-size: 30</span><br><span class="line">    minimum-idle: 1</span><br><span class="line"></span><br><span class="line">canal:</span><br><span class="line">  adminUser: admin</span><br><span class="line">  adminPasswd: 123456</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动admin</span></span><br><span class="line">./startup_admin.sh</span><br><span class="line"><span class="comment"># 启动脚本</span></span><br><span class="line"><span class="built_in">cat</span> startup_admin.sh </span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/data/soft/jdk1.8.0_301</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line"></span><br><span class="line">/data/canal/admin/bin/startup.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录控制台"><a href="#登录控制台" class="headerlink" title="登录控制台"></a>登录控制台</h3><p><a target="_blank" rel="noopener" href="http://192.168.8.211/">http://192.168.8.211</a> admin&#x2F;admin123</p>
+<p>新建一个集群</p>
+<h3 id="配置并启动deployer"><a href="#配置并启动deployer" class="headerlink" title="配置并启动deployer"></a>配置并启动deployer</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">vi deployer/conf/canal_local.properties</span><br><span class="line"></span><br><span class="line"><span class="comment"># register ip</span></span><br><span class="line">canal.register.ip = </span><br><span class="line"></span><br><span class="line"><span class="comment"># canal admin config</span></span><br><span class="line">canal.admin.manager = 192.168.8.221:18089</span><br><span class="line">canal.admin.port = 11110</span><br><span class="line">canal.admin.user = admin</span><br><span class="line">canal.admin.passwd = 6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9</span><br><span class="line"><span class="comment"># admin auto register</span></span><br><span class="line">canal.admin.register.auto = <span class="literal">true</span></span><br><span class="line">canal.admin.register.cluster = canal-cluster</span><br><span class="line">canal.admin.register.name =  </span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动脚本</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/data/soft/jdk1.8.0_301</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line"></span><br><span class="line">/data/canal/deployer/bin/startup.sh  <span class="built_in">local</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动正常的话，控制台就能看到3台server，否则请看log排错。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="控制台配置server-集群配置"><a href="#控制台配置server-集群配置" class="headerlink" title="控制台配置server(集群配置)"></a>控制台配置server(集群配置)</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#################################################</span></span><br><span class="line"><span class="comment">#########               common argument         #############</span></span><br><span class="line"><span class="comment">#################################################</span></span><br><span class="line"><span class="comment"># tcp bind ip</span></span><br><span class="line"><span class="attr">canal.ip</span> =<span class="string"></span></span><br><span class="line"><span class="comment"># register ip to zookeeper</span></span><br><span class="line"><span class="attr">canal.register.ip</span> = <span class="string"></span></span><br><span class="line"><span class="attr">canal.port</span> = <span class="string">11111</span></span><br><span class="line"><span class="attr">canal.metrics.pull.port</span> = <span class="string">11112</span></span><br><span class="line"><span class="comment"># canal instance user/passwd</span></span><br><span class="line"><span class="comment"># canal.user = canal</span></span><br><span class="line"><span class="comment"># canal.passwd = E3619321C1A937C46A0D8BD1DAC39F93B27D4458</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># canal admin config</span></span><br><span class="line"><span class="attr">canal.admin.manager</span> = <span class="string">192.168.8.221:18089</span></span><br><span class="line"><span class="attr">canal.admin.port</span> = <span class="string">11110</span></span><br><span class="line"><span class="attr">canal.admin.user</span> = <span class="string">admin</span></span><br><span class="line"><span class="attr">canal.admin.passwd</span> = <span class="string">6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9</span></span><br><span class="line"><span class="comment"># admin auto register</span></span><br><span class="line"><span class="attr">canal.admin.register.auto</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.admin.register.cluster</span> = <span class="string">canal-cluster</span></span><br><span class="line"><span class="comment">#canal.admin.register.name = bigdata01</span></span><br><span class="line"></span><br><span class="line"><span class="attr">canal.zkServers</span> = <span class="string">192.168.8.221:12181,192.168.8.222:12181,192.168.8.223:12181</span></span><br><span class="line"><span class="comment"># flush data to zk</span></span><br><span class="line"><span class="attr">canal.zookeeper.flush.period</span> = <span class="string">1000</span></span><br><span class="line"><span class="attr">canal.withoutNetty</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"># tcp, kafka, rocketMQ, rabbitMQ</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">rocketMQ</span></span><br><span class="line"><span class="comment"># flush meta cursor/parse position to file</span></span><br><span class="line"><span class="attr">canal.file.data.dir</span> = <span class="string">$&#123;canal.conf.dir&#125;</span></span><br><span class="line"><span class="attr">canal.file.flush.period</span> = <span class="string">1000</span></span><br><span class="line"><span class="comment">## memory store RingBuffer size, should be Math.pow(2,n)</span></span><br><span class="line"><span class="attr">canal.instance.memory.buffer.size</span> = <span class="string">16384</span></span><br><span class="line"><span class="comment">## memory store RingBuffer used memory unit size , default 1kb</span></span><br><span class="line"><span class="attr">canal.instance.memory.buffer.memunit</span> = <span class="string">1024 </span></span><br><span class="line"><span class="comment">## meory store gets mode used MEMSIZE or ITEMSIZE</span></span><br><span class="line"><span class="attr">canal.instance.memory.batch.mode</span> = <span class="string">MEMSIZE</span></span><br><span class="line"><span class="attr">canal.instance.memory.rawEntry</span> = <span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## detecing config</span></span><br><span class="line"><span class="attr">canal.instance.detecting.enable</span> = <span class="string">false</span></span><br><span class="line"><span class="comment">#canal.instance.detecting.sql = insert into retl.xdual values(1,now()) on duplicate key update x=now()</span></span><br><span class="line"><span class="attr">canal.instance.detecting.sql</span> = <span class="string">select 1</span></span><br><span class="line"><span class="attr">canal.instance.detecting.interval.time</span> = <span class="string">3</span></span><br><span class="line"><span class="attr">canal.instance.detecting.retry.threshold</span> = <span class="string">3</span></span><br><span class="line"><span class="attr">canal.instance.detecting.heartbeatHaEnable</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># support maximum transaction size, more than the size of the transaction will be cut into multiple transactions delivery</span></span><br><span class="line"><span class="attr">canal.instance.transaction.size</span> =  <span class="string">1024</span></span><br><span class="line"><span class="comment"># mysql fallback connected to new master should fallback times</span></span><br><span class="line"><span class="attr">canal.instance.fallbackIntervalInSeconds</span> = <span class="string">60</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># network config</span></span><br><span class="line"><span class="attr">canal.instance.network.receiveBufferSize</span> = <span class="string">16384</span></span><br><span class="line"><span class="attr">canal.instance.network.sendBufferSize</span> = <span class="string">16384</span></span><br><span class="line"><span class="attr">canal.instance.network.soTimeout</span> = <span class="string">30</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># binlog filter config</span></span><br><span class="line"><span class="attr">canal.instance.filter.druid.ddl</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.instance.filter.query.dcl</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.instance.filter.query.dml</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.instance.filter.query.ddl</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.instance.filter.table.error</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.instance.filter.rows</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">canal.instance.filter.transaction.entry</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.instance.filter.dml.insert</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">canal.instance.filter.dml.update</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">canal.instance.filter.dml.delete</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># binlog format/image check</span></span><br><span class="line"><span class="attr">canal.instance.binlog.format</span> = <span class="string">ROW,STATEMENT,MIXED </span></span><br><span class="line"><span class="attr">canal.instance.binlog.image</span> = <span class="string">FULL,MINIMAL,NOBLOB</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># binlog ddl isolation</span></span><br><span class="line"><span class="attr">canal.instance.get.ddl.isolation</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># parallel parser config</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallel</span> = <span class="string">true</span></span><br><span class="line"><span class="comment">## concurrent thread number, default 60% available processors, suggest not to exceed Runtime.getRuntime().availableProcessors()</span></span><br><span class="line"><span class="comment">#canal.instance.parser.parallelThreadSize = 16</span></span><br><span class="line"><span class="comment">## disruptor ringbuffer size, must be power of 2</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelBufferSize</span> = <span class="string">256</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># table meta tsdb info</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.enable</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.dir</span> = <span class="string">$&#123;canal.file.data.dir:../conf&#125;/$&#123;canal.instance.destination:&#125;</span></span><br><span class="line"><span class="comment">#canal.instance.tsdb.url = jdbc:h2:$&#123;canal.instance.tsdb.dir&#125;/h2;CACHE_SIZE=1000;MODE=MYSQL;</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.dbUsername</span> = <span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.dbPassword</span> = <span class="string">canal</span></span><br><span class="line"><span class="comment"># dump snapshot interval, default 24 hour</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.snapshot.interval</span> = <span class="string">24</span></span><br><span class="line"><span class="comment"># purge snapshot expire , default 360 hour(15 days)</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.snapshot.expire</span> = <span class="string">360</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#################################################</span></span><br><span class="line"><span class="comment">#########               destinations            #############</span></span><br><span class="line"><span class="comment">#################################################</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string"></span></span><br><span class="line"><span class="comment"># conf root dir</span></span><br><span class="line"><span class="attr">canal.conf.dir</span> = <span class="string">../conf</span></span><br><span class="line"><span class="comment"># auto scan instance dir add/remove and start/stop instance</span></span><br><span class="line"><span class="attr">canal.auto.scan</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.auto.scan.interval</span> = <span class="string">5</span></span><br><span class="line"><span class="comment"># set this value to &#x27;true&#x27; means that when binlog pos not found, skip to latest.</span></span><br><span class="line"><span class="comment"># WARN: pls keep &#x27;false&#x27; in production env, or if you know what you want.</span></span><br><span class="line"><span class="attr">canal.auto.reset.latest.pos.mode</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#canal.instance.tsdb.spring.xml = classpath:spring/tsdb/h2-tsdb.xml</span></span><br><span class="line"><span class="attr">canal.instance.tsdb.spring.xml</span> = <span class="string">classpath:spring/tsdb/mysql-tsdb.xml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">canal.instance.global.mode</span> = <span class="string">spring</span></span><br><span class="line"><span class="attr">canal.instance.global.lazy</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">canal.instance.global.manager.address</span> = <span class="string">$&#123;canal.admin.manager&#125;</span></span><br><span class="line"><span class="comment">#canal.instance.global.spring.xml = classpath:spring/memory-instance.xml</span></span><br><span class="line"><span class="comment">#canal.instance.global.spring.xml = classpath:spring/file-instance.xml</span></span><br><span class="line"><span class="attr">canal.instance.global.spring.xml</span> = <span class="string">classpath:spring/default-instance.xml</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">##################################################</span></span><br><span class="line"><span class="comment">#########             MQ Properties      #############</span></span><br><span class="line"><span class="comment">##################################################</span></span><br><span class="line"><span class="comment"># aliyun ak/sk , support rds/mq</span></span><br><span class="line"><span class="attr">canal.aliyun.accessKey</span> =<span class="string"></span></span><br><span class="line"><span class="attr">canal.aliyun.secretKey</span> =<span class="string"></span></span><br><span class="line"><span class="attr">canal.aliyun.uid</span>=<span class="string"></span></span><br><span class="line"></span><br><span class="line"><span class="attr">canal.mq.flatMessage</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.mq.canalBatchSize</span> = <span class="string">50</span></span><br><span class="line"><span class="attr">canal.mq.canalGetTimeout</span> = <span class="string">100</span></span><br><span class="line"><span class="comment"># Set this value to &quot;cloud&quot;, if you want open message trace feature in aliyun.</span></span><br><span class="line"><span class="attr">canal.mq.accessChannel</span> = <span class="string">local</span></span><br><span class="line"></span><br><span class="line"><span class="attr">canal.mq.database.hash</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">canal.mq.send.thread.size</span> = <span class="string">30</span></span><br><span class="line"><span class="attr">canal.mq.build.thread.size</span> = <span class="string">8</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">##################################################</span></span><br><span class="line"><span class="comment">#########                   RocketMQ         #############</span></span><br><span class="line"><span class="comment">##################################################</span></span><br><span class="line"><span class="attr">rocketmq.producer.group</span> = <span class="string">mysql-canal-mq</span></span><br><span class="line"><span class="attr">rocketmq.enable.message.trace</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">rocketmq.customized.trace.topic</span> =<span class="string"></span></span><br><span class="line"><span class="attr">rocketmq.namespace</span> =<span class="string"></span></span><br><span class="line"><span class="attr">rocketmq.namesrv.addr</span> = <span class="string">hxkj07:9876</span></span><br><span class="line"><span class="attr">rocketmq.retry.times.when.send.failed</span> = <span class="string">0</span></span><br><span class="line"><span class="attr">rocketmq.vip.channel.enabled</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">rocketmq.tag</span> = <span class="string"></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建并配置instance"><a href="#创建并配置instance" class="headerlink" title="创建并配置instance"></a>创建并配置instance</h3><p>控制台新建一个instance，配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#################################################</span><br><span class="line">## mysql serverId , v1.0.26+ will autoGen</span><br><span class="line"># canal.instance.mysql.slaveId=0</span><br><span class="line"></span><br><span class="line"># enable gtid use true/false</span><br><span class="line">canal.instance.gtidon=false</span><br><span class="line"></span><br><span class="line"># position info</span><br><span class="line">canal.instance.master.address=hxkj07:3306</span><br><span class="line">canal.instance.master.journal.name=</span><br><span class="line">canal.instance.master.position=</span><br><span class="line">canal.instance.master.timestamp=</span><br><span class="line">canal.instance.master.gtid=</span><br><span class="line"></span><br><span class="line"># rds oss binlog</span><br><span class="line">canal.instance.rds.accesskey=</span><br><span class="line">canal.instance.rds.secretkey=</span><br><span class="line">canal.instance.rds.instanceId=</span><br><span class="line"></span><br><span class="line"># table meta tsdb info</span><br><span class="line">canal.instance.tsdb.enable=false</span><br><span class="line">#canal.instance.tsdb.url=jdbc:mysql://127.0.0.1:3306/canal_tsdb</span><br><span class="line">#canal.instance.tsdb.dbUsername=canal</span><br><span class="line">#canal.instance.tsdb.dbPassword=canal</span><br><span class="line"></span><br><span class="line">#canal.instance.standby.address =</span><br><span class="line">#canal.instance.standby.journal.name =</span><br><span class="line">#canal.instance.standby.position =</span><br><span class="line">#canal.instance.standby.timestamp =</span><br><span class="line">#canal.instance.standby.gtid=</span><br><span class="line"></span><br><span class="line"># username/password</span><br><span class="line">canal.instance.dbUsername=canal</span><br><span class="line">canal.instance.dbPassword=Hxkj2022!!!</span><br><span class="line">canal.instance.connectionCharset = UTF-8</span><br><span class="line"># enable druid Decrypt database password</span><br><span class="line">canal.instance.enableDruid=false</span><br><span class="line">#canal.instance.pwdPublicKey=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALK4BUxdDltRRE5/zXpVEVPUgunvscYFtEip3pmLlhrWpacX7y7GCMo2/JM6LeHmiiNdH1FWgGCpUfircSwlWKUCAwEAAQ==</span><br><span class="line"></span><br><span class="line"># table regex</span><br><span class="line">canal.instance.filter.regex=front_telematics.machinery_implement_combination_record,baseinfo.t_implement_sku,baseinfo.t_device_sku,iot.t_device,front_telematics.t_bg_agronomy_operate,baseinfo.t_fault_definittion_description</span><br><span class="line"># table black regex</span><br><span class="line">canal.instance.filter.black.regex=</span><br><span class="line"># table field filter(format: schema1.tableName1:field1/field2,schema2.tableName2:field1/field2)</span><br><span class="line">#canal.instance.filter.field=test1.t_product:id/subject/keywords,test2.t_company:id/name/contact/ch</span><br><span class="line"># table field black filter(format: schema1.tableName1:field1/field2,schema2.tableName2:field1/field2)</span><br><span class="line">#canal.instance.filter.black.field=test1.t_product:subject/product_image,test2.t_company:id/name/contact/ch</span><br><span class="line"></span><br><span class="line"># mq config</span><br><span class="line">canal.mq.topic=mysql_canal_mq</span><br><span class="line"># dynamic topic route by schema or table regex</span><br><span class="line">#canal.mq.dynamicTopic=</span><br><span class="line">canal.mq.partition=0</span><br><span class="line"># hash partition config</span><br><span class="line">canal.mq.partitionsNum=4</span><br><span class="line">canal.mq.partitionHash=.*\\..*:$pk$,.*\\..*:id</span><br><span class="line">#canal.mq.partitionHash=test.table:id^name,.*\\..*</span><br><span class="line">#################################################</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="检查mq"><a href="#检查mq" class="headerlink" title="检查mq"></a>检查mq</h3><p>所有配置正常情况下，修改目标mysql，就能在rocketmq看到相应的message</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/" title="Canal将mysql变化数据投送（同步）到MQ" target="_blank" rel="external">https://biglovewheat.gihub.io/2023/04/25/Canal将mysql变化数据投送（同步）到MQ/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/05/04/Doris+datax%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/" title="Doris+Datax数据备份与恢复"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/04/13/Cloudera-CM+CDH6%E5%AE%89%E8%A3%85/" title="Cloudera-CM+CDH6安装"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
