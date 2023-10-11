@@ -2,330 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/21/Kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/17/elk-on-k8s%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/17/elk-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/17/emqx-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/07/26/frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/21/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/21/git-%E8%A7%92%E8%89%B2/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/06/28/gitlab-%E4%BF%AE%E6%94%B9IP/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/06/28/gitlab-%E5%88%9D%E5%A7%8B%E5%8C%96root%E5%AF%86%E7%A0%81/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/07/26/gitlab-%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/04/gitlab-%E5%BC%82%E5%BA%93%E5%90%8C%E6%AD%A5/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/03/gitlab-%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/05/https-%E6%8F%A1%E6%89%8B%E6%B5%81%E7%A8%8B/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/12/13/java-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/09/01/java-%E7%A8%8B%E5%BA%8F%E5%8D%A0%E7%94%A8cpu%E9%AB%98%E6%8E%92%E6%9F%A5/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/09/13/jenkins-npm-%E6%9E%84%E5%BB%BA%E6%8A%A5%E9%94%99/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/10/11/jenkins-%E5%A2%9E%E5%8A%A0agent/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/10/12/jenkins-%E6%8C%89%E8%A7%86%E5%9B%BE%E6%89%B9%E9%87%8F%E5%A4%8D%E5%88%B6%E9%A1%B9%E7%9B%AE/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/04/k8s-centos7-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/09/k8s-evicted-pod%E5%A4%84%E7%90%86/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/18/k8s-helm-%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/04/k8s-ubuntu-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/12/05/k8s-%E5%85%81%E8%AE%B8master%E8%8A%82%E7%82%B9%E5%8F%82%E4%B8%8E%E8%B0%83%E5%BA%A6/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/30/k8s-%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/07/linux-centos7-%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/08/07/linux-sed%E6%9B%BF%E6%8D%A2/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/04/linux-swap%E6%89%A9%E5%AE%B9/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/15/linux-vsftp-%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2023/03/03/linux-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://biglovewheat.gihub.io/2022/12/05/linux-%E6%97%B6%E5%8C%BA%E6%93%8D%E4%BD%9C/</loc>
     
     <lastmod>2023-10-11</lastmod>
@@ -749,33 +425,6 @@
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/01/shell-%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/08/shell-%E6%B8%85%E7%90%86%E8%84%9A%E6%9C%AC/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/08/02/shell-%E8%8E%B7%E5%8F%96mysql%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E5%80%BC/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://biglovewheat.gihub.io/2022/11/24/skywalking-%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%E9%83%A8%E7%BD%B2/</loc>
     
     <lastmod>2023-10-11</lastmod>
@@ -866,6 +515,33 @@
   </url>
   
   <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/08/shell-%E6%B8%85%E7%90%86%E8%84%9A%E6%9C%AC/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/01/shell-%E5%BE%AA%E7%8E%AF%E4%BE%8B%E5%AD%90/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/02/shell-%E8%8E%B7%E5%8F%96mysql%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E5%80%BC/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://biglovewheat.gihub.io/2023/04/25/Canal%E5%B0%86mysql%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%8A%95%E9%80%81%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89%E5%88%B0MQ/</loc>
     
     <lastmod>2023-10-11</lastmod>
@@ -884,16 +560,7 @@
   </url>
   
   <url>
-    <loc>https://biglovewheat.gihub.io/2022/12/16/ansible-roles-%E6%96%B0%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/</loc>
-    
-    <lastmod>2023-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://biglovewheat.gihub.io/2022/09/08/ansible-%E4%BF%AE%E6%94%B9hosts/</loc>
+    <loc>https://biglovewheat.gihub.io/2023/08/21/Kafka-%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2023-10-11</lastmod>
     
@@ -1037,6 +704,339 @@
   </url>
   
   <url>
+    <loc>https://biglovewheat.gihub.io/2023/08/17/elk-on-k8s%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/17/elk-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/08/17/emqx-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/07/26/frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/03/geoserver-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/08/21/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/08/21/git-%E8%A7%92%E8%89%B2/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/06/28/gitlab-%E4%BF%AE%E6%94%B9IP/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/06/28/gitlab-%E5%88%9D%E5%A7%8B%E5%8C%96root%E5%AF%86%E7%A0%81/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/07/26/gitlab-%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/04/gitlab-%E5%BC%82%E5%BA%93%E5%90%8C%E6%AD%A5/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/03/gitlab-%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/05/https-%E6%8F%A1%E6%89%8B%E6%B5%81%E7%A8%8B/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/12/13/java-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E4%BF%AE%E6%94%B9/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/09/01/java-%E7%A8%8B%E5%BA%8F%E5%8D%A0%E7%94%A8cpu%E9%AB%98%E6%8E%92%E6%9F%A5/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/09/jenkins-gitlab-webhook%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-k8s-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/09/13/jenkins-npm-%E6%9E%84%E5%BB%BA%E6%8A%A5%E9%94%99/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/07/26/jenkins-systemd-%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/10/11/jenkins-%E5%A2%9E%E5%8A%A0agent/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/10/12/jenkins-%E6%8C%89%E8%A7%86%E5%9B%BE%E6%89%B9%E9%87%8F%E5%A4%8D%E5%88%B6%E9%A1%B9%E7%9B%AE/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/04/k8s-centos7-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/30/k8s-crontabjob/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/09/k8s-evicted-pod%E5%A4%84%E7%90%86/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/18/k8s-helm-%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/09/k8s-ingress-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/04/k8s-ubuntu-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/12/05/k8s-%E5%85%81%E8%AE%B8master%E8%8A%82%E7%82%B9%E5%8F%82%E4%B8%8E%E8%B0%83%E5%BA%A6/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/30/k8s-%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/08/07/linux-centos7-%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/09/linux-iftop-%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/08/07/linux-sed%E6%9B%BF%E6%8D%A2/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/04/linux-swap%E6%89%A9%E5%AE%B9/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/08/15/linux-vsftp-%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2023/03/03/linux-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/12/16/ansible-roles-%E6%96%B0%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/2022/09/08/ansible-%E4%BF%AE%E6%94%B9hosts/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://biglovewheat.gihub.io/categories/index.html</loc>
     
     <lastmod>2022-07-26</lastmod>
@@ -1065,6 +1065,13 @@
   
   <url>
     <loc>https://biglovewheat.gihub.io/tags/bigdata/</loc>
+    <lastmod>2023-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://biglovewheat.gihub.io/tags/all/</loc>
     <lastmod>2023-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
