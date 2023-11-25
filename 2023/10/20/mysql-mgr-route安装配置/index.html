@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Mysql-MGR-router安装配置 | biglovewheat</title>
+  <meta name="description" content="Mysql-MGR-router安装配置环境1234567810.77.114.192  mgr0110.77.114.192  mgr0210.77.114.192  mgr03mysql 8.0.34mysql shell 8.0.34mysql router 8.0.34centos 7.9  操作系统配置包括防火墙、selinux、内核优化参数等（略） 安装mysqlserver12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql-MGR-router安装配置">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2023/10/20/mysql-mgr-route%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="Mysql-MGR-router安装配置环境1234567810.77.114.192  mgr0110.77.114.192  mgr0210.77.114.192  mgr03mysql 8.0.34mysql shell 8.0.34mysql router 8.0.34centos 7.9  操作系统配置包括防火墙、selinux、内核优化参数等（略） 安装mysqlserver12345">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-25T04:42:31.744Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="all">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2023/10/20/mysql-mgr-route%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/all/">all</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bigdata/">bigdata</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">基础概念</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/">备份恢复</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/all/" style="font-size: 14px;">all</a> <a href="/tags/ansible/" style="font-size: 13.15px;">ansible</a> <a href="/tags/aws/" style="font-size: 13.31px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/bigdata/" style="font-size: 13.23px;">bigdata</a> <a href="/tags/consul/" style="font-size: 13px;">consul</a> <a href="/tags/database/" style="font-size: 13px;">database</a> <a href="/tags/devops/" style="font-size: 13.85px;">devops</a> <a href="/tags/dns/" style="font-size: 13px;">dns</a> <a href="/tags/docker/" style="font-size: 13.08px;">docker</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.08px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.38px;">git</a> <a href="/tags/gitlab/" style="font-size: 13.08px;">gitlab</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/java/" style="font-size: 13.15px;">java</a> <a href="/tags/jenkins/" style="font-size: 13.38px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.62px;">k8s</a> <a href="/tags/keepalived/" style="font-size: 13px;">keepalived</a> <a href="/tags/linux/" style="font-size: 13.77px;">linux</a> <a href="/tags/lvs/" style="font-size: 13px;">lvs</a> <a href="/tags/middleware/" style="font-size: 13.31px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mq/" style="font-size: 13.08px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.92px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13.08px;">nacos</a> <a href="/tags/network/" style="font-size: 13.08px;">network</a> <a href="/tags/nexus/" style="font-size: 13px;">nexus</a> <a href="/tags/nginx/" style="font-size: 13.15px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13px;">nodejs</a> <a href="/tags/oracle/" style="font-size: 13.46px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.31px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13.08px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.54px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/s3/" style="font-size: 13px;">s3</a> <a href="/tags/seata/" style="font-size: 13px;">seata</a> <a href="/tags/shell/" style="font-size: 13.69px;">shell</a> <a href="/tags/skywalking/" style="font-size: 13px;">skywalking</a> <a href="/tags/ssl/" style="font-size: 13px;">ssl</a> <a href="/tags/supervisor/" style="font-size: 13px;">supervisor</a> <a href="/tags/vpn/" style="font-size: 13px;">vpn</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13px;">基础概念</a> <a href="/tags/%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" style="font-size: 13px;">备份恢复</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13.08px;">日志</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">正则表达式</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">测试</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.31px;">监控</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13.15px;">阿里云</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/ansible-%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85mysql/" class="title">Ansible-批量安装mysql</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-limit%E7%94%A8%E6%B3%95/" class="title">Mysql-limit用法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/" class="title">Mysql-双主复制和keepalived</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-%E5%A4%9A%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/" class="title">Mysql-多实例配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2/" class="title">Mysql-常用查询</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-mysql-mgr-route安装配置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql-MGR-router安装配置
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/10/20/mysql-mgr-route%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2023-10-19T16:00:00.000Z" itemprop="datePublished">2023-10-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/all/" rel="tag">all</a>, <a class="article-tag-link-link" href="/tags/mysql/" rel="tag">mysql</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/10/20/mysql-mgr-route%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Mysql-MGR-router安装配置"><a href="#Mysql-MGR-router安装配置" class="headerlink" title="Mysql-MGR-router安装配置"></a>Mysql-MGR-router安装配置</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">10.77.114.192  mgr01</span><br><span class="line">10.77.114.192  mgr02</span><br><span class="line">10.77.114.192  mgr03</span><br><span class="line"></span><br><span class="line">mysql 8.0.34</span><br><span class="line">mysql shell 8.0.34</span><br><span class="line">mysql router 8.0.34</span><br><span class="line">centos 7.9</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作系统配置"><a href="#操作系统配置" class="headerlink" title="操作系统配置"></a>操作系统配置</h3><p>包括防火墙、selinux、内核优化参数等<br>（略）</p>
+<h3 id="安装mysqlserver"><a href="#安装mysqlserver" class="headerlink" title="安装mysqlserver"></a>安装mysqlserver</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 卸载mariadb</span></span><br><span class="line">rpm -e $(rpm -qa |grep maria) --nodeps</span><br><span class="line"></span><br><span class="line"><span class="comment">## rpm 安装</span></span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-common-8*.rpm</span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-client-plugins-8*.rpm</span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-libs-8*.rpm</span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-libs-compat-8*.rpm</span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-client-8*.rpm</span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-icu-data-files-8*.rpm</span><br><span class="line">yum localinstall -y <span class="variable">$RPM_PATH</span>/mysql-community-server-8*.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## 启动mysql</span></span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line">systemctl start mysqld</span><br><span class="line"></span><br><span class="line"><span class="comment">## 拿到初始密码，并修改密码</span></span><br><span class="line">mysql_passwd=$(grep password /var/log/mysqld.log | awk -F<span class="string">&#x27;root@localhost: &#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|<span class="built_in">tail</span> -1) </span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">&#x27;EOF&#x27;</span> &gt; /tmp/temp.sql</span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;Abc123!!!&#x27;</span>;</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">flush privileges;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">mysql -uroot -p<span class="variable">$mysql_passwd</span> -b --connect-expired-password &lt; /tmp/temp.sql</span><br><span class="line"><span class="built_in">rm</span> -rf /tmp/temp.sql</span><br><span class="line"></span><br><span class="line"><span class="comment">## copy data file, copy my.cnf</span></span><br><span class="line">systemctl stop mysqld</span><br><span class="line">\<span class="built_in">cp</span> -f <span class="variable">$INSTALL_PATH</span>/other/my.cnf  /etc/my.cnf</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -d /data/mysql ]; <span class="keyword">then</span> <span class="built_in">mv</span> /data/mysql /data/mysql_$(<span class="built_in">date</span> +<span class="string">&quot;%Y%m%d%H%M%S&quot;</span>); <span class="keyword">fi</span></span><br><span class="line"><span class="built_in">mv</span> /var/lib/mysql /data/mysql ; <span class="built_in">chown</span> -R mysql:mysql /data/mysql</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>配置文件my.cnf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[client]</span><br><span class="line">#default-character-set = utf8mb4</span><br><span class="line">host = localhost</span><br><span class="line">user = root</span><br><span class="line">port = 33066</span><br><span class="line">password = Abc123!!!</span><br><span class="line">socket=/data/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line"># basic settings #</span><br><span class="line">default-storage-engine= InnoDB</span><br><span class="line">server_id = 1</span><br><span class="line">#basedir = /app/mysql8.0.34</span><br><span class="line">datadir = /data/mysql/</span><br><span class="line">socket =  /data/mysql/mysql.sock</span><br><span class="line">pid_file = /data/mysql/mysqld.pid</span><br><span class="line">port = 33066</span><br><span class="line">default-time_zone = &#x27;+8:00&#x27;</span><br><span class="line">character_set_server = utf8mb4</span><br><span class="line">explicit_defaults_for_timestamp = 1</span><br><span class="line">autocommit = 1</span><br><span class="line">transaction_isolation = READ-COMMITTED</span><br><span class="line">#secure_file_priv = &quot;/data/mysql/&quot;</span><br><span class="line">max_allowed_packet = 64M</span><br><span class="line">lower_case_table_names = 0</span><br><span class="line">default_authentication_plugin = mysql_native_password</span><br><span class="line">sql_mode=&#x27;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&#x27;</span><br><span class="line"></span><br><span class="line"># connection #</span><br><span class="line">back_log = 500</span><br><span class="line">interactive_timeout = 300</span><br><span class="line">wait_timeout = 1800</span><br><span class="line">lock_wait_timeout = 300</span><br><span class="line">max_user_connections = 800</span><br><span class="line">skip_name_resolve = 1</span><br><span class="line">max_connections = 2500</span><br><span class="line">max_connect_errors = 1000</span><br><span class="line"></span><br><span class="line">#table cache performance settings</span><br><span class="line">#table_open_cache = 1024</span><br><span class="line">#table_definition_cache = 1024</span><br><span class="line">#table_open_cache_instances = 16</span><br><span class="line"></span><br><span class="line">#session memory settings #</span><br><span class="line">#read_buffer_size = 16M</span><br><span class="line">#read_rnd_buffer_size = 32M</span><br><span class="line">#sort_buffer_size = 32M</span><br><span class="line">#tmp_table_size = 64M</span><br><span class="line">#join_buffer_size = 128M</span><br><span class="line">#thread_cache_size = 256</span><br><span class="line"></span><br><span class="line"># log settings #</span><br><span class="line">slow_query_log = ON</span><br><span class="line">slow_query_log_file = /data/mysql/slow.log</span><br><span class="line">log_error = /data/mysql/mysqld.log</span><br><span class="line">log_error_verbosity = 3</span><br><span class="line">#log_bin = /data/mysqldb/binlog/mysql_bin</span><br><span class="line">#log_bin_index = /data/mysqldb/binlog/mysql_binlog.index</span><br><span class="line"># general_log_file = /data/mysql/generallog/general.log</span><br><span class="line">log_queries_not_using_indexes = 1</span><br><span class="line">log_slow_admin_statements = 1</span><br><span class="line">#log_slow_slave_statements = 1</span><br><span class="line">#expire_logs_days = 15</span><br><span class="line">binlog_expire_logs_seconds = 2592000</span><br><span class="line">long_query_time = 5</span><br><span class="line">min_examined_row_limit = 100</span><br><span class="line">log_throttle_queries_not_using_indexes = 1000</span><br><span class="line">#log_bin_trust_function_creators = 1</span><br><span class="line">log_replica_updates = 1</span><br><span class="line">mysqlx_port = 33060</span><br><span class="line">#mysqlx_socket = /data/mysqldb/socket/mysqlx.sock</span><br><span class="line"></span><br><span class="line"># innodb settings #</span><br><span class="line">innodb_buffer_pool_size = 16G</span><br><span class="line">innodb_buffer_pool_instances = 4</span><br><span class="line">innodb_log_buffer_size = 100M</span><br><span class="line">innodb_buffer_pool_load_at_startup = 1</span><br><span class="line">innodb_buffer_pool_dump_at_shutdown = 1</span><br><span class="line">innodb_lru_scan_depth = 4096</span><br><span class="line">innodb_lock_wait_timeout = 20</span><br><span class="line">innodb_io_capacity = 5000</span><br><span class="line">innodb_io_capacity_max = 10000</span><br><span class="line">innodb_flush_method = O_DIRECT</span><br><span class="line">innodb_log_file_size = 1G</span><br><span class="line">innodb_log_files_in_group = 3</span><br><span class="line">innodb_purge_threads = 4</span><br><span class="line">innodb_thread_concurrency = 200</span><br><span class="line">innodb_print_all_deadlocks = 1</span><br><span class="line">innodb_print_ddl_logs = 1</span><br><span class="line">innodb_strict_mode = 1</span><br><span class="line">innodb_sort_buffer_size = 32M</span><br><span class="line">innodb_write_io_threads = 16</span><br><span class="line">innodb_read_io_threads = 16 </span><br><span class="line">innodb_file_per_table = 1</span><br><span class="line">innodb_stats_persistent_sample_pages = 64</span><br><span class="line">innodb_autoinc_lock_mode = 2</span><br><span class="line">innodb_online_alter_log_max_size = 1G</span><br><span class="line">innodb_open_files = 4096</span><br><span class="line">innodb_buffer_pool_dump_pct = 25</span><br><span class="line">innodb_page_cleaners = 16</span><br><span class="line">innodb_undo_log_truncate = 1</span><br><span class="line">innodb_max_undo_log_size = 2G</span><br><span class="line">innodb_purge_rseg_truncate_frequency = 128</span><br><span class="line">innodb_flush_log_at_trx_commit = 1</span><br><span class="line">log_timestamps = UTC</span><br><span class="line"></span><br><span class="line"># replication settings #</span><br><span class="line">sync_binlog = 1</span><br><span class="line">binlog_format = ROW</span><br><span class="line">gtid_mode = ON</span><br><span class="line">enforce_gtid_consistency = ON</span><br><span class="line">relay_log_recovery = 1</span><br><span class="line">#relay_log = /data/mysqldb/relaylog/relay.log</span><br><span class="line">#relay_log_index = /data/mysqldb/relaylog/mysql_relay.index</span><br><span class="line">replica_parallel_type = LOGICAL_CLOCK</span><br><span class="line">replica_parallel_workers = 16</span><br><span class="line">binlog_gtid_simple_recovery = 1</span><br><span class="line">replica_preserve_commit_order = 1</span><br><span class="line">binlog_rows_query_log_events = 1</span><br><span class="line">replica_transaction_retries = 10</span><br><span class="line"></span><br><span class="line"># group replication settings</span><br><span class="line">transaction_write_set_extraction = XXHASH64</span><br><span class="line">binlog_checksum = NONE</span><br><span class="line">loose_group_replication_group_name = &quot;957e8af0-bc63-11ea-bb19-005056a52572&quot;</span><br><span class="line">loose_group_replication_start_on_boot = off</span><br><span class="line">loose_group_replication_local_address = &quot;10.77.114.192:24901&quot;</span><br><span class="line">loose_group_replication_group_seeds = &quot;10.77.114.192:24901,10.77.114.193:24901,10.77.114.194:24901&quot;</span><br><span class="line">loose_group_replication_bootstrap_group = off</span><br><span class="line">loose_group_replication_ip_whitelist = &quot;10.77.114.0/24&quot;</span><br><span class="line">loose_group_replication_member_expel_timeout=30</span><br><span class="line">report_host = 10.77.114.192</span><br><span class="line">report_port = 33066</span><br><span class="line">#read_only=1</span><br><span class="line">#super_read_only=1</span><br><span class="line">binlog_transaction_dependency_tracking = WRITESET</span><br></pre></td></tr></table></figure>
+
+<p>每个节点需要更改的是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server_id = 1</span><br><span class="line">loose_group_replication_local_address = &quot;10.77.114.192:24901&quot;</span><br><span class="line">report_host = 10.77.114.192</span><br></pre></td></tr></table></figure>
+
+<p>启动mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启组复制"><a href="#开启组复制" class="headerlink" title="开启组复制"></a>开启组复制</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装组复制插件</span></span><br><span class="line">INSTALL PLUGIN group_replication SONAME <span class="string">&#x27;group_replication.so&#x27;</span>;</span><br><span class="line">show plugins;</span><br><span class="line"></span><br><span class="line"><span class="comment">## node1 执行</span></span><br><span class="line">SET SQL_LOG_BIN=0;</span><br><span class="line">CREATE USER rep@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;Abc123!!!&#x27;</span>;</span><br><span class="line">GRANT REPLICATION SLAVE ON *.* TO rep@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">SET SQL_LOG_BIN=1;</span><br><span class="line"></span><br><span class="line">CHANGE MASTER TO MASTER_USER=<span class="string">&#x27;rep&#x27;</span>, MASTER_PASSWORD=<span class="string">&#x27;Abc123!!!&#x27;</span> FOR CHANNEL <span class="string">&#x27;group_replication_recovery&#x27;</span>;</span><br><span class="line"></span><br><span class="line">SET GLOBAL group_replication_bootstrap_group=ON;</span><br><span class="line">START GROUP_REPLICATION;</span><br><span class="line">SET GLOBAL group_replication_bootstrap_group=OFF;</span><br><span class="line"></span><br><span class="line"><span class="comment">## node2/node3 执行</span></span><br><span class="line"></span><br><span class="line">SET SQL_LOG_BIN=0;</span><br><span class="line">CREATE USER rep@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;Abc123!!!&#x27;</span>;</span><br><span class="line">GRANT REPLICATION SLAVE ON *.* TO rep@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">SET SQL_LOG_BIN=1;</span><br><span class="line"></span><br><span class="line">CHANGE MASTER TO MASTER_USER=<span class="string">&#x27;rep&#x27;</span>, MASTER_PASSWORD=<span class="string">&#x27;Abc123!!!&#x27;</span> FOR CHANNEL <span class="string">&#x27;group_replication_recovery&#x27;</span>;</span><br><span class="line"></span><br><span class="line">START GROUP_REPLICATION;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 成功后查询，应该可以看到3个节点</span></span><br><span class="line">SELECT * FROM performance_schema.replication_group_members;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装mysql-shell"><a href="#安装mysql-shell" class="headerlink" title="安装mysql-shell"></a>安装mysql-shell</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall -y mysql-shell-8*.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## node1登录</span></span><br><span class="line">mysqlsh root@10.77.114.192:33066 --py</span><br><span class="line"></span><br><span class="line">dba.create_cluster(<span class="string">&#x27;mysqlrouter&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 查看集群状态</span></span><br><span class="line">c=dba.get_cluster()</span><br><span class="line">c.status()</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装mysql-router"><a href="#安装mysql-router" class="headerlink" title="安装mysql-router"></a>安装mysql-router</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## rpm安装</span></span><br><span class="line">yum localinstall -y mysql-router-8*.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">## 初始化</span></span><br><span class="line">mysqlrouter  --bootstrap root@10.77.114.192:33066 --force</span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启</span></span><br><span class="line">systemctl <span class="built_in">enable</span> mysqlrouter</span><br><span class="line">systemctl restart mysqlrouter</span><br><span class="line"></span><br><span class="line"><span class="comment">## 链接测试</span></span><br><span class="line">mysql -u root -p 10.77.114.192 6446  //读写</span><br><span class="line">mysql -u root -p 10.77.114.192 6447  //只读 </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，一个高可用，单主的mysql mgr集群已搭建完毕，应用可按需链接读写6446或只读 6447，也可将3台机器安装mysql-router，使用nginx反向代理</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2023/10/20/mysql-mgr-route%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Mysql-MGR-router安装配置" target="_blank" rel="external">https://biglovewheat.gihub.io/2023/10/20/mysql-mgr-route安装配置/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/11/03/mysql-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" title="Mysql-用户管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/10/12/mongodb-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Mongodb-安装配置"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

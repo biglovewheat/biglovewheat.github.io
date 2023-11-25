@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Mysql-双主复制和keepalived | biglovewheat</title>
+  <meta name="description" content="Mysql-双主复制和keepalived环境1234test1  192.168.8.201 centos7 mysql5.7test2  192.168.8.202  centos7 mysql5.7虚拟vip  192.168.8.203  keepalived 1.2.13xtrabackup 2.4 mysql安装配置12345678910111213141516171819202122">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql-双主复制和keepalived">
+<meta property="og:url" content="https://biglovewheat.gihub.io/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/index.html">
+<meta property="og:site_name" content="biglovewheat">
+<meta property="og:description" content="Mysql-双主复制和keepalived环境1234test1  192.168.8.201 centos7 mysql5.7test2  192.168.8.202  centos7 mysql5.7虚拟vip  192.168.8.203  keepalived 1.2.13xtrabackup 2.4 mysql安装配置12345678910111213141516171819202122">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-25T04:42:31.744Z">
+<meta property="article:author" content="biglovewheat">
+<meta property="article:tag" content="all">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://biglovewheat.gihub.io/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="biglovewheat" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/biglovewheat" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">biglovewheat</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">老年佛系运维</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Guangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/all/">all</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/bigdata/">bigdata</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/devops/">devops</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/gis/">gis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">基础概念</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/">备份恢复</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">故障排查</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">34</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">理论知识</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9B%91%E6%8E%A7/">监控</a><span class="category-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/all/" style="font-size: 14px;">all</a> <a href="/tags/ansible/" style="font-size: 13.15px;">ansible</a> <a href="/tags/aws/" style="font-size: 13.31px;">aws</a> <a href="/tags/backup/" style="font-size: 13px;">backup</a> <a href="/tags/bigdata/" style="font-size: 13.23px;">bigdata</a> <a href="/tags/consul/" style="font-size: 13px;">consul</a> <a href="/tags/database/" style="font-size: 13px;">database</a> <a href="/tags/devops/" style="font-size: 13.85px;">devops</a> <a href="/tags/dns/" style="font-size: 13px;">dns</a> <a href="/tags/docker/" style="font-size: 13.08px;">docker</a> <a href="/tags/frp/" style="font-size: 13px;">frp</a> <a href="/tags/fs/" style="font-size: 13.08px;">fs</a> <a href="/tags/gis/" style="font-size: 13px;">gis</a> <a href="/tags/git/" style="font-size: 13.38px;">git</a> <a href="/tags/gitlab/" style="font-size: 13.08px;">gitlab</a> <a href="/tags/http/" style="font-size: 13px;">http</a> <a href="/tags/java/" style="font-size: 13.15px;">java</a> <a href="/tags/jenkins/" style="font-size: 13.38px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 13.62px;">k8s</a> <a href="/tags/keepalived/" style="font-size: 13px;">keepalived</a> <a href="/tags/linux/" style="font-size: 13.77px;">linux</a> <a href="/tags/lvs/" style="font-size: 13px;">lvs</a> <a href="/tags/middleware/" style="font-size: 13.31px;">middleware</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mq/" style="font-size: 13.08px;">mq</a> <a href="/tags/mysql/" style="font-size: 13.92px;">mysql</a> <a href="/tags/nacos/" style="font-size: 13.08px;">nacos</a> <a href="/tags/network/" style="font-size: 13.08px;">network</a> <a href="/tags/nexus/" style="font-size: 13px;">nexus</a> <a href="/tags/nginx/" style="font-size: 13.15px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13px;">nodejs</a> <a href="/tags/oracle/" style="font-size: 13.46px;">oracle</a> <a href="/tags/postgresql/" style="font-size: 13.31px;">postgresql</a> <a href="/tags/prometheus/" style="font-size: 13.08px;">prometheus</a> <a href="/tags/python/" style="font-size: 13.54px;">python</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/s3/" style="font-size: 13px;">s3</a> <a href="/tags/seata/" style="font-size: 13px;">seata</a> <a href="/tags/shell/" style="font-size: 13.69px;">shell</a> <a href="/tags/skywalking/" style="font-size: 13px;">skywalking</a> <a href="/tags/ssl/" style="font-size: 13px;">ssl</a> <a href="/tags/supervisor/" style="font-size: 13px;">supervisor</a> <a href="/tags/vpn/" style="font-size: 13px;">vpn</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13px;">基础概念</a> <a href="/tags/%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" style="font-size: 13px;">备份恢复</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 13.08px;">日志</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">正则表达式</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 13px;">测试</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 13.31px;">监控</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13.15px;">阿里云</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">44</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/devops/">devops</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/ansible-%E6%89%B9%E9%87%8F%E5%AE%89%E8%A3%85mysql/" class="title">Ansible-批量安装mysql</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-limit%E7%94%A8%E6%B3%95/" class="title">Mysql-limit用法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/" class="title">Mysql-双主复制和keepalived</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-%E5%A4%9A%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/" class="title">Mysql-多实例配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/11/06/mysql-%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2/" class="title">Mysql-常用查询</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-mysql-双主复制和keepalived" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql-双主复制和keepalived
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/" class="article-date">
+	  <time datetime="2023-11-05T16:00:00.000Z" itemprop="datePublished">2023-11-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/all/" rel="tag">all</a>, <a class="article-tag-link-link" href="/tags/mysql/" rel="tag">mysql</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="Mysql-双主复制和keepalived"><a href="#Mysql-双主复制和keepalived" class="headerlink" title="Mysql-双主复制和keepalived"></a>Mysql-双主复制和keepalived</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test1  192.168.8.201 centos7 mysql5.7</span><br><span class="line">test2  192.168.8.202  centos7 mysql5.7</span><br><span class="line">虚拟vip  192.168.8.203  keepalived 1.2.13</span><br><span class="line">xtrabackup 2.4</span><br></pre></td></tr></table></figure>
+<h3 id="mysql安装配置"><a href="#mysql安装配置" class="headerlink" title="mysql安装配置"></a>mysql安装配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装xtrabackup</span></span><br><span class="line">rpm -ivh libev-4.15-7.el7.x86_64.rpm</span><br><span class="line">yum install -y percona-xtrabackup-80-8.0.10-1.el7.x86_64.rpm</span><br><span class="line">``</span><br><span class="line"><span class="comment">## 安装mysql</span></span><br><span class="line">rpm -qa |grep maria</span><br><span class="line">rpm -e mariadb-libs-5.5.60-1.el7_5.x86_64 --nodeps</span><br><span class="line">yum install -y net-tools perl</span><br><span class="line"></span><br><span class="line">rpm -ivh mysql-community-common-5.7.28-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.28-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-compat-5.7.28-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.28-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.28-1.el7.x86_64.rpm</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line">systemctl restart mysqld</span><br><span class="line"><span class="built_in">cat</span> /var/log/mysqld.log |grep password</span><br><span class="line">mysql_secure_installation</span><br><span class="line">mysql&gt;use mysql;</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## mysql8</span></span><br><span class="line">create user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">mysql&gt;flush privileges;</span><br><span class="line">mysql&gt;quit</span><br></pre></td></tr></table></figure>
+
+<h4 id="1号机开启binlog"><a href="#1号机开启binlog" class="headerlink" title="1号机开启binlog"></a>1号机开启binlog</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/my.cnf</span><br><span class="line"></span><br><span class="line">log-bin=mysql-bin</span><br><span class="line"><span class="comment">##开启binlog</span></span><br><span class="line">binlog_format=mixed</span><br><span class="line"><span class="comment">##binlog模式</span></span><br><span class="line">server-id=1</span><br><span class="line"><span class="comment">##serverid,两台机不能相同</span></span><br><span class="line">auto_increment_increment=2</span><br><span class="line"><span class="comment">##自增量步进，一般为服务器数量</span></span><br><span class="line">auto_increment_offset=1</span><br><span class="line"><span class="comment">##自增量偏移量</span></span><br><span class="line">replicate-do-db=monitor</span><br><span class="line"><span class="comment">##需复制数据库</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 重启</span></span><br><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="1号机开启脚本，不停插入数据"><a href="#1号机开启脚本，不停插入数据" class="headerlink" title="1号机开启脚本，不停插入数据"></a>1号机开启脚本，不停插入数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建测试表</span></span><br><span class="line">create database monitor;</span><br><span class="line">use monitor;</span><br><span class="line">create table moni(monidata datetime,host varchar(20));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@mysql1 mysqlbackup]<span class="comment"># cat /aa.sh</span></span><br><span class="line"><span class="built_in">export</span> MYSQL_PWD=<span class="string">&quot;2014Picc!!!&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">mysql -u root -D monitor &lt;&lt;! 2&gt;&gt; aa.log 1&gt;&amp;2</span><br><span class="line">insert into moni(monidata,host)</span><br><span class="line">select now(),<span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">!</span><br><span class="line"><span class="built_in">sleep</span> 1</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1号机全量备份，设置备份用户"><a href="#1号机全量备份，设置备份用户" class="headerlink" title="1号机全量备份，设置备份用户"></a>1号机全量备份，设置备份用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT,PROCESS,SUPER ON *.* TO <span class="string">&#x27;bkpuser&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<h4 id="全量备份"><a href="#全量备份" class="headerlink" title="全量备份"></a>全量备份</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xtrabackup --defaults-file=/etc/my.cnf --host=localhost --port=3306 --user=bkpuser --password=2014Picc!!! --target-dir=/mysqlbackup/ --backup</span><br></pre></td></tr></table></figure>
+
+<h4 id="从1号机拷贝数据导2号机"><a href="#从1号机拷贝数据导2号机" class="headerlink" title="从1号机拷贝数据导2号机"></a>从1号机拷贝数据导2号机</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r 2019-08-26_15-43-26 192.168.8.202:/backup</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机停止mysql"><a href="#2号机停止mysql" class="headerlink" title="2号机停止mysql"></a>2号机停止mysql</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机清空mysqldata文件件"><a href="#2号机清空mysqldata文件件" class="headerlink" title="2号机清空mysqldata文件件"></a>2号机清空mysqldata文件件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /mysqldata/*</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机查看备份的日志信息（同步时用到"><a href="#2号机查看备份的日志信息（同步时用到" class="headerlink" title="2号机查看备份的日志信息（同步时用到)"></a>2号机查看备份的日志信息（同步时用到)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">innobackupex --apply-log /backup/2019-08-26_16-37-20</span><br><span class="line">InnoDB: xtrabackup: Last MySQL binlog file position 15398, file name mysql-bin.000003</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机恢复备份"><a href="#2号机恢复备份" class="headerlink" title="2号机恢复备份"></a>2号机恢复备份</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">innobackupex --defaults-file=/etc/my.cnf --use-memory=1G --copy-back /backup/2019-08-26_16-37-20</span><br></pre></td></tr></table></figure>
+
+<h4 id="恢复后更改属主"><a href="#恢复后更改属主" class="headerlink" title="恢复后更改属主"></a>恢复后更改属主</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R mysql:mysql /mysqldata</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机开启binlog"><a href="#2号机开启binlog" class="headerlink" title="2号机开启binlog"></a>2号机开启binlog</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">log-bin=mysql-bin</span><br><span class="line"><span class="comment">##开启binlog</span></span><br><span class="line">binlog_format=mixed</span><br><span class="line"><span class="comment">##binlog模式</span></span><br><span class="line">server-id=2</span><br><span class="line"><span class="comment">##serverid,两台机不能相同</span></span><br><span class="line">auto_increment_increment=2</span><br><span class="line"><span class="comment">##自增量步进，一般为服务器数量</span></span><br><span class="line">auto_increment_offset=2</span><br><span class="line"><span class="comment">##自增量偏移量</span></span><br><span class="line">replicate-do-db=monitor</span><br><span class="line"><span class="comment">##需复制数据库</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看表情况"><a href="#查看表情况" class="headerlink" title="查看表情况"></a>查看表情况</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select max(<span class="built_in">id</span>) from moni;</span><br><span class="line">+---------+</span><br><span class="line">| max(<span class="built_in">id</span>) |</span><br><span class="line">+---------+</span><br><span class="line">|    2689 |</span><br><span class="line">+---------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mysql&gt;  select max(<span class="built_in">id</span>) from moni;</span><br><span class="line">+---------+</span><br><span class="line">| max(<span class="built_in">id</span>) |</span><br><span class="line">+---------+</span><br><span class="line">|    1935 |</span><br><span class="line">+---------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="1号机创建复制用户"><a href="#1号机创建复制用户" class="headerlink" title="1号机创建复制用户"></a>1号机创建复制用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION SLAVE ON *.* TO <span class="string">&#x27;repuser&#x27;</span>@<span class="string">&#x27;192.168.8.%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;2014Picc!!!&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机开启slave"><a href="#2号机开启slave" class="headerlink" title="2号机开启slave"></a>2号机开启slave</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">change master to master_host=<span class="string">&#x27;192.168.8.201&#x27;</span>, master_user=<span class="string">&#x27;repuser&#x27;</span>, master_password=<span class="string">&#x27;2014Picc!!!&#x27;</span>, master_log_file=<span class="string">&#x27;mysql-bin.000003&#x27;</span>, master_log_pos=15398;</span><br><span class="line">start slave;</span><br><span class="line">show slave status\G</span><br></pre></td></tr></table></figure>
+
+<h4 id="停掉插入脚本，对比两边数据状态"><a href="#停掉插入脚本，对比两边数据状态" class="headerlink" title="停掉插入脚本，对比两边数据状态"></a>停掉插入脚本，对比两边数据状态</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ps -ef |grep aa.sh |grep -v grep |awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">mysql&gt; select max(<span class="built_in">id</span>) from moni;</span><br><span class="line">+---------+</span><br><span class="line">| max(<span class="built_in">id</span>) |</span><br><span class="line">+---------+</span><br><span class="line">|    3369 |</span><br><span class="line">+---------+</span><br><span class="line">mysql&gt; select max(<span class="built_in">id</span>) from moni;</span><br><span class="line">+---------+</span><br><span class="line">| max(<span class="built_in">id</span>) |</span><br><span class="line">+---------+</span><br><span class="line">|    3369 |</span><br><span class="line">+---------+</span><br></pre></td></tr></table></figure>
+
+<h4 id="同理，创建2号机到1号机的复制，2号机创建复制用户"><a href="#同理，创建2号机到1号机的复制，2号机创建复制用户" class="headerlink" title="同理，创建2号机到1号机的复制，2号机创建复制用户"></a>同理，创建2号机到1号机的复制，2号机创建复制用户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION SLAVE ON *.* TO <span class="string">&#x27;repuser&#x27;</span>@<span class="string">&#x27;192.168.8.%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;2014Picc&#x27;</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看2号机日志状态"><a href="#查看2号机日志状态" class="headerlink" title="查看2号机日志状态"></a>查看2号机日志状态</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1号机开启slave，并查看状态"><a href="#1号机开启slave，并查看状态" class="headerlink" title="1号机开启slave，并查看状态"></a>1号机开启slave，并查看状态</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">change master to master_host=<span class="string">&#x27;192.168.8.202&#x27;</span>, master_user=<span class="string">&#x27;repuser&#x27;</span>, master_password=<span class="string">&#x27;2014Picc&#x27;</span>, master_log_file=<span class="string">&#x27;mysql-bin.000001&#x27;</span>, master_log_pos=434;</span><br><span class="line">start slave;</span><br><span class="line"></span><br><span class="line">show slave status\G</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机开启插入脚本"><a href="#2号机开启插入脚本" class="headerlink" title="2号机开启插入脚本"></a>2号机开启插入脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql1 mysqlbackup]<span class="comment"># cat /bb.sh</span></span><br><span class="line"><span class="built_in">export</span> MYSQL_PWD=<span class="string">&quot;2014Picc&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">mysql -u root -D monitor &lt;&lt;! 2&gt;&gt; aa.log 1&gt;&amp;2</span><br><span class="line">insert into moni(monidata,host)</span><br><span class="line">select now(),<span class="string">&#x27;B&#x27;</span>;</span><br><span class="line">!</span><br><span class="line"><span class="built_in">sleep</span> 1</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="停止1、2号机上的脚本"><a href="#停止1、2号机上的脚本" class="headerlink" title="停止1、2号机上的脚本"></a>停止1、2号机上的脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef |grep aa.sh |grep -v grep |awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">ps -ef |grep bb.sh |grep -v grep |awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br></pre></td></tr></table></figure>
+
+<h4 id="对比数据状态，数据一致"><a href="#对比数据状态，数据一致" class="headerlink" title="对比数据状态，数据一致"></a>对比数据状态，数据一致</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select host,count(1) from moni group by host;</span><br><span class="line">+------+----------+</span><br><span class="line">| host | count(1) |</span><br><span class="line">+------+----------+</span><br><span class="line">| A    |     1038 |</span><br><span class="line">| B    |       84 |</span><br><span class="line">+------+----------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line">mysql&gt;  select host,count(1) from moni group by host;</span><br><span class="line">+------+----------+</span><br><span class="line">| host | count(1) |</span><br><span class="line">+------+----------+</span><br><span class="line">| A    |     1038 |</span><br><span class="line">| B    |       84 |</span><br><span class="line">+------+----------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="keepalived配置"><a href="#keepalived配置" class="headerlink" title="keepalived配置"></a>keepalived配置</h3><h4 id="安装（1，2号机）"><a href="#安装（1，2号机）" class="headerlink" title="安装（1，2号机）"></a>安装（1，2号机）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh keepalived-1.2.13-5.el6_6.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="1号机配置"><a href="#1号机配置" class="headerlink" title="1号机配置"></a>1号机配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql1 haproxy15_keepalived12_el6_rpm]<span class="comment"># cat /etc/keepalived/keepalived.conf</span></span><br><span class="line">! Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">    router_id rr1</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script check_mysql &#123;</span><br><span class="line">    script <span class="string">&quot;/root/check_mysql.sh&quot;</span></span><br><span class="line">    interval 5</span><br><span class="line">&#125;</span><br><span class="line">vrrp_sync_group VG1 &#123;</span><br><span class="line">     group &#123;</span><br><span class="line">       VI_1</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 2014Picc</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.199</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">       check_mysql</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2号机配置"><a href="#2号机配置" class="headerlink" title="2号机配置"></a>2号机配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql2 ~]<span class="comment"># cat /etc/keepalived/keepalived.conf</span></span><br><span class="line">! Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">    router_id rr2</span><br><span class="line">&#125;</span><br><span class="line">vrrp_script check_mysql &#123;</span><br><span class="line">    script <span class="string">&quot;/root/check_mysql.sh&quot;</span></span><br><span class="line">    interval 5</span><br><span class="line">&#125;</span><br><span class="line">vrrp_sync_group VG1 &#123;</span><br><span class="line">     group &#123;</span><br><span class="line">       VI_1</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    interface eth1</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 50</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 2014Picc</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.8.199</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">    check_mysql</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1，2号机配置脚本"><a href="#1，2号机配置脚本" class="headerlink" title="1，2号机配置脚本"></a>1，2号机配置脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql2 ~]<span class="comment"># cat /root/check_mysql.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">MYSQL=/usr/bin/mysql</span><br><span class="line">MYSQL_HOST=localhost</span><br><span class="line">MYSQL_USER=root</span><br><span class="line"><span class="built_in">export</span> MYSQL_PWD=<span class="string">&quot;2014Picc&quot;</span></span><br><span class="line">CHECK_TIME=3</span><br><span class="line"><span class="comment">#mysql  is working MYSQL_OK is 1 , mysql down MYSQL_OK is 0</span></span><br><span class="line">MYSQL_OK=1</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">check_mysql_health</span></span> ()&#123;</span><br><span class="line"><span class="variable">$MYSQL</span> -h <span class="variable">$MYSQL_HOST</span> -u <span class="variable">$MYSQL_USER</span> -e <span class="string">&quot;show status;&quot;</span> &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ] ;<span class="keyword">then</span></span><br><span class="line">     MYSQL_OK=1</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">     MYSQL_OK=0</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">     <span class="built_in">return</span> <span class="variable">$MYSQL_OK</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$CHECK_TIME</span> -ne 0 ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">     <span class="built_in">let</span> <span class="string">&quot;CHECK_TIME-=1&quot;</span></span><br><span class="line">     check_mysql_health</span><br><span class="line">     <span class="keyword">if</span> [ <span class="variable">$MYSQL_OK</span> = 1 ] ; <span class="keyword">then</span></span><br><span class="line">          CHECK_TIME=0</span><br><span class="line">          <span class="built_in">exit</span> 0</span><br><span class="line">     <span class="keyword">fi</span></span><br><span class="line">     <span class="keyword">if</span> [ <span class="variable">$MYSQL_OK</span> -eq 0 ] &amp;&amp;  [ <span class="variable">$CHECK_TIME</span> -eq 0 ]</span><br><span class="line">     <span class="keyword">then</span></span><br><span class="line">          /etc/init.d/keepalived stop</span><br><span class="line">     <span class="built_in">exit</span> 1</span><br><span class="line">     <span class="keyword">fi</span></span><br><span class="line">     <span class="built_in">sleep</span> 1</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1，2号机启动keepalived"><a href="#1，2号机启动keepalived" class="headerlink" title="1，2号机启动keepalived"></a>1，2号机启动keepalived</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service keepalived start</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试，用vip连接数据库，查看实例id"><a href="#测试，用vip连接数据库，查看实例id" class="headerlink" title="测试，用vip连接数据库，查看实例id"></a>测试，用vip连接数据库，查看实例id</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 192.168.8.199 -u root -p</span><br><span class="line">mysql&gt; show variables like <span class="string">&#x27;%server_id%&#x27;</span>;</span><br><span class="line">+----------------+-------+</span><br><span class="line">| Variable_name  | Value |</span><br><span class="line">+----------------+-------+</span><br><span class="line">| server_id      | 1     |</span><br><span class="line">| server_id_bits | 32    |</span><br><span class="line">+----------------+-------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="关掉1号机mysql"><a href="#关掉1号机mysql" class="headerlink" title="关掉1号机mysql"></a>关掉1号机mysql</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
+
+<h4 id="重新登录查询，已成功切换"><a href="#重新登录查询，已成功切换" class="headerlink" title="重新登录查询，已成功切换"></a>重新登录查询，已成功切换</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 192.168.8.199 -u root -p</span><br><span class="line">mysql&gt; show variables like <span class="string">&#x27;%server_id%&#x27;</span>;</span><br><span class="line">+----------------+-------+</span><br><span class="line">| Variable_name  | Value |</span><br><span class="line">+----------------+-------+</span><br><span class="line">| server_id      | 2     |</span><br><span class="line">| server_id_bits | 32    |</span><br><span class="line">+----------------+-------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启1号机mysql、keepalived"><a href="#重启1号机mysql、keepalived" class="headerlink" title="重启1号机mysql、keepalived"></a>重启1号机mysql、keepalived</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql1 haproxy15_keepalived12_el6_rpm]<span class="comment"># service mysql start</span></span><br><span class="line">Starting MySQL.                                            [  OK  ]</span><br><span class="line">[root@mysql1 haproxy15_keepalived12_el6_rpm]<span class="comment"># service keepalived start</span></span><br><span class="line">Starting keepalived:                                       [  OK  ]</span><br></pre></td></tr></table></figure>
+
+<h4 id="再次登录查询，已成功回切"><a href="#再次登录查询，已成功回切" class="headerlink" title="再次登录查询，已成功回切"></a>再次登录查询，已成功回切</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 192.168.8.199 -u root -p</span><br><span class="line">mysql&gt; show variables like <span class="string">&#x27;%server_id%&#x27;</span>;</span><br><span class="line">+----------------+-------+</span><br><span class="line">| Variable_name  | Value |</span><br><span class="line">+----------------+-------+</span><br><span class="line">| server_id      | 1     |</span><br><span class="line">| server_id_bits | 32    |</span><br><span class="line">+----------------+-------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://biglovewheat.gihub.io/2023/11/06/mysql-%E5%8F%8C%E4%B8%BB%E5%A4%8D%E5%88%B6%E5%92%8Ckeepalived/" title="Mysql-双主复制和keepalived" target="_blank" rel="external">https://biglovewheat.gihub.io/2023/11/06/mysql-双主复制和keepalived/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/biglovewheat" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/biglovewheat" target="_blank"><span class="text-dark">biglovewheat</span><small class="ml-1x">老年佛系运维</small></a></h3>
+        <div>老年佛系运维 | biglovewheat@126.com</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/11/06/mysql-limit%E7%94%A8%E6%B3%95/" title="Mysql-limit用法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/11/06/mysql-%E5%A4%9A%E5%AE%9E%E4%BE%8B%E9%85%8D%E7%BD%AE/" title="Mysql-多实例配置"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/biglovewheat" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        </div>
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = '';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'bvA4MRVOIjC3eEqjPhMvNBSA-gzGzoHsz',
+    appKey: 'TWvpSWo1XAHYy0KdVfAz8J60',
+    placeholder: '',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
